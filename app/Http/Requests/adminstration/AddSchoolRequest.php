@@ -2,19 +2,13 @@
 
 namespace App\Http\Requests\adminstration;
 
-use App\Models\AdAdmin;
 use App\Helpers\ApiResponse;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-
-class UpdateProfile extends FormRequest
+class AddSchoolRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
 
     protected function failedValidation(Validator $validator)
     {
@@ -23,7 +17,9 @@ class UpdateProfile extends FormRequest
             throw new ValidationException($validator, $reponse);
         }
     }
-
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
@@ -37,8 +33,7 @@ class UpdateProfile extends FormRequest
     public function rules(): array
     {
         return [
-            // 'name' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(AdAdmin::class)->ignore($this->user()->id)],
+            'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'min:11', 'numeric'],
             'address' => ['required', 'string'],
         ];

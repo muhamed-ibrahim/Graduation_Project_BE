@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('phone');
             $table->string('password');
-            $table->bigInteger('adminstration_id')->unsigned()->index();
+            $table->unsignedBigInteger('adminstration_id')->index();
             $table->rememberToken();
             $table->timestamps();
         });

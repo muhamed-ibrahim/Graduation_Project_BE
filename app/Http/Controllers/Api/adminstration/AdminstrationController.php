@@ -21,9 +21,9 @@ class AdminstrationController extends Controller
     public function updateProfile(UpdateProfile $request){
         if($request->hasFile('image'))
         {
-            if(file_exists(public_path().'/storage/adminstration_admins/'.$request->user()->image)){
-                unlink('/storage/adminstration_admins/'.$request->user()->image);
-            }
+            // if(file_exists(public_path().'/storage/adminstration_admins/'.$request->user()->image)){
+            //     unlink(public_path().'/storage/adminstration_admins/'.$request->user()->image);
+            // }
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time(). '.' . $extension;

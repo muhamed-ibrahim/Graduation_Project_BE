@@ -14,4 +14,13 @@ class Adminstration extends Model
     {
         return $this->hasMany(AdAdmin::class);
     }
+
+    public function Schools()
+    {
+        return $this->hasMany(School::class);
+    }
+
+
+
+
 }

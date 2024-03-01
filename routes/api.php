@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\adminstration\SchoolController;
 use App\Http\Controllers\Api\adminstration\auth\AuthController;
 use App\Http\Controllers\Api\adminstration\AdminstrationController;
 use App\Http\Controllers\Api\adminstration\auth\PasswordController;
@@ -29,6 +31,9 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
     Route::get('/showProfile', [AdminstrationController::class, 'showProfile']);
     Route::post('/updateProfile', [AdminstrationController::class, 'updateProfile']);
     Route::post('/updatePassword', [PasswordController::class, 'updatePassword']);
+    Route::post('/addSchool', [SchoolController::class, 'addSchool']);
+    Route::get('/showSchool', [SchoolController::class, 'showSchool']);
+
 });
 
 

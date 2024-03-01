@@ -18,7 +18,7 @@ class AdAdmin extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $url = 'https://example.com/reset-password?token=' . $token;
+        $url = 'http://localhost:5173/resetPassword/:token' . $token;
         $this->notify(new ResetPasswordNotification($url));
     }
 

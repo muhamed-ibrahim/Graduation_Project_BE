@@ -17,10 +17,13 @@ class AdProfileResource extends JsonResource
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'image' => $this->image,
+            'image' => asset('/storage/adminstration_admins/' . $this->image),
             'phone' => $this->phone,
-            'adminstration name' => $this->adminstration()->first()->name,
-            'adminstration address' => $this->adminstration()->first()->address,
+            'address' => $this->address,
+            'adminstration_name' => $this->adminstration()->first()->name,
+            'adminstration_address' => $this->adminstration()->first()->address,
+            'adminstration_State' => $this->adminstration()->first()->state,
+            'adminstration_Phone' => $this->adminstration()->first()->phone,
 
         ];
     }
