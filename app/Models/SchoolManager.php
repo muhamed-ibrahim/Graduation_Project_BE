@@ -3,37 +3,27 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use App\Models\Adminstration;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
-use App\Http\Middleware\Adminstration_admin;
-use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class AdAdmin extends Authenticatable
+class SchoolManager extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-    public function sendPasswordResetNotification($token)
-    {
-        $url = 'http://localhost:5173/resetPassword/:token' . $token;
-        $this->notify(new ResetPasswordNotification($url));
-    }
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $table = 'adminstration_admin';
+    protected $table = 'school_managers';
 
     protected $guarded = [];
 
-    public function adminstration()
+    public function School()
     {
-        return $this->belongsTo(Adminstration::class);
+        return $this->belongsTo(School::class);
     }
 
     /**

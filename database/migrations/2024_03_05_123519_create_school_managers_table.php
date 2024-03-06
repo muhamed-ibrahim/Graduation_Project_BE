@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('adminstration_admin', function (Blueprint $table) {
+        Schema::create('school_managers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('image')->nullable();
-            $table->string('phone');
+            $table->string('manager_name');
+            $table->string('manager_email')->unique();
+            $table->string('manager_phone');
+            $table->string('manager_address');
             $table->string('password');
-            $table->unsignedBigInteger('adminstration_id')->index();
+            $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('adminstration_admin');
+        Schema::dropIfExists('school_managers');
     }
 };

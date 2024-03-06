@@ -2,19 +2,16 @@
 
 namespace App\Http\Requests\adminstration;
 
-use App\Models\AdAdmin;
 use App\Helpers\ApiResponse;
+use App\Models\SchoolManager;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-
-class UpdateProfile extends FormRequest
+class ManagerRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
 
     protected function failedValidation(Validator $validator)
     {
@@ -23,7 +20,9 @@ class UpdateProfile extends FormRequest
             throw new ValidationException($validator, $reponse);
         }
     }
-
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
@@ -37,10 +36,11 @@ class UpdateProfile extends FormRequest
     public function rules(): array
     {
         return [
-            // 'name' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(AdAdmin::class)->ignore($this->user()->id)],
-            'phone' => ['required', 'min:11', 'numeric'],
-            'address' => ['required', 'string'],
+            'manager_name' => ['required', 'string', 'max:255'],
+            'manager_email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(SchoolManager::class)],
+            'manager_phone' => ['required', 'min:11', 'numeric'],
+            'manager_address' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
 }

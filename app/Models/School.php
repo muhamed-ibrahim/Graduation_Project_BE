@@ -5,22 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Adminstration extends Model
+class School extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
-    public function AdAdmins()
+
+    public function adminstration()
     {
-        return $this->hasMany(AdAdmin::class);
+        return $this->belongsTo(Adminstration::class);
     }
 
-    public function Schools()
+    public function Manager()
     {
-        return $this->hasMany(School::class);
+        return $this->hasOne(SchoolManager::class);
     }
-
-
-
 
 }
