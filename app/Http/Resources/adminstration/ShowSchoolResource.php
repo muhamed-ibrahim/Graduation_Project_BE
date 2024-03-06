@@ -21,6 +21,12 @@ class ShowSchoolResource extends JsonResource
             'image' => asset('/storage/school_logo/' . $this->image),
             'phone' => $this->phone,
             'address' => $this->address,
+            'manger_id' => $this->Manager()->first()->id,
+            'manger_name' => $this->Manager()->first()->manager_name,
+            'manager_email ' => $this->Manager()->first()->manager_email,
+            'manager_phone' => $this->Manager()->first()->manager_phone,
+            'manger_address' => $this->Manager()->first()->manager_address,
+
         ];
     }
 }

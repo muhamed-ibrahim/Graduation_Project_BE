@@ -12,10 +12,11 @@ use App\Http\Requests\adminstration\SchoolRequest;
 use App\Http\Requests\adminstration\ManagerRequest;
 use App\Http\Resources\adminstration\ShowSchoolResource;
 use App\Models\SchoolManager;
+use Illuminate\Database\Capsule\Manager;
 
 class SchoolController extends Controller
 {
-    public function addSchool(SchoolRequest $request ,ManagerRequest $req)
+    public function addSchool(SchoolRequest $request, ManagerRequest $req)
     {
 
         $school = $request->validated();
@@ -31,24 +32,23 @@ class SchoolController extends Controller
             $school['image'] = $filename;
         }
         $StoreSchool = School::create($school);
-        if($StoreSchool){
+        if ($StoreSchool) {
             $manager = $req->validated();
             $manager['school_id'] = $StoreSchool->id;
             $StoreManager = SchoolManager::create($manager);
-            if($StoreManager)
-                return ApiResponse::sendResponse(201, 'School with his Manager Added Successfully',[]);
+            if ($StoreManager)
+                return ApiResponse::sendResponse(201, 'School and Manager Added Successfully', []);
         }
-
     }
 
     public function showSchool(Request $request)
     {
         $user = Auth::user();
         $school = School::where('adminstration_id', $user->adminstration_id)->get();
-        return ApiResponse::sendResponse(200, 'School Retrived Successfully', ShowSchoolResource::collection($school));
+        return ApiResponse::sendResponse(200, 'School and Manager Retrived Successfully', ShowSchoolResource::collection($school));
     }
 
-    public function updateSchool(SchoolRequest $request, $id)
+    public function updateSchool(SchoolRequest $request, $id, ManagerRequest $req)
     {
         $school = $request->validated();
         if ($request->hasFile('image')) {
@@ -62,20 +62,24 @@ class SchoolController extends Controller
             $school['image'] = $filename;
         }
         $StoreSchool = School::findorfail($id)->update($school);
-        if ($StoreSchool) {
-            return ApiResponse::sendResponse(200, 'School updated Successfully', []);
-        }else{
-            return ApiResponse::sendResponse(200,'School Not Found',[]);
+        $GetSchoolManger = School::findorfail($id)->Manager()->first()->id;
+        $manager = $req->validated();
+        $StoreManager = SchoolManager::findorfail($GetSchoolManger)->update($manager);
+        if ($StoreSchool || $StoreManager) {
+            return ApiResponse::sendResponse(200, 'School and Manger updated Successfully', []);
+        } else {
+            return ApiResponse::sendResponse(200, 'School Not Found', []);
         }
     }
 
-    public function deleteSchool(Request $request,$id){
+    public function deleteSchool(Request $request, $id)
+    {
         $school = School::findorfail($id);
-        if($school){
+        if ($school) {
             $school->delete();
-            return ApiResponse::sendResponse(200,'School deleted Successfully',[]);
-        }else{
-            return ApiResponse::sendResponse(200,'School Not Found',[]);
+            return ApiResponse::sendResponse(200, 'School deleted Successfully', []);
+        } else {
+            return ApiResponse::sendResponse(200, 'School Not Found', []);
         }
     }
 }
