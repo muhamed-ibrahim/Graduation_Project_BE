@@ -16,4 +16,9 @@ class School extends Model
         return $this->belongsTo(Adminstration::class);
     }
 
+    public function Manager()
+    {
+        return $this->hasOne(SchoolManager::class);
+    }
+
 }

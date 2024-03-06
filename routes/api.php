@@ -33,6 +33,10 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
     Route::post('/updatePassword', [PasswordController::class, 'updatePassword']);
     Route::post('/addSchool', [SchoolController::class, 'addSchool']);
     Route::get('/showSchool', [SchoolController::class, 'showSchool']);
+    Route::post('/updateSchool/{id}', [SchoolController::class, 'updateSchool']);
+    Route::post('/deleteSchool/{id}', [SchoolController::class, 'deleteSchool']);
+
+
 
 });
 
