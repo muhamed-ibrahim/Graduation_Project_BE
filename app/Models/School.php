@@ -21,4 +21,9 @@ class School extends Model
         return $this->hasOne(SchoolManager::class);
     }
 
+    public function Events()
+    {
+        return $this->belongsToMany(AdEvent::class);
+    }
+
 }

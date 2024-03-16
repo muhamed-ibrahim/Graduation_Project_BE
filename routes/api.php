@@ -3,6 +3,7 @@
 use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\adminstration\EventController;
 use App\Http\Controllers\Api\adminstration\SchoolController;
 use App\Http\Controllers\Api\adminstration\auth\AuthController;
 use App\Http\Controllers\Api\adminstration\AdminstrationController;
@@ -27,6 +28,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 Route::post('forgot-password', [ForgotPasswordController::class, 'forgot']);
 Route::post('reset-password', [ForgotPasswordController::class, 'reset']);
+
 Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function () {
     Route::get('/showProfile', [AdminstrationController::class, 'showProfile']);
     Route::post('/updateProfile', [AdminstrationController::class, 'updateProfile']);
@@ -35,9 +37,10 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
     Route::get('/showSchool', [SchoolController::class, 'showSchool']);
     Route::post('/updateSchool/{id}', [SchoolController::class, 'updateSchool']);
     Route::post('/deleteSchool/{id}', [SchoolController::class, 'deleteSchool']);
-
-
-
+    Route::post('/addEvent', [EventController::class, 'addEvent']);
+    Route::get('/showEvent', [EventController::class, 'showEvent']);
+    Route::post('/updateEvent/{id}', [EventController::class, 'updateEvent']);
+    Route::post('/deleteEvent/{id}', [EventController::class, 'deleteEvent']);
 });
 
 

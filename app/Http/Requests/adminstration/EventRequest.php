@@ -3,15 +3,11 @@
 namespace App\Http\Requests\adminstration;
 
 use App\Helpers\ApiResponse;
-use App\Models\SchoolManager;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class ManagerRequest extends FormRequest
+class EventRequest extends FormRequest
 {
 
     protected function failedValidation(Validator $validator)
@@ -37,11 +33,12 @@ class ManagerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'manager_name' => ['required', 'string', 'max:255'],
-            'manager_email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(SchoolManager::class)->ignore($this->id)],
-            'manager_phone' => ['required', 'min:11', 'numeric'],
-            'manager_address' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'date' => ['required', 'date'],
+            'time' => ['required', 'date_format:H:i:s'],
+            'schools' => ['required'],
+
         ];
     }
 }
