@@ -20,7 +20,7 @@ class SchoolManagerSeeder extends Seeder
         SchoolManager::truncate();
         SchoolManager::create([
             'manager_name' => 'Magdy',
-            'manager_email' => 'magdy@gmail.com',
+            'email' => 'magdy@gmail.com',
             'manager_phone' => '01555455555',
             'manager_address' => 'الوراق',
             'password' => Hash::make('12345678'),
@@ -29,7 +29,7 @@ class SchoolManagerSeeder extends Seeder
         ]);
         SchoolManager::create([
             'manager_name' => 'Youssef',
-            'manager_email' => 'youssef@gamil.com',
+            'email' => 'youssef@gamil.com',
             'manager_phone' => '01251645556',
             'manager_address' => 'كرداسة',
             'password' => Hash::make('12345678'),

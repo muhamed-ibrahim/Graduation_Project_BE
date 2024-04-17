@@ -38,7 +38,7 @@ class ManagerRequest extends FormRequest
     {
         return [
             'manager_name' => ['required', 'string', 'max:255'],
-            'manager_email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(SchoolManager::class)->ignore($this->id)],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(SchoolManager::class)->ignore($this->id)],
             'manager_phone' => ['required', 'min:11', 'numeric'],
             'manager_address' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],

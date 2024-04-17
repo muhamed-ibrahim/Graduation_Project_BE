@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Http\Requests\adminstration;
+namespace App\Http\Requests\school\auth;
 
 use App\Helpers\ApiResponse;
-use App\Rules\DateBetweenRule;
-use App\Rules\timeBetweenRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-
-class EventRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
-
-
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     protected function failedValidation(Validator $validator)
     {
         if ($this->is('api/*')) {
@@ -21,14 +19,10 @@ class EventRequest extends FormRequest
             throw new ValidationException($validator, $reponse);
         }
     }
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
-
 
     /**
      * Get the validation rules that apply to the request.
@@ -37,14 +31,9 @@ class EventRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
-            'name' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'date' => ['required', 'date',new DateBetweenRule],
-            'time' => ['required','date_format:H:i' ,new timeBetweenRule],
-            'schools' => ['required'],
-
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
         ];
     }
 }

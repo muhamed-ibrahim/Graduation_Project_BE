@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('school_managers', function (Blueprint $table) {
             $table->id();
             $table->string('manager_name');
-            $table->string('manager_email')->unique();
+            $table->string('email')->unique();
             $table->string('manager_phone');
             $table->string('manager_address');
             $table->string('password');
