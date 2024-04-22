@@ -6,14 +6,14 @@ use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\school\ManagerProfileResource;
+use App\Http\Resources\school\ParentResource;
 use App\Http\Requests\school\UpdateManagerProfileRequest;
 
 class ManagerProfileController extends Controller
 {
     public function showProfile(){
         $manager = Auth::user();
-        return ApiResponse::sendResponse(200,'Manager Profile Retrived Successfully',new ManagerProfileResource($manager));
+        return ApiResponse::sendResponse(200,'Manager Profile Retrived Successfully',new ParentResource($manager));
     }
 
 

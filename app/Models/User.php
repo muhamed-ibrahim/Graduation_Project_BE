@@ -21,7 +21,18 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'national_id',
+        'address',
+        'national_id_image',
+        'birthdate',
+        'gender'
     ];
+
+    // children
+    public function children(){
+        return $this->hasMany(Child::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,4 +53,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // getter for national_id_image
+    public function getNationalIdImageAttribute($value)
+    {
+        return asset('storage/parents/' . $value);
+    }
 }
