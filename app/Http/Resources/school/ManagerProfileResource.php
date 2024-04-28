@@ -21,7 +21,12 @@ class ManagerProfileResource extends JsonResource
             'phone' => $this->manager_phone,
             'address' => $this->manager_address,
             'school_name' => $this->School()->first()->name,
-            'adminstartion' => $this->School()->first()->adminstration()->first()->name,
+            'school_image' => asset('/storage/school_logo/' . $this->School()->first()->image),
+            'school_address' => $this->School()->first()->address,
+            'adminstartion_name' => $this->School()->first()->adminstration()->first()->name,
+            'adminstartion_state' => $this->School()->first()->adminstration()->first()->state,
+            'adminstartion_phone' => $this->School()->first()->adminstration()->first()->phone,
+            'adminstartion_address' => $this->School()->first()->adminstration()->first()->address,
         ];
     }
 }

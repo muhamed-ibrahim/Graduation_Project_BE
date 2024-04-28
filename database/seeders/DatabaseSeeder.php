@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\School;
 use App\Models\AdEvent;
+use App\Models\Student;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,6 +29,8 @@ class DatabaseSeeder extends Seeder
             AdminstrationAdminSeeder::class,
             SchoolSeeder::class,
             SchoolManagerSeeder::class,
+            StudentSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

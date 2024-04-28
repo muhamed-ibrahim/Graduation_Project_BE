@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\school;
+namespace App\Http\Requests\parent\requests;
 
 use App\Helpers\ApiResponse;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class UpdateManagerProfileRequest extends FormRequest
+class EnrolRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,7 +19,6 @@ class UpdateManagerProfileRequest extends FormRequest
             throw new ValidationException($validator, $reponse);
         }
     }
-
     public function authorize(): bool
     {
         return true;
@@ -33,9 +32,15 @@ class UpdateManagerProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'manager_name' => ['required', 'string'],
-            'manager_phone' => ['required', 'min:11', 'numeric'],
-            'manager_address' => ['required', 'string'],
+            'name' => 'required|string',
+            'student_national_id' => 'required|string',
+            'image' => 'required|image',
+            'birthdate' => 'date_format:Y-m-d|before:today',
+            'gender' => 'required|in:male,female',
+            'religion' => 'required',
+            'childbirth_certificate' => 'required|image',
+            'schools' => 'required',
+
         ];
     }
 }

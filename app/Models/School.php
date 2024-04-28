@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\EnrollRequest;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class School extends Model
 {
@@ -25,5 +26,13 @@ class School extends Model
     {
         return $this->belongsToMany(AdEvent::class);
     }
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 
+    public function enrollRequest()
+    {
+        return $this->belongsToMany(EnrollRequest::class);
+    }
 }

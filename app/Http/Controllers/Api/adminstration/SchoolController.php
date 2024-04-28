@@ -44,6 +44,7 @@ class SchoolController extends Controller
     public function showSchool(Request $request)
     {
         $user = Auth::user();
+        
         $school = School::where('adminstration_id', $user->adminstration_id)->get();
         return ApiResponse::sendResponse(200, 'School and Manager Retrived Successfully', ShowSchoolResource::collection($school));
     }
@@ -58,7 +59,7 @@ class SchoolController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $file->move('storage/school_logo/', $filename);
+            $file->move('/storage/school_logo/', $filename);
             $school['image'] = $filename;
         }
         $StoreSchool = School::findorfail($id)->update($school);

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class UpdateManagerProfileRequest extends FormRequest
+class UpdateStudentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,7 +19,6 @@ class UpdateManagerProfileRequest extends FormRequest
             throw new ValidationException($validator, $reponse);
         }
     }
-
     public function authorize(): bool
     {
         return true;
@@ -33,9 +32,9 @@ class UpdateManagerProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'manager_name' => ['required', 'string'],
-            'manager_phone' => ['required', 'min:11', 'numeric'],
-            'manager_address' => ['required', 'string'],
+            'name' => ['required','string'],
+            'level' => ['required','string'],
+            'address' => ['required','string'],
         ];
     }
 }
