@@ -29,9 +29,9 @@ class DatabaseSeeder extends Seeder
             AdminstrationAdminSeeder::class,
             SchoolSeeder::class,
             SchoolManagerSeeder::class,
-            StudentSeeder::class,
-            UserSeeder::class,
             SchoolStaffSeeder::class,
+            UserSeeder::class,
+            StudentSeeder::class,
         ]);
     }
 }

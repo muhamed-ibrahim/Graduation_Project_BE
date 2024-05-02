@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('student_national_id')->nullable();
+            $table->string('nationality');
             $table->string('image')->nullable();
             $table->date('birthdate');
             $table->string('gender');
             $table->string('religion')->nullable();
+            $table->string('state');
+            $table->string('country');
             $table->string('childbirth_certificate')->nullable();
             $table->foreignId('parent_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();

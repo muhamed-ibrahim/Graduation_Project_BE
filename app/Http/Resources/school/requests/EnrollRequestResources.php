@@ -17,10 +17,14 @@ class EnrollRequestResources extends JsonResource
         return [
             'name' => $this->name,
             'student_national_id'=> $this->student_national_id,
+            'nationality'=> $this->nationality,
             'image' => $this->image,
             'birthdate'=> $this->birthdate,
             'gender'=> $this->gender,
             'religion'=> $this->religion,
+            'state' => $this->state,
+            'request_status' => $this->Schools()->withPivot('status')->get()->pluck('pivot.status'),
+            'country' => $this->country,
             'childbirth_certificate'=> $this->childbirth_certificate,
             'created_at_date' => $this->created_at->format('Y-m-d'),
             'created_at_time' => $this->created_at->format('H:i:s'),
@@ -34,9 +38,6 @@ class EnrollRequestResources extends JsonResource
             'parent_phone'=> $this->parent()->first()->phone,
             'parent_birthdate'=> $this->parent()->first()->birthdate,
             'parent_national_id_image'=> $this->parent()->first()->national_id_image,
-
-
-
 
         ];
     }

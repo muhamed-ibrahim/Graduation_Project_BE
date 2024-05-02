@@ -25,7 +25,9 @@ class StudentResource extends JsonResource
             'address' => $this->address,
             'state' => $this->state,
             'country' => $this->country,
-            'parent_id' => $this->parent_id,
+            'parent_name' => $this->parent()->first()->name,
+            'parent_job' => $this->parent()->first()->job,
+
 
         ];
     }

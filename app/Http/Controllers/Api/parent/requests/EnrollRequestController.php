@@ -47,6 +47,9 @@ class EnrollRequestController extends Controller
         $enroll->birthdate=$request->birthdate;
         $enroll->gender=$request->gender;
         $enroll->religion=$request->religion;
+        $enroll->nationality=$request->nationality;
+        $enroll->state=$request->state;
+        $enroll->country=$request->country;
         $enroll->parent_id= $user->id;
         $enroll->save();
         $enroll->Schools()->attach($schools);
@@ -97,6 +100,9 @@ class EnrollRequestController extends Controller
         $enroll->birthdate=$request->birthdate;
         $enroll->gender=$request->gender;
         $enroll->religion=$request->religion;
+        $enroll->nationality=$request->nationality;
+        $enroll->state=$request->state;
+        $enroll->country=$request->country;
         $enroll->save();
         $enroll->Schools()->sync($schools);
         if($enroll){

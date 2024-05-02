@@ -17,12 +17,13 @@ return new class extends Migration
             $table->string('nationality');
             $table->string('national_id');
             $table->string('gender');
+            $table->string('religion')->nullable();
             $table->date('date_of_birth');
             $table->string('address');
             $table->string('state');
             $table->string('country');
             $table->string('level');
-            $table->string('parent_id')->nullable();
+            $table->foreignId('parent_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
             $table->timestamps();
         });
