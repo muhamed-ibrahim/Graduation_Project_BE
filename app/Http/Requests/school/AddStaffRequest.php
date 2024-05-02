@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\school\auth;
+namespace App\Http\Requests\school;
 
 use App\Helpers\ApiResponse;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class LoginRequest extends FormRequest
+class AddStaffRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,9 +32,12 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
-            'role' => ['required','string'],
+            'staff_name'  => ['required', 'string'],
+            'email'  => ['required', 'string', 'lowercase', 'email', 'max:255'],
+            'staff_phone'  => ['required', 'min:11', 'numeric'],
+            'staff_address'  => ['required', 'string'],
+            'birthdate'  => ['required','date_format:Y-m-d','before:today'],
+            'staff_role'  => ['required', 'string'],
         ];
     }
 }

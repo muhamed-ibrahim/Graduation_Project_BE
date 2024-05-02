@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\school\auth;
+namespace App\Http\Requests\parent\auth;
 
 use App\Helpers\ApiResponse;
 use Illuminate\Foundation\Http\FormRequest;
@@ -34,7 +34,6 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
-            'role' => ['required','string'],
         ];
     }
 }

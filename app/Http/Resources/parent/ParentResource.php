@@ -17,12 +17,15 @@ class ParentResource extends JsonResource
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'phone' => $this->phone,
             'national_id' => $this->national_id,
+            'nationality' => $this->nationality,
+            'phone' => $this->phone,
             'address' => $this->address,
             'national_id_image' => $this->national_id_image,
             'gender' => $this->gender,
+            'religion' => $this->religion,
             'birthdate' => $this->birthdate,
+
         ];
     }
 }

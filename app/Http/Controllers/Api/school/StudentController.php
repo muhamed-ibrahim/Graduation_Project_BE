@@ -49,18 +49,6 @@ class StudentController extends Controller
 
     }
 
-    public function showAdminstrations($state){
-        $adminstrations = Adminstration::where('state','=',$state)->get();
-        return ApiResponse::sendResponse('200','Adminstration Retrivied Successfully',$adminstrations);
-    }
-
-    public function showSchoolsAdminstrations($id){
-        $schools = School::where('adminstration_id','=',$id)->get();
-        return ApiResponse::sendResponse('200','Schools Retrivied Successfully',$schools);
-    }
-
-
-
 
 
 }

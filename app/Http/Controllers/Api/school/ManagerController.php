@@ -9,16 +9,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\school\ManagerProfileResource;
 use App\Http\Requests\school\UpdateManagerProfileRequest;
+use App\Http\Resources\school\StaffProfileResource;
 
-class ManagerProfileController extends Controller
+class ManagerController extends Controller
 {
+
+
     public function showProfile(){
-        $manager = Auth::user();
-        return ApiResponse::sendResponse(200,'Manager Profile Retrived Successfully',new ManagerProfileResource($manager));
+        $user = Auth::user();
+        if($user->role === 'manager'){
+            return ApiResponse::sendResponse(200,'Manager Profile Retrived Successfully',new ManagerProfileResource($user));
+        }
     }
 
 
     public function updateProfile(UpdateManagerProfileRequest $request){
+
         $school['image'] = null;
         if($request->hasFile('image'))
          {
@@ -31,13 +37,14 @@ class ManagerProfileController extends Controller
             $file->move('storage/school_logo/', $filename);
             $school['image'] = $filename;
          }
+         $StoreSchool = School::find($request->user()->school_id)->update($school);
+
         $request->user()->manager_name = $request->manager_name;
         $request->user()->manager_phone = $request->manager_phone;
         $request->user()->manager_address = $request->manager_address;
         $request->user()->save();
 
         //to update school logo
-        $StoreSchool = School::find($request->user()->school_id)->update($school);
 
         return ApiResponse::sendResponse(200,'Manager Profile Updated Successfully',[]);
     }

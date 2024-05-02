@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -12,15 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('school_managers', function (Blueprint $table) {
+        Schema::create('school_staff', function (Blueprint $table) {
             $table->id();
-            $table->string('manager_name');
+            $table->string('staff_name');
             $table->string('email')->unique();
-            $table->string('manager_phone');
-            $table->string('manager_address');
+            $table->string('staff_phone');
+            $table->string('staff_address');
+            $table->date('birthdate');
             $table->string('password')->default(Hash::make('12345678'));
-            $table->string('role')->default('manager');
             $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
+            $table->string('staff_role');
+            $table->string('role')->default('staff');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('school_managers');
+        Schema::dropIfExists('school_staff');
     }
 };

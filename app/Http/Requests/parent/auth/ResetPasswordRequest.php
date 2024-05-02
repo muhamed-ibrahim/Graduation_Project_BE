@@ -1,27 +1,29 @@
 <?php
 
-namespace App\Http\Requests\school\auth;
+namespace App\Http\Requests\adminstration\auth;
 
 use App\Helpers\ApiResponse;
+use Illuminate\Validation\Rules;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class LoginRequest extends FormRequest
+
+class ResetPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
+    public function authorize(): bool
+    {
+        return true;
+    }
     protected function failedValidation(Validator $validator)
     {
         if ($this->is('api/*')) {
             $reponse = ApiResponse::sendResponse(422, 'Not Valid', $validator->errors());
             throw new ValidationException($validator, $reponse);
         }
-    }
-    public function authorize(): bool
-    {
-        return true;
     }
 
     /**
@@ -32,9 +34,9 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
-            'role' => ['required','string'],
+            'token' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
 }

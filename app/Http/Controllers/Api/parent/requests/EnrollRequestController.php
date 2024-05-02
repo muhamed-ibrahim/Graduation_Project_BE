@@ -8,6 +8,8 @@ use App\Models\EnrollRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\parent\requests\EnrolRequest;
+use App\Http\Requests\parent\requests\UpdateEnrolRequest;
+use App\Http\Resources\parent\requests\EnrollRequestResources;
 
 class EnrollRequestController extends Controller
 {
@@ -52,12 +54,16 @@ class EnrollRequestController extends Controller
             return ApiResponse::sendResponse(201,'Request send to schools successfully',[]);
         }
 
+    }
 
-
+    public function ShowEnrollRequests(){
+        $user = Auth::user();
+        $req = EnrollRequest::where('parent_id','=',$user->id)->get();
+        return ApiResponse::sendResponse('200','Request Retrivied Successfully',EnrollRequestResources::collection($req));
     }
 
 
-    public function updateEnrollRequest(EnrolRequest $request,$id)
+    public function updateEnrollRequest(UpdateEnrolRequest $request,$id)
     {
 
         $enroll = EnrollRequest::findorfail($id);

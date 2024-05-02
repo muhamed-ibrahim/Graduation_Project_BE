@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\EnrollRequest;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class SchoolStaff extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,26 +17,17 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'job',
-        'phone',
-        'national_id',
-        'address',
-        'national_id_image',
-        'birthdate',
-        'gender'
-    ];
+    protected $table = 'school_staff';
+
     protected $guarded = [];
 
-    public function enrollRequest()
+
+    public function school()
     {
-        return $this->hasMany(EnrollRequest::class);
+        return $this->belongsTo(School::class);
     }
 
-    /**
+        /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
@@ -56,4 +46,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
 }

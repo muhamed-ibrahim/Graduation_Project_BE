@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api\adminstration;
 
+use App\Models\School;
 use App\Models\AdAdmin;
 use Spatie\FlareClient\Api;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
+use App\Models\Adminstration;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -35,6 +37,16 @@ class AdminstrationController extends Controller
         $request->user()->phone = $request->phone;
         $request->user()->save();
         return ApiResponse::sendResponse(200,'Adminstration Profile Updated Successfully',[]);
+    }
+
+    public function showAdminstrations($state){
+        $adminstrations = Adminstration::where('state','=',$state)->get();
+        return ApiResponse::sendResponse('200','Adminstration Retrivied Successfully',$adminstrations);
+    }
+
+    public function showSchoolsAdminstrations($id){
+        $schools = School::where('adminstration_id','=',$id)->get();
+        return ApiResponse::sendResponse('200','Schools Retrivied Successfully',$schools);
     }
 
 }

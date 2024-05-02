@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api\parent\auth;
 
-use App\Helpers\ApiResponse;
-use App\Http\Resources\parent\ParentResource;
 use App\Models\User;
+use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\adminstration\auth\LoginRequest;
+use App\Http\Resources\parent\ParentResource;
+use App\Http\Requests\parent\auth\LoginRequest;
+use App\Http\Requests\parent\auth\RegisterRequest;
 
 class AuthController extends Controller
 {
@@ -36,29 +37,22 @@ class AuthController extends Controller
     }
 
     // register parent
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8',
-            'phone' => 'required|string',
-            'address' => 'required|string',
-            'gender' => 'required|string|in:male,female',
-            'national_id' => 'required|string|unique:users|digits:14',
-            'national_id_image' => 'required|image',
-            'birthdate' => 'required|date',
-        ]);
+        $data = $request->validated();
         $data['password'] = bcrypt($request->password);
         $user = User::create($data);
+        $user->nationality = $request->nationality;
+        $user->job = $request->job;
+        $user->religion = $request->religion;
         if ($request->hasFile('national_id_image')) {
             $file = $request->file('national_id_image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('storage/parents/', $filename);
             $user->national_id_image = $filename;
-            $user->save();
         }
+        $user->save();
         if ($user) {
             $token = $user->createToken('GP_project')->plainTextToken;
             $data = [

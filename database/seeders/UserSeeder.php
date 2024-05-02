@@ -27,12 +27,28 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Yassmin Wael',
             'email' => 'yassmin@gmail.com',
+            'phone' => '012655666565',
+            'address' => 'مدينة نصر',
+            'gender' => 'female',
+            'job' => 'مهندسة',
+            'national_id' => '23355252216246',
+            'nationality' => 'مصرية',
+            'religion' => 'مسلمة',
+            'birthdate' => '1990-05-11',
             'password' => bcrypt('12345678'),
 
         ]);
         User::create([
             'name' => 'Salah Mohamed',
             'email' => 'salah@gmail.com',
+            'phone' => '011155126565',
+            'address' => 'مدينة بدر',
+            'gender' => 'male',
+            'job' => 'دكتور',
+            'national_id' => '24455252218249',
+            'nationality' => 'مصري',
+            'religion' => 'مسلم',
+            'birthdate' => '1995-09-18',
             'password' => bcrypt('12345678'),
         ]);
         Schema::enableForeignKeyConstraints();
