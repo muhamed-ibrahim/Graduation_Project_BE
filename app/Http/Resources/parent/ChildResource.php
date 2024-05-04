@@ -16,8 +16,10 @@ class ChildResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'birthdate' => $this->birthdate,
+            'national_id' => $this->national_id,
+            'date_of_birth' => $this->date_of_birth,
             'image' => $this->image,
+            'level' => $this->level,
             'parent_id' => $this->parent_id,
             'parent' => new ParentResource($this->parent),
             'gender' => $this->gender,
