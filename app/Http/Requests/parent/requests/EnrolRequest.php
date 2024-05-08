@@ -32,9 +32,10 @@ class EnrolRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'type' => 'required|string',
             'name' => 'required|string',
             'nationality' => 'required|string',
-            'student_national_id' => 'required|string',
+            'student_national_id' => 'required|integer',
             'image' => 'required|image',
             'birthdate' => 'date_format:Y-m-d|before:today',
             'gender' => 'required|in:male,female',

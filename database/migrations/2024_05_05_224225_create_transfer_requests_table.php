@@ -11,22 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('transfer_requests', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->bigInteger('student_national_id')->nullable();
             $table->string('nationality');
-            $table->bigInteger('national_id');
             $table->string('image')->nullable();
+            $table->date('birthdate');
             $table->string('gender');
             $table->string('religion')->nullable();
-            $table->date('date_of_birth');
-            $table->string('address');
             $table->string('state');
             $table->string('country');
             $table->string('childbirth_certificate')->nullable();
-            $table->string('level');
             $table->foreignId('parent_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
+            $table->foreignId('old_school')->constrained('schools')->cascadeOnDelete();
+            $table->foreignId('new_school')->constrained('schools')->cascadeOnDelete();
+
             $table->timestamps();
         });
     }
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('transfer_requests');
     }
 };

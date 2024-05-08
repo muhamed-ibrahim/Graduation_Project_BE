@@ -3,13 +3,14 @@
 use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\school\StaffController;
+use App\Http\Controllers\Api\school\ManagerController;
 use App\Http\Controllers\Api\school\StudentController;
 use App\Http\Controllers\Api\school\auth\AuthController;
-use App\Http\Controllers\Api\school\StaffController;
 use App\Http\Controllers\Api\school\auth\PasswordController;
-use App\Http\Controllers\Api\school\ManagerController;
 use App\Http\Controllers\Api\school\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\school\requests\EnrollRequestController;
+use App\Http\Controllers\Api\school\requests\TransferRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,9 @@ Route::group(['middleware' => ['auth:sanctum','multiguard']], function () {
     Route::post('/updateStudent/{id}', [StudentController::class, 'updateStudent']);
     Route::get('/ShowEnrollRequests', [EnrollRequestController::class, 'ShowEnrollRequests']);
     Route::post('/SendEnrollRequests/{id}', [EnrollRequestController::class, 'SendEnrollRequests']);
+    Route::get('/ShowTransferRequestsToNew', [TransferRequestController::class, 'ShowTransferRequestsTONew']);
+    Route::get('/ShowTransferRequestsToOld', [TransferRequestController::class, 'ShowTransferRequestsToOld']);
+
 });
 
 

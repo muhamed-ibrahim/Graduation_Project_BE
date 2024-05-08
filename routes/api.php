@@ -9,7 +9,6 @@ use App\Http\Controllers\Api\adminstration\auth\AuthController;
 use App\Http\Controllers\Api\adminstration\AdminstrationController;
 use App\Http\Controllers\Api\adminstration\auth\PasswordController;
 use App\Http\Controllers\Api\adminstration\auth\ForgotPasswordController;
-use App\Models\Adminstration;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +44,8 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
 });
 Route::get('/showAdminstrations/{state}', [AdminstrationController::class, 'showAdminstrations']);
 Route::get('/showSchoolsAdminstrations/{id}', [AdminstrationController::class, 'showSchoolsAdminstrations']);
+Route::post('/showSchoolsExceptSchool/{id}', [AdminstrationController::class, 'showSchoolsExceptSchool']);
+
 
 
 

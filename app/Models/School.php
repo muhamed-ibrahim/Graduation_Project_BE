@@ -36,6 +36,11 @@ class School extends Model
         return $this->belongsToMany(EnrollRequest::class);
     }
 
+    public function tansferRequest()
+    {
+        return $this->hasMany(TransferRequest::class);
+    }
+
     public function staff()
     {
         return $this->hasMany(SchoolStaff::class);

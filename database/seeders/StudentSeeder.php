@@ -20,7 +20,7 @@ class StudentSeeder extends Seeder
         Student::create([
             'name' => 'Ahmed Yasser',
             'nationality' => 'مصري',
-            'national_id' => '15545985566555',
+            'national_id' => 15545985566555,
             'gender' => 'Male',
             'religion' => 'Muslim',
             'date_of_birth' => '2002/6/16',
@@ -36,7 +36,7 @@ class StudentSeeder extends Seeder
         Student::create([
             'name' => 'Khaled Mohamed',
             'nationality' => 'مصري',
-            'national_id' => '1669556653355',
+            'national_id' => 1669556653355,
             'gender' => 'Male',
             'religion' => 'Muslim',
             'date_of_birth' => '2001/9/1',

@@ -15,6 +15,7 @@ class EnrollRequestResources extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'type' => $this->type,
             'name' => $this->name,
             'student_national_id'=> $this->student_national_id,
             'nationality'=> $this->nationality,
@@ -23,7 +24,7 @@ class EnrollRequestResources extends JsonResource
             'gender'=> $this->gender,
             'religion'=> $this->religion,
             'state' => $this->state,
-            'request_status' => $this->Schools()->withPivot('status')->get()->pluck('pivot.status'),
+            'request_status' => optional($this->Schools()->withPivot('status')->find($this->pivot->school_id))->pivot->status,
             'country' => $this->country,
             'childbirth_certificate'=> $this->childbirth_certificate,
             'created_at_date' => $this->created_at->format('Y-m-d'),

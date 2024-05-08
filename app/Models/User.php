@@ -36,6 +36,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(EnrollRequest::class);
     }
+    public function tansferRequest()
+    {
+        return $this->hasMany(TransferRequest::class);
+    }
 
     public function students()
     {

@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\parent\auth\PasswordController;
 use App\Http\Controllers\Api\parent\ChildController;
 use App\Http\Controllers\Api\parent\ParentController;
 use App\Http\Controllers\Api\parent\requests\EnrollRequestController;
+use App\Http\Controllers\Api\parent\requests\TransferRequestController;
+use App\Models\TransferRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +37,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/deleteEnrollRequest/{id}', [EnrollRequestController::class, 'deleteEnrollRequest']);
     Route::get('/ShowEnrollRequests', [EnrollRequestController::class, 'ShowEnrollRequests']);
     Route::get('/showChild', [ChildController::class, 'showChild']);
-
+    Route::post('/transferRequest/{id}', [TransferRequestController::class, 'transferRequest']);
 
 });
 

@@ -23,7 +23,7 @@ class UpdateEnrolRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'student_national_id' => 'required|string',
+            'student_national_id' => 'required|integer',
             'birthdate' => 'date_format:Y-m-d|before:today',
             'gender' => 'required|in:male,female',
             'religion' => 'required',

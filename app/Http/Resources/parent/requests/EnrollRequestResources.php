@@ -16,6 +16,7 @@ class EnrollRequestResources extends JsonResource
     {
         return [
             'id' => $this->id,
+            'type' => $this->type,
             'name' => $this->name,
             'student_national_id'=> $this->student_national_id,
             'nationality'=> $this->nationality,

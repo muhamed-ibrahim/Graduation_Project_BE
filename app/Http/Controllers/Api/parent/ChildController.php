@@ -18,4 +18,7 @@ class ChildController extends Controller
             return ApiResponse::sendResponse(200,'Childs Retrivied Successfully',ChildResource::collection($getchild));
         }
     }
+
+
+
 }

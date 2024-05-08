@@ -15,6 +15,7 @@ class EnrollRequestController extends Controller
 {
     public function enrollRequest(EnrolRequest $request)
     {
+        $request->validated();
         $user = Auth::user();
         $enroll = new EnrollRequest();
         $schools = $request->input('schools');
@@ -42,6 +43,7 @@ class EnrollRequestController extends Controller
             $file->move('storage/requests/EnrollReqChildcertificate/', $filename);
             $enroll->childbirth_certificate=$filename;
         }
+        $enroll->type=$request->type;
         $enroll->name=$request->name;
         $enroll->student_national_id= $request->student_national_id;
         $enroll->birthdate=$request->birthdate;

@@ -49,4 +49,14 @@ class AdminstrationController extends Controller
         return ApiResponse::sendResponse('200','Schools Retrivied Successfully',$schools);
     }
 
+    public function showSchoolsExceptSchool(Request $request,$id){
+        $validated = $request->validate([
+            'school_Id' => ['required'],
+        ]);
+        $schools = School::where('adminstration_id', '=', $id)
+        ->whereNotIn('id', [$validated['school_Id']])
+        ->get();
+        return ApiResponse::sendResponse('200','Schools Retrivied Successfully',$schools);
+    }
+
 }

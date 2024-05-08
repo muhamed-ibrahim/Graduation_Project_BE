@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('enroll_requests', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
             $table->string('name');
-            $table->string('student_national_id')->nullable();
+            $table->bigInteger('student_national_id')->nullable();
             $table->string('nationality');
             $table->string('image')->nullable();
             $table->date('birthdate');
