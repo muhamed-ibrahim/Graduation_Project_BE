@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/ShowEnrollRequests', [EnrollRequestController::class, 'ShowEnrollRequests']);
     Route::get('/showChild', [ChildController::class, 'showChild']);
     Route::post('/transferRequest/{id}', [TransferRequestController::class, 'transferRequest']);
+    Route::get('/ShowTransferReqWithNationalID/{nationalId}', [TransferRequestController::class, 'ShowTransferReqWithNationalID']);
 
 });
 

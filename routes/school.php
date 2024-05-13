@@ -59,6 +59,8 @@ Route::group(['middleware' => ['auth:sanctum','multiguard']], function () {
     Route::post('/SendEnrollRequests/{id}', [EnrollRequestController::class, 'SendEnrollRequests']);
     Route::get('/ShowTransferRequestsToNew', [TransferRequestController::class, 'ShowTransferRequestsTONew']);
     Route::get('/ShowTransferRequestsToOld', [TransferRequestController::class, 'ShowTransferRequestsToOld']);
+    Route::post('/SendTransferReqToNew/{id}', [TransferRequestController::class, 'SendTransferReqToNew']);
+    Route::post('/SendTransferReqToOld/{id}', [TransferRequestController::class, 'SendTransferReqToOld']);
 
 });
 

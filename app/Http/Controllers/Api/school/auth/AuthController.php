@@ -41,6 +41,7 @@ class AuthController extends Controller
                         'name' => $staff->staff_name,
                         'email' => $staff->email,
                         'role' => $staff->role,
+                        'staff_role' => $staff->staff_role,
                     ];
                     return ApiResponse::sendResponse(200, 'staff Account Logged in Successfully', $data);
                 } else {

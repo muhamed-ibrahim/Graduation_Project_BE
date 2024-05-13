@@ -29,6 +29,7 @@ class TransferRequestController extends Controller
             'religion' => $student->religion,
             'nationality' => $student->nationality,
             'state' => $student->state,
+            'address' => $student->address,
             'country' => $student->country,
             'image' => $student->image,
             'childbirth_certificate' => $student->childbirth_certificate,
@@ -41,6 +42,21 @@ class TransferRequestController extends Controller
         $transfer = TransferRequest::create($transferData);
         if($transfer){
             return ApiResponse::sendResponse(201,'Request transfer send to school successfully',[]);
+        }
+
+    }
+
+    public function ShowTransferReqWithNationalID($nationalId){
+        $transfer = TransferRequest::where('student_national_id',$nationalId)->get();
+        if(!$transfer->isEmpty()){
+            return ApiResponse::sendResponse(200,'Request Transfer Retrivied Successfully',$transfer);
+        }else{
+            $student = Student::where('national_id', $nationalId)->where('parent_id',Auth::user()->id)->first();
+            if($student){
+                return ApiResponse::sendResponse(404, 'Student Found but No Transfer Requests Found',[]);
+            } else {
+                return ApiResponse::sendResponse(404, 'Student Not Found',[]);
+            }
         }
 
     }

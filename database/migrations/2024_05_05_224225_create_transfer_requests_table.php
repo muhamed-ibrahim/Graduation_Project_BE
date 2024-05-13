@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->date('birthdate');
             $table->string('gender');
+            $table->string('address');
             $table->string('religion')->nullable();
             $table->string('state');
             $table->string('country');
@@ -26,7 +27,7 @@ return new class extends Migration
             $table->foreignId('parent_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('old_school')->constrained('schools')->cascadeOnDelete();
             $table->foreignId('new_school')->constrained('schools')->cascadeOnDelete();
-
+            $table->integer('status')->default(-1);
             $table->timestamps();
         });
     }
