@@ -7,21 +7,21 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SendEnrollReqNotification extends Notification
+class SendParentToSchoolNotification extends Notification
 {
     use Queueable;
     private $data;
     private $user;
-
+    private $action;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($data,$user)
+    public function __construct($data,$user,$action)
     {
         $this->data = $data;
         $this->user = $user;
-
+        $this->action = $action;
     }
 
     /**
@@ -34,12 +34,14 @@ class SendEnrollReqNotification extends Notification
         return ['database'];
     }
 
+
     public function toArray(object $notifiable): array
     {
         return [
             'data_id' => $this->data->id,
-            'data_title' => 'some users added new enroll requests',
+            'data_title' => 'تسجيل',
             'parent_name' => $this->user->name,
         ];
     }
+
 }

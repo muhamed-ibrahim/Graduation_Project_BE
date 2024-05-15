@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api\parent\requests;
 
+use App\Models\SchoolStaff;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Models\EnrollRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\parent\requests\EnrolRequest;
+use App\Notifications\SendParentToSchoolNotification;
 use App\Http\Requests\parent\requests\UpdateEnrolRequest;
 use App\Http\Resources\parent\requests\EnrollRequestResources;
-use App\Models\SchoolManager;
-use App\Notifications\SendEnrollReqNotification;
-use Illuminate\Support\Facades\Notification;
 
 
 class EnrollRequestController extends Controller
@@ -63,10 +63,10 @@ class EnrollRequestController extends Controller
 
         if($enroll){
             foreach ($schools as $school) {
-                $manager = SchoolManager::where('school_id',$school)->first();
-                Notification::send($manager, new SendEnrollReqNotification($enroll,$user));
+                $staff = SchoolStaff::where('school_id',$school)->where('staff_role','مسؤل تسجيل الطلاب')->get();
+                Notification::send($staff, new SendParentToSchoolNotification($enroll,$user,'Enroll'));
+                return ApiResponse::sendResponse(201,'Request send to schools successfully',[]);
             }
-            return ApiResponse::sendResponse(201,'Request send to schools successfully',[]);
         }
 
     }
@@ -120,8 +120,6 @@ class EnrollRequestController extends Controller
         if($enroll){
             return ApiResponse::sendResponse(200,'Request update and send to schools successfully',[]);
         }
-
-
 
     }
 
