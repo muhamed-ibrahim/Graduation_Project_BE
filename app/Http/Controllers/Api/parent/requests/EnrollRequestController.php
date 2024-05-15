@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\parent\requests\EnrolRequest;
 use App\Http\Requests\parent\requests\UpdateEnrolRequest;
 use App\Http\Resources\parent\requests\EnrollRequestResources;
+use App\Models\SchoolManager;
+use App\Notifications\SendEnrollReqNotification;
+use Illuminate\Support\Facades\Notification;
+
 
 class EnrollRequestController extends Controller
 {
@@ -55,7 +59,13 @@ class EnrollRequestController extends Controller
         $enroll->parent_id= $user->id;
         $enroll->save();
         $enroll->Schools()->attach($schools);
+
+
         if($enroll){
+            foreach ($schools as $school) {
+                $manager = SchoolManager::where('school_id',$school)->first();
+                Notification::send($manager, new SendEnrollReqNotification($enroll,$user));
+            }
             return ApiResponse::sendResponse(201,'Request send to schools successfully',[]);
         }
 

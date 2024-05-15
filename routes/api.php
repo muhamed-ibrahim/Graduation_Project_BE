@@ -3,6 +3,7 @@
 use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\adminstration\EventController;
 use App\Http\Controllers\Api\adminstration\SchoolController;
 use App\Http\Controllers\Api\adminstration\auth\AuthController;
@@ -45,6 +46,7 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
 Route::get('/showAdminstrations/{state}', [AdminstrationController::class, 'showAdminstrations']);
 Route::get('/showSchoolsAdminstrations/{id}', [AdminstrationController::class, 'showSchoolsAdminstrations']);
 Route::post('/showSchoolsExceptSchool/{id}', [AdminstrationController::class, 'showSchoolsExceptSchool']);
+Route::get('/notification', [NotificationController::class, 'notification'])->middleware('auth:sanctum');;
 
 
 

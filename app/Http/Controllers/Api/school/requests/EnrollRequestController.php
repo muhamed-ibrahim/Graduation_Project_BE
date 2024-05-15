@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 use App\Models\EnrollRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SendEnrollReqNotification;
 use App\Http\Requests\parent\requests\EnrolRequest;
 use App\Http\Resources\school\requests\EnrollRequestResources;
 
@@ -61,6 +63,7 @@ class EnrollRequestController extends Controller
             File::copy('storage/requests/EnrollReqChildcertificate/' . $studentData['childbirth_certificate'], 'storage/student_data/st-certficate/' . $studentData['childbirth_certificate']);
             $addStudent = Student::create($studentData);
             if ($addStudent) {
+                Notification::send($req->parent()->first(), new SendEnrollReqNotification($addStudent,$user));
                 return ApiResponse::sendResponse('201', 'Status Updated and Student Added Successfully', []);
             }
         }
