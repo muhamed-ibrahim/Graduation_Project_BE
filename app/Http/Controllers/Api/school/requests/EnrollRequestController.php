@@ -63,9 +63,9 @@ class EnrollRequestController extends Controller
             File::copy('storage/requests/EnrollReqChildcertificate/' . $studentData['childbirth_certificate'], 'storage/student_data/st-certficate/' . $studentData['childbirth_certificate']);
             $addStudent = Student::create($studentData);
             if ($addStudent) {
-                Notification::send($req->parent()->first(), new SendSchoolToParentNotification($addStudent,$user));
-                return ApiResponse::sendResponse('201', 'Status Updated and Student Added Successfully', []);
+                Notification::send($req->parent()->first(), new SendSchoolToParentNotification($addStudent,$user,"/Darb/Dashboard/Children"));
             }
+            return ApiResponse::sendResponse('201', 'Status Updated and Student Added Successfully', []);
         }
     }
 }

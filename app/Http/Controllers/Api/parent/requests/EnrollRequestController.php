@@ -65,8 +65,8 @@ class EnrollRequestController extends Controller
             foreach ($schools as $school) {
                 $staff = SchoolStaff::where('school_id',$school)->where('staff_role','مسؤل تسجيل الطلاب')->get();
                 Notification::send($staff, new SendParentToSchoolNotification($enroll,$user,'Enroll'));
-                return ApiResponse::sendResponse(201,'Request send to schools successfully',[]);
             }
+            return ApiResponse::sendResponse(201,'Request send to schools successfully',[]);
         }
 
     }

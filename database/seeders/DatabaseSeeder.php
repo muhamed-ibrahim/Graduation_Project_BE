@@ -4,9 +4,13 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Term;
+use App\Models\Grade;
+use App\Models\Stage;
 use App\Models\School;
 use App\Models\AdEvent;
 use App\Models\Student;
+use App\Models\TermSubject;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -32,6 +36,14 @@ class DatabaseSeeder extends Seeder
             SchoolStaffSeeder::class,
             UserSeeder::class,
             StudentSeeder::class,
+            StageSeeder::class,
+            GradeSeeder::class,
+            TermSeeder::class,
+            SubjectSeeder::class,
+            TermSubjectSeeder::class,
+
+
+
         ]);
     }
 }

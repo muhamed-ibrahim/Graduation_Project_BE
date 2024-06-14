@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\adminstration\auth\AuthController;
 use App\Http\Controllers\Api\adminstration\AdminstrationController;
 use App\Http\Controllers\Api\adminstration\auth\PasswordController;
 use App\Http\Controllers\Api\adminstration\auth\ForgotPasswordController;
+use App\Http\Controllers\Api\adminstration\educationalLevels\LevelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,11 +43,21 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
     Route::get('/showEvent', [EventController::class, 'showEvent']);
     Route::post('/updateEvent/{id}', [EventController::class, 'updateEvent']);
     Route::post('/deleteEvent/{id}', [EventController::class, 'deleteEvent']);
+
+    Route::get('/showStages', [LevelController::class, 'showStages']);
+    Route::get('/showLevels/{stageId}', [LevelController::class, 'showLevels']);
+    Route::get('/showterms', [LevelController::class, 'showterms']);
+    Route::get('/showSubjects/{levelId}/{termId}', [LevelController::class, 'showSubjects']);
+
+
+
+
 });
 Route::get('/showAdminstrations/{state}', [AdminstrationController::class, 'showAdminstrations']);
 Route::get('/showSchoolsAdminstrations/{id}', [AdminstrationController::class, 'showSchoolsAdminstrations']);
 Route::post('/showSchoolsExceptSchool/{id}', [AdminstrationController::class, 'showSchoolsExceptSchool']);
 Route::get('/notification', [NotificationController::class, 'notification'])->middleware('auth:sanctum');;
+Route::get('/markAsRead/{id}', [NotificationController::class, 'markAsRead'])->middleware('auth:sanctum');;
 
 
 

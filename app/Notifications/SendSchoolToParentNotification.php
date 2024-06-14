@@ -12,16 +12,17 @@ class SendSchoolToParentNotification extends Notification
     use Queueable;
     private $data;
     private $user;
+    private $url;
 
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($data,$user)
+    public function __construct($data,$user,$url)
     {
         $this->data = $data;
         $this->user = $user;
-
+        $this->url = $url;
     }
 
     /**
@@ -41,6 +42,7 @@ class SendSchoolToParentNotification extends Notification
             'data_title' => 'تم الرد',
             'staff_name' => $this->user->name,
             'school_name' => $this->user->school()->first()->name,
+            'url' => $this->url,
         ];
     }
 }
