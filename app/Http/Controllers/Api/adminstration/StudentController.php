@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api\adminstration;
 
 use App\Models\School;
 use App\Models\Student;
+use Spatie\FlareClient\Api;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\adminstration\StudentInfoResource;
 
 class StudentController extends Controller
 {
@@ -33,6 +35,11 @@ class StudentController extends Controller
             return ApiResponse::sendResponse('200','This School is Not Found in this Adminstration',[]);
         }
 
+    }
+
+    public function studentinfo($studentId){
+        $student = Student::where('id', $studentId)->get();
+        return ApiResponse::sendResponse('200','cccccccc',StudentInfoResource::collection($student));
     }
 
 }

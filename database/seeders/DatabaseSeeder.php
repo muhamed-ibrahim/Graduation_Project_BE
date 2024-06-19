@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             TermSeeder::class,
             SubjectSeeder::class,
             TermSubjectSeeder::class,
+            ScoreSeeder::class,
 
 
 

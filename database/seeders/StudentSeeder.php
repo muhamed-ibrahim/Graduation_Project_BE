@@ -28,7 +28,7 @@ class StudentSeeder extends Seeder
             'state' => 'الجيزة',
             'country' => 'Eygpt',
             'stage_id' => 1,
-            'grade_id' => 1,
+            'grade_id' => 2,
             'parent_id' =>  1,
             'school_id' =>  1,
 

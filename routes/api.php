@@ -51,6 +51,9 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
     Route::get('/showSubjects/{levelId}/{termId}', [LevelController::class, 'showSubjects']);
 
     Route::post('/getStudent/{school}/{stage}/{grade}', [StudentController::class, 'getStudent']);
+    Route::get('/studentinfo/{studentId}', [StudentController::class, 'studentinfo']);
+
+
 
 
 

@@ -28,4 +28,9 @@ class TermSubject extends Model
     {
         return $this->belongsTo(Subject::class);
     }
+
+    public function scores()
+    {
+        return $this->hasMany(Score::class);
+    }
 }
