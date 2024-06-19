@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\adminstration\AdminstrationController;
 use App\Http\Controllers\Api\adminstration\auth\PasswordController;
 use App\Http\Controllers\Api\adminstration\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\adminstration\educationalLevels\LevelController;
+use App\Http\Controllers\Api\adminstration\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,10 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
     Route::get('/showLevels/{stageId}', [LevelController::class, 'showLevels']);
     Route::get('/showterms', [LevelController::class, 'showterms']);
     Route::get('/showSubjects/{levelId}/{termId}', [LevelController::class, 'showSubjects']);
+
+    Route::post('/getStudent/{school}/{stage}/{grade}', [StudentController::class, 'getStudent']);
+
+
 
 
 
