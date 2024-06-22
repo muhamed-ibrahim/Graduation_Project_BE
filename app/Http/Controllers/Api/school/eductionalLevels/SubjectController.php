@@ -12,9 +12,6 @@ class SubjectController extends Controller
     public function subjectsGrade($stage){
         $school = Auth::user()->school;
         $stagesWithGradesAndTermSubjects = $school->stages()->where('stages.id',$stage)->with(['grades.termSubject.subject'])->get();
-        if (!$stagesWithGradesAndTermSubjects) {
-            return ApiResponse::sendResponse('404', 'Stage not found',[]);
-        }
         return ApiResponse::sendResponse('200','Subject retrivied Successfully',$stagesWithGradesAndTermSubjects);
     }
 }

@@ -9,8 +9,9 @@ use App\Http\Controllers\Api\school\StudentController;
 use App\Http\Controllers\Api\school\auth\AuthController;
 use App\Http\Controllers\Api\school\auth\PasswordController;
 use App\Http\Controllers\Api\school\auth\ForgotPasswordController;
-use App\Http\Controllers\Api\school\eductionalLevels\SubjectController;
+use App\Http\Controllers\Api\school\eductionalLevels\LevelController;
 use App\Http\Controllers\Api\school\requests\EnrollRequestController;
+use App\Http\Controllers\Api\school\eductionalLevels\SubjectController;
 use App\Http\Controllers\Api\school\requests\TransferRequestController;
 
 /*
@@ -63,6 +64,7 @@ Route::group(['middleware' => ['auth:sanctum','multiguard']], function () {
     Route::post('/SendTransferReqToNew/{id}', [TransferRequestController::class, 'SendTransferReqToNew']);
     Route::post('/SendTransferReqToOld/{id}', [TransferRequestController::class, 'SendTransferReqToOld']);
 
+    Route::get('/showStages', [LevelController::class, 'showStages']);
     Route::get('/subjectsGrade/{stage}', [SubjectController::class, 'subjectsGrade']);
 
 
