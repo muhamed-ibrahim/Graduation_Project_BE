@@ -21,4 +21,9 @@ class Stage extends Model
     {
         return $this->hasMany(Grade::class);
     }
+
+    public function schools()
+    {
+        return $this->belongsToMany(School::class);
+    }
 }

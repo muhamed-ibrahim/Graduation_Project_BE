@@ -14,39 +14,40 @@ use App\Models\SchoolStaff;
 
 class StaffController extends Controller
 {
-    public function addStaff(AddStaffRequest $request){
+    public function addStaff(AddStaffRequest $request)
+    {
         $data = $request->validated();
         $user = Auth::user();
         $data['school_id'] = $user->school_id;
         $staff = SchoolStaff::create($data);
-        if($staff){
-            return ApiResponse::sendResponse(201,'Staff Added Successfully',[]);
+        if ($staff) {
+            return ApiResponse::sendResponse(201, 'Staff Added Successfully', []);
         }
-
     }
-    public function showProfile(){
+    public function showProfile()
+    {
         $user = Auth::user();
-        if($user->role === 'staff'){
-            return ApiResponse::sendResponse(200,'Staff Profile Retrived Successfully',new StaffProfileResource($user));
+        if ($user->role === 'staff') {
+            return ApiResponse::sendResponse(200, 'Staff Profile Retrived Successfully', new StaffProfileResource($user));
         }
     }
 
 
-    public function updateProfile(UpdateStaffProfileRequest $request){
+    public function updateProfile(UpdateStaffProfileRequest $request)
+    {
 
         $school['image'] = null;
-        if($request->hasFile('image'))
-         {
-        //     if(file_exists(public_path().'/storage/adminstration_admins/'.$request->user()->image)){
-        //         unlink(public_path().'/storage/adminstration_admins/'.$request->user()->image);
-        //     }
+        if ($request->hasFile('image')) {
+            //     if(file_exists(public_path().'/storage/adminstration_admins/'.$request->user()->image)){
+            //         unlink(public_path().'/storage/adminstration_admins/'.$request->user()->image);
+            //     }
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
-            $filename = time(). '.' . $extension;
+            $filename = time() . '.' . $extension;
             $file->move('storage/school_logo/', $filename);
             $school['image'] = $filename;
-         }
-         $StoreSchool = School::find($request->user()->school_id)->update($school);
+        }
+        $StoreSchool = School::find($request->user()->school_id)->update($school);
 
         $request->user()->staff_name = $request->staff_name;
         $request->user()->staff_phone = $request->staff_phone;
@@ -55,6 +56,6 @@ class StaffController extends Controller
 
         //to update school logo
 
-        return ApiResponse::sendResponse(200,'Staff Profile Updated Successfully',[]);
+        return ApiResponse::sendResponse(200, 'Staff Profile Updated Successfully', []);
     }
 }

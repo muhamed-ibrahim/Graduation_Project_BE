@@ -45,4 +45,9 @@ class School extends Model
     {
         return $this->hasMany(SchoolStaff::class);
     }
+
+    public function stages()
+    {
+        return $this->belongsToMany(Stage::class);
+    }
 }
