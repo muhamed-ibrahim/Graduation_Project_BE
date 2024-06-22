@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth:sanctum','multiguard']], function () {
     Route::post('/SendTransferReqToOld/{id}', [TransferRequestController::class, 'SendTransferReqToOld']);
 
     Route::get('/showStages', [LevelController::class, 'showStages']);
-    Route::get('/showLevels', [LevelController::class, 'showLevels']);
+    Route::get('/showLevels/{stageId}', [LevelController::class, 'showLevels']);
     Route::get('/showterms', [LevelController::class, 'showterms']);
 
     Route::get('/subjectsGrade/{stage}', [SubjectController::class, 'subjectsGrade']);
