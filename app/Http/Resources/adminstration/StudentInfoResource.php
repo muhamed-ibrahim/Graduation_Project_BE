@@ -49,6 +49,12 @@ class StudentInfoResource extends JsonResource
         ];
 
 
+        $schoolDetails = [
+            'school_name' => $this->school->name,
+            'school_image' => asset('/storage/school_logo/' . $this->school->image),
+        ];
+
+
         return [
             "id" => $this->id,
             "name" => $this->name,
@@ -65,6 +71,7 @@ class StudentInfoResource extends JsonResource
             'stage_name' => $this->stage->stage_name,
             'grade_name' => $this->grade->grade_name,
             'parent' => $parentDetails,
+            'school' => $schoolDetails,
             'Scores' => $scoresFormatted,
         ];
     }
