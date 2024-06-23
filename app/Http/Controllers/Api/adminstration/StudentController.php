@@ -42,4 +42,9 @@ class StudentController extends Controller
         return ApiResponse::sendResponse('200','cccccccc',StudentInfoResource::collection($student));
     }
 
+    public function getStudentsSchools(){
+        $student = Student::all();
+        return ApiResponse::sendResponse('200','Students Retrivied Successfully',$student);
+    }
+
 }

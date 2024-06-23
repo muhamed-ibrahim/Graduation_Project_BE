@@ -21,12 +21,14 @@ class SchoolSeeder extends Seeder
             'name' => 'مدرسة العمرانية بنين',
             'address' => 'شارع الطوابق',
             'phone' => '0225998897',
+            'image' => '1711868111.png',
             'adminstration_id' => 2,
         ]);
         School::create([
             'name' => 'مدرسة مصطفي كامل',
             'address' => 'شارع حسن محمد',
             'phone' => '0225568897',
+            'image' => '1711868111.png',
             'adminstration_id' => 1,
         ]);
         Schema::enableForeignKeyConstraints();

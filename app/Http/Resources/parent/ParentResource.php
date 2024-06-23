@@ -21,7 +21,7 @@ class ParentResource extends JsonResource
             'nationality' => $this->nationality,
             'phone' => $this->phone,
             'address' => $this->address,
-            'national_id_image' => $this->national_id_image,
+            'national_id_image' => asset('/storage/parents/' . $this->national_id_image),
             'gender' => $this->gender,
             'religion' => $this->religion,
             'birthdate' => $this->birthdate,

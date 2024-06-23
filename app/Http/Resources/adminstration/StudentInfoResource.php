@@ -37,7 +37,7 @@ class StudentInfoResource extends JsonResource
                 })->values(),
             ];
         })->values();
-        
+
         $parentDetails = [
             'name' => $this->parent->name,
             'national_id' => $this->parent->national_id,
@@ -54,14 +54,14 @@ class StudentInfoResource extends JsonResource
             "name" => $this->name,
             "nationality" => $this->nationality,
             "national_id" => $this->national_id,
-            "image" => $this->image,
+            "image" => asset('/storage/student_data/st-image/' . $this->image),
             "gender" => $this->gender,
             "religion" => $this->religion,
             "date_of_birth" => $this->date_of_birth,
             "address" => $this->address,
             "state" => $this->state,
             "country" => $this->country,
-            "childbirth_certificate" => $this->childbirth_certificate,
+            "childbirth_certificate" => asset('/storage/student_data/st-certficate/' . $this->childbirth_certificate),
             'stage_name' => $this->stage->stage_name,
             'grade_name' => $this->grade->grade_name,
             'parent' => $parentDetails,

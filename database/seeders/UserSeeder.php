@@ -36,6 +36,7 @@ class UserSeeder extends Seeder
             'religion' => 'مسلمة',
             'birthdate' => '1990-05-11',
             'password' => bcrypt('12345678'),
+            'national_id_image' => '1714668111.png',
 
         ]);
         User::create([
@@ -50,6 +51,8 @@ class UserSeeder extends Seeder
             'religion' => 'مسلم',
             'birthdate' => '1995-09-18',
             'password' => bcrypt('12345678'),
+            'national_id_image' => '1714668111.png',
+
         ]);
         Schema::enableForeignKeyConstraints();
     }

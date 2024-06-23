@@ -20,7 +20,8 @@ class ShowEventResource extends JsonResource
             'description' => $this->description,
             'date' => $this->date,
             'time' => $this->time,
-            'schools'=>$this->Schools()->pluck('name')->toArray(),
+            'schools'=>$this->Schools()->select('school_id', 'name')->get()->toArray(),
+
         ];
     }
 }

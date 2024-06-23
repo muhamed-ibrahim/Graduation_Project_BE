@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api\school\eductionalLevels;
 
 use App\Models\Term;
 use App\Models\Grade;
+use App\Models\TermSubject;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\school\ShowSubjectResource;
 
 class LevelController extends Controller
 {
@@ -27,4 +29,12 @@ class LevelController extends Controller
         return ApiResponse::sendResponse('200','terms Retrived Successfully',$terms);
 
     }
+
+    public function showSubjects($levelId,$termId){
+        $subjects = TermSubject::where('Grade_id',$levelId)->where('term_id',$termId)->get();
+        return ApiResponse::sendResponse('200','subjects Retrived Successfully',ShowSubjectResource::collection($subjects));
+    }
+
+
+
 }

@@ -44,14 +44,19 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
     Route::get('/showEvent', [EventController::class, 'showEvent']);
     Route::post('/updateEvent/{id}', [EventController::class, 'updateEvent']);
     Route::post('/deleteEvent/{id}', [EventController::class, 'deleteEvent']);
+    Route::get('/getAllAdminstrations', [AdminstrationController::class, 'getAllAdminstrations']);
+
+
 
     Route::get('/showStages', [LevelController::class, 'showStages']);
     Route::get('/showLevels/{stageId}', [LevelController::class, 'showLevels']);
     Route::get('/showterms', [LevelController::class, 'showterms']);
     Route::get('/showSubjects/{levelId}/{termId}', [LevelController::class, 'showSubjects']);
 
+    Route::get('/getStudentsSchools', [StudentController::class, 'getStudentsSchools']);
     Route::post('/getStudent/{school}/{stage}/{grade}', [StudentController::class, 'getStudent']);
     Route::get('/studentinfo/{studentId}', [StudentController::class, 'studentinfo']);
+
 
 
 

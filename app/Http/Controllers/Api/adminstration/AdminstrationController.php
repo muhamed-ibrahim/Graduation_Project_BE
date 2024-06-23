@@ -59,4 +59,11 @@ class AdminstrationController extends Controller
         return ApiResponse::sendResponse('200','Schools Retrivied Successfully',$schools);
     }
 
+    public function getAllAdminstrations(){
+        $adminstration = Auth::user()->adminstration;
+        $adminstration_id = $adminstration->id;
+        $staff = AdAdmin::where('adminstration_id',$adminstration_id)->get();
+        return ApiResponse::sendResponse('200','Adminstration Staff Retrivied Successfully',$staff);
+    }
+
 }

@@ -67,6 +67,9 @@ Route::group(['middleware' => ['auth:sanctum','multiguard']], function () {
     Route::get('/showStages', [LevelController::class, 'showStages']);
     Route::get('/showLevels/{stageId}', [LevelController::class, 'showLevels']);
     Route::get('/showterms', [LevelController::class, 'showterms']);
+    Route::get('/showSubjects/{levelId}/{termId}', [LevelController::class, 'showSubjects']);
+
+
 
     Route::get('/subjectsGrade/{stage}', [SubjectController::class, 'subjectsGrade']);
 

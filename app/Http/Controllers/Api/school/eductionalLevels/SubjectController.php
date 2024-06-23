@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
-    public function subjectsGrade($stage){
+    public function subjectsGrade(){
         $school = Auth::user()->school;
-        $stagesWithGradesAndTermSubjects = $school->stages()->where('stages.id',$stage)->with(['grades.termSubject.subject'])->get();
+        $stagesWithGradesAndTermSubjects = $school->stages()->with(['grades.termSubject.subject'])->get();
         return ApiResponse::sendResponse('200','Subject retrivied Successfully',$stagesWithGradesAndTermSubjects);
     }
 }
