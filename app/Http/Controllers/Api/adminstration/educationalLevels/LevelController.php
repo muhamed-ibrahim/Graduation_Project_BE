@@ -38,13 +38,13 @@ class LevelController extends Controller
     public function showStudentLevel($studentId,$stageId){
         $student = Student::find($studentId);
         $stage = $student->stage;
-        $grade = $student->grade;
+        $grade = $student->grade->id;
         if($stage->id!=$stageId){
             $Grade = Grade::where('stage_id',$stageId)->get();
             return ApiResponse::sendResponse('200', 'levels Retrived Successfully', $Grade);
         }else{
-            $Grade = Grade::where('stage_id',$stageId)->where('grade_name','<=',$grade)->get();
-            return ApiResponse::sendResponse('200', 'levels Retrived Successfully', $grade);
+            $Grade = Grade::where('stage_id',$stageId)->where('id','<=',$grade)->get();
+            return ApiResponse::sendResponse('200', 'levels Retrived Successfully', $Grade);
 
         }
 
