@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Api\school;
 
-use App\Helpers\ApiResponse;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\school\UpdateStudentRequest;
-use App\Http\Resources\school\StudentResource;
-use App\Models\Adminstration;
 use App\Models\School;
 use App\Models\Student;
+use App\Helpers\ApiResponse;
+use Illuminate\Http\Request;
+use App\Models\Adminstration;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\school\StudentResource;
+use App\Http\Requests\school\UpdateStudentRequest;
+use App\Http\Resources\school\StudentInfoResource;
+
+use function PHPUnit\Framework\isNull;
 
 class StudentController extends Controller
 {
@@ -46,7 +49,17 @@ class StudentController extends Controller
         }
         return ApiResponse::sendResponse(200,'this user not found in this school',[]);
 
+    }
 
+    public function getStudentsGrade($levelId){
+        $school = Auth::user()->school->id;
+        $GetStudent = Student::where('school_id',$school)->where('grade_id',$levelId)->get();
+        return ApiResponse::sendResponse('200','Student Info Retrivied Successfully',$GetStudent);
+    }
+
+    public function studentinfo($studentId){
+        $student = Student::where('id', $studentId)->get();
+        return ApiResponse::sendResponse('200','Student Info Retrivied Successfully',StudentInfoResource::collection($student));
     }
 
 
