@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\school\StudentResource;
 use App\Http\Requests\school\UpdateStudentRequest;
 use App\Http\Resources\school\StudentInfoResource;
+use App\Models\TermSubject;
 
 use function PHPUnit\Framework\isNull;
 
@@ -51,16 +52,17 @@ class StudentController extends Controller
 
     }
 
-    public function getStudentsGrade($levelId){
-        $school = Auth::user()->school->id;
-        $GetStudent = Student::where('school_id',$school)->where('grade_id',$levelId)->get();
-        return ApiResponse::sendResponse('200','Student Info Retrivied Successfully',$GetStudent);
+    public function getStudentsGrade($termSubject){
+        $termSubject = TermSubject::find($termSubject);
+        $students = $termSubject->grade->students;
+        return ApiResponse::sendResponse('200','Student Info Retrivied Successfully',$students);
     }
 
     public function studentinfo($studentId){
         $student = Student::where('id', $studentId)->get();
         return ApiResponse::sendResponse('200','Student Info Retrivied Successfully',StudentInfoResource::collection($student));
     }
+
 
 
 

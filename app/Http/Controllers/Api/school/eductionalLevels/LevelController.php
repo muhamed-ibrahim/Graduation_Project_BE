@@ -35,6 +35,4 @@ class LevelController extends Controller
         return ApiResponse::sendResponse('200','subjects Retrived Successfully',ShowSubjectResource::collection($subjects));
     }
 
-
-
 }
