@@ -11,8 +11,8 @@ use App\Http\Controllers\Api\school\auth\PasswordController;
 use App\Http\Controllers\Api\school\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\school\eductionalLevels\LevelController;
 use App\Http\Controllers\Api\school\requests\EnrollRequestController;
-use App\Http\Controllers\Api\school\eductionalLevels\SubjectController;
 use App\Http\Controllers\Api\school\requests\TransferRequestController;
+use App\Http\Controllers\Api\school\eductionalLevels\StudentScoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,9 +67,11 @@ Route::group(['middleware' => ['auth:sanctum','multiguard']], function () {
     Route::get('/showLevels/{stageId}', [LevelController::class, 'showLevels']);
     Route::get('/showterms', [LevelController::class, 'showterms']);
     Route::get('/showSubjects/{levelId}/{termId}', [LevelController::class, 'showSubjects']);
-    Route::get('/subjectsGrade', [SubjectController::class, 'subjectsGrade']);
+    Route::get('/addStudentGrade/{studentId}', [StudentScoreController::class, 'addStudentGrade']);
     Route::get('/studentinfo/{studentId}', [StudentController::class, 'studentinfo']);
     Route::get('/getStudentsGrade/{termSubject}', [StudentController::class, 'getStudentsGrade']);
+    Route::post('/addStudentScore/{studentId}/{termSubject}', [StudentScoreController::class, 'addStudentScore']);
+
 
 
 

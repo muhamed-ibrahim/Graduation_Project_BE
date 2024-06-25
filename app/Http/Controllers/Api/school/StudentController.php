@@ -18,52 +18,57 @@ use function PHPUnit\Framework\isNull;
 
 class StudentController extends Controller
 {
-    public function showStudents(){
+    public function showStudents()
+    {
 
         $user = Auth::user();
-        $school =$user->school_id;
-        $students = Student::where('school_id','=',$school)->get();
-        return ApiResponse::sendResponse(200,'Students Retrived Successfully',StudentResource::collection($students));
-
+        $school = $user->school_id;
+        $students = Student::where('school_id', '=', $school)->get();
+        return ApiResponse::sendResponse(200, 'Students Retrived Successfully', StudentResource::collection($students));
     }
 
 
-    public function showStudentInf($id){
+    public function showStudentInf($id)
+    {
         $user = Auth::user();
-        $school =$user->school_id;
-        $student = Student::where('school_id','=',$school)->get()->find($id);
-        if(!$student){
-            return ApiResponse::sendResponse(200,'this Student not found in this school',[]);
+        $school = $user->school_id;
+        $student = Student::where('school_id', '=', $school)->get()->find($id);
+        if (!$student) {
+            return ApiResponse::sendResponse(200, 'this Student not found in this school', []);
         }
-        return ApiResponse::sendResponse(200,'Students Retrived Successfully',new StudentResource($student));
+        return ApiResponse::sendResponse(200, 'Students Retrived Successfully', new StudentResource($student));
     }
 
 
-    public function updateStudent(UpdateStudentRequest $request,$id){
+    public function updateStudent(UpdateStudentRequest $request, $id)
+    {
         $newData =  $request->validated();
         $user = Auth::user();
-        $school =$user->school_id;
-        $student = Student::where('school_id','=',$school)->get()->find($id);
-        if($student){
+        $school = $user->school_id;
+        $student = Student::where('school_id', '=', $school)->get()->find($id);
+        if ($student) {
             $student->update($newData);
-            return ApiResponse::sendResponse(200,'Student Data Updated  Successfully',[]);
+            return ApiResponse::sendResponse(200, 'Student Data Updated  Successfully', []);
         }
-        return ApiResponse::sendResponse(200,'this user not found in this school',[]);
-
+        return ApiResponse::sendResponse(200, 'this user not found in this school', []);
     }
 
-    public function getStudentsGrade($termSubject){
+    public function getStudentsGrade($termSubject)
+    {
+        $school = Auth::user()->school->id;
         $termSubject = TermSubject::find($termSubject);
-        $students = $termSubject->grade->students;
-        return ApiResponse::sendResponse('200','Student Info Retrivied Successfully',$students);
+        $students = $termSubject->grade->students()->where('school_id', $school)->get();
+        $studentsWithScores = $students->map(function ($student) use ($termSubject) {
+            $score = $student->scores()->where('term_subject_id', $termSubject->id)->first();
+            $student->score = $score ? $score->score : null;
+            return $student;
+        });
+        return ApiResponse::sendResponse('200', 'Student Info Retrivied Successfully', $studentsWithScores);
     }
 
-    public function studentinfo($studentId){
+    public function studentinfo($studentId)
+    {
         $student = Student::where('id', $studentId)->get();
-        return ApiResponse::sendResponse('200','Student Info Retrivied Successfully',StudentInfoResource::collection($student));
+        return ApiResponse::sendResponse('200', 'Student Info Retrivied Successfully', StudentInfoResource::collection($student));
     }
-
-
-
-
 }

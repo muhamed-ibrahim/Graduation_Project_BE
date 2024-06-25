@@ -64,10 +64,6 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
 
 
 
-
-
-
-
 });
 Route::get('/showAdminstrations/{state}', [AdminstrationController::class, 'showAdminstrations']);
 Route::get('/showSchoolsAdminstrations/{id}', [AdminstrationController::class, 'showSchoolsAdminstrations']);

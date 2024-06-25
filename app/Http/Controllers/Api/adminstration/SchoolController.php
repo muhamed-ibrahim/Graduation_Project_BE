@@ -31,20 +31,25 @@ class SchoolController extends Controller
             $file->move('storage/school_logo/', $filename);
             $school['image'] = $filename;
         }
-        $StoreSchool = School::create($school);
+        $filteredSchool = collect($school)->except('stages')->toArray();
+        $StoreSchool = School::create($filteredSchool);
         if ($StoreSchool) {
-            $manager = $req->validated();
-            $manager['school_id'] = $StoreSchool->id;
-            $StoreManager = SchoolManager::create($manager);
-            if ($StoreManager)
-                return ApiResponse::sendResponse(201, 'School and Manager Added Successfully', []);
+            $stages = $request->input('stages');
+            $StoreStages = $StoreSchool->stages()->sync($stages);
+            if($StoreStages){
+                $manager = $req->validated();
+                $manager['school_id'] = $StoreSchool->id;
+                $StoreManager = SchoolManager::create($manager);
+                if ($StoreManager)
+                    return ApiResponse::sendResponse(201, 'School and Manager Added Successfully', []);
+            }
         }
     }
 
     public function showSchool(Request $request)
     {
         $user = Auth::user();
-        
+
         $school = School::where('adminstration_id', $user->adminstration_id)->get();
         return ApiResponse::sendResponse(200, 'School and Manager Retrived Successfully', ShowSchoolResource::collection($school));
     }
