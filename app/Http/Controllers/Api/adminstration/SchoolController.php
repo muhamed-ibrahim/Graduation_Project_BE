@@ -36,12 +36,13 @@ class SchoolController extends Controller
         if ($StoreSchool) {
             $stages = $request->input('stages');
             $StoreStages = $StoreSchool->stages()->sync($stages);
-            if($StoreStages){
+            if ($StoreStages) {
                 $manager = $req->validated();
                 $manager['school_id'] = $StoreSchool->id;
                 $StoreManager = SchoolManager::create($manager);
-                if ($StoreManager)
+                if ($StoreManager) {
                     return ApiResponse::sendResponse(201, 'School and Manager Added Successfully', []);
+                }
             }
         }
     }
@@ -67,11 +68,15 @@ class SchoolController extends Controller
             $file->move('/storage/school_logo/', $filename);
             $school['image'] = $filename;
         }
-        $StoreSchool = School::findorfail($id)->update($school);
+        $filteredSchool = collect($school)->except('stages')->toArray();
+        $StoreSchool = School::findorfail($id)->update($filteredSchool);
         $GetSchoolManger = School::findorfail($id)->Manager()->first()->id;
         $manager = $req->validated();
         $StoreManager = SchoolManager::findorfail($GetSchoolManger)->update($manager);
-        if ($StoreSchool || $StoreManager) {
+        $stages = $request->input('stages');
+        $SC = School::findorfail($id);
+        $StoreStages = $SC->stages()->sync($stages);
+        if ($StoreSchool || $StoreManager || $StoreStages) {
             return ApiResponse::sendResponse(200, 'School and Manger updated Successfully', []);
         } else {
             return ApiResponse::sendResponse(200, 'School Not Found', []);
