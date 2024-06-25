@@ -16,6 +16,7 @@ class StudentScoreController extends Controller
     {
         $validate = $request->validate([
             'score' => 'required|integer',
+            'is_edit' => 'required',
         ]);
         $school = Auth::user()->school->id;
         $student = Student::with('grade')->findOrFail($studentId);
@@ -45,6 +46,8 @@ class StudentScoreController extends Controller
             $existingScore = Score::where('student_id', $studentId)->where('term_subject_id', $termSubject)->first();
             if ($existingScore) {
                 $existingScore->score = $validate['score'];
+                $existingScore->is_edit = $validate['is_edit'];
+
                 $existingScore->save();
                 return ApiResponse::sendResponse('200', 'Student Score Updated Successfully', $existingScore);
             } else {
@@ -52,6 +55,7 @@ class StudentScoreController extends Controller
                 $ADDScore->student_id = $studentId;
                 $ADDScore->term_subject_id = $termSubject;
                 $ADDScore->score = $validate['score'];
+                $ADDScore->is_edit = $validate['is_edit'];
                 $ADDScore->save();
                 return ApiResponse::sendResponse('201', 'Student Score Added Successfully', $ADDScore);
             }
