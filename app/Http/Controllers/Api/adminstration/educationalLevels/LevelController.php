@@ -64,7 +64,9 @@ class LevelController extends Controller
 
     public function getScoresByStudentGradeAndTerm($studentId, $gradeId, $termId)
     {
-        $getTermSubject = TermSubject::with(['scores', 'grade', 'term', 'subject'])
+        $getTermSubject = TermSubject::with(['scores' => function ($query) use ($studentId) {
+            $query->where('student_id', $studentId);
+        }, 'grade', 'term', 'subject'])
             ->where('grade_id', $gradeId)
             ->where('term_id', $termId)
             ->get();

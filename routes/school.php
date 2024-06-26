@@ -64,13 +64,17 @@ Route::group(['middleware' => ['auth:sanctum','multiguard']], function () {
     Route::post('/SendTransferReqToNew/{id}', [TransferRequestController::class, 'SendTransferReqToNew']);
     Route::post('/SendTransferReqToOld/{id}', [TransferRequestController::class, 'SendTransferReqToOld']);
     Route::get('/showStages', [LevelController::class, 'showStages']);
+    Route::get('/showStudentStage/{studentId}', [LevelController::class, 'showStudentStage']);
     Route::get('/showLevels/{stageId}', [LevelController::class, 'showLevels']);
+    Route::get('/showStudentLevel/{studentId}/{stageId}', [LevelController::class, 'showStudentLevel']);
     Route::get('/showterms', [LevelController::class, 'showterms']);
     Route::get('/showSubjects/{levelId}/{termId}', [LevelController::class, 'showSubjects']);
     Route::get('/addStudentGrade/{studentId}', [StudentScoreController::class, 'addStudentGrade']);
     Route::get('/studentinfo/{studentId}', [StudentController::class, 'studentinfo']);
     Route::get('/getStudentsGrade/{termSubject}', [StudentController::class, 'getStudentsGrade']);
     Route::post('/addStudentScore/{studentId}/{termSubject}', [StudentScoreController::class, 'addStudentScore']);
+    Route::get('/getScoresByStudentGradeAndTerm/{studentId}/{levelId}/{termId}', [LevelController::class, 'getScoresByStudentGradeAndTerm']);
+
 
 
 

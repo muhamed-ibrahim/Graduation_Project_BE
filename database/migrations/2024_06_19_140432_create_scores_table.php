@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained('students')->cascadeOnDelete();
             $table->foreignId('term_subject_id')->constrained('term_subjects')->cascadeOnDelete();
             $table->integer('score');
-            $table->boolean('is_edit')->default(false);
             $table->timestamps();
         });
     }

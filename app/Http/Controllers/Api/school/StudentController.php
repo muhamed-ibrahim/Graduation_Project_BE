@@ -61,8 +61,6 @@ class StudentController extends Controller
         $studentsWithScores = $students->map(function ($student) use ($termSubject) {
             $score = $student->scores()->where('term_subject_id', $termSubject->id)->first();
             $student->score = $score ? $score->score : null;
-            $student->is_edit = $score ? $score->is_edit : null;
-
             return $student;
         });
         return ApiResponse::sendResponse('200', 'Student Info Retrivied Successfully', $studentsWithScores);
