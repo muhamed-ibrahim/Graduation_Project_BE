@@ -26,6 +26,11 @@ class School extends Model
     {
         return $this->belongsToMany(AdEvent::class);
     }
+
+    public function Reports()
+    {
+        return $this->belongsToMany(Report::class);
+    }
     public function students()
     {
         return $this->hasMany(Student::class);

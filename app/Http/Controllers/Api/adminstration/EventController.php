@@ -25,7 +25,7 @@ class EventController extends Controller
         return ApiResponse::sendResponse(201,'Event added Successfully',[]);
     }
 
-    public function showEvent(Request $request,){
+    public function showEvent(Request $request){
         $event = AdEvent::all();
         return ApiResponse::sendResponse(200,'Events Retrived Successfully',ShowEventResource::collection($event));
 
