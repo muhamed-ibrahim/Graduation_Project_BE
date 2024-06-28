@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chatpot', function (Blueprint $table) {
+        Schema::create('chatpots', function (Blueprint $table) {
             $table->id();
             $table->string('question');
             $table->string('answer');
+            $table->text('description');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
             $table->timestamps();
