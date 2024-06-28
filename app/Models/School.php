@@ -55,4 +55,9 @@ class School extends Model
     {
         return $this->belongsToMany(Stage::class);
     }
+
+    public function chatpot()
+    {
+        return $this->hasMany(Chatpot::class);
+    }
 }

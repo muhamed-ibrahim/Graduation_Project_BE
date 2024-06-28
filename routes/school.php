@@ -82,5 +82,12 @@ Route::group(['middleware' => ['auth:sanctum', 'multiguard']], function () {
     Route::get('/showReport', [ReportController::class, 'showReport']);
 
     Route::get('/ShowAdEvent', [AdminstrationEventController::class, 'ShowAdEvent']);
-    Route::get('/addEvent', [EventController::class, 'addEvent']);
+    Route::post('/addEvent', [EventController::class, 'addEvent']);
+    Route::get('/showEvent', [EventController::class, 'showEvent']);
+    Route::post('/updateEvent/{eventId}', [EventController::class, 'updateEvent']);
+    Route::get('/deleteEvent/{eventId}', [EventController::class, 'deleteEvent']);
+
+
+
+
 });

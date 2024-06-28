@@ -14,11 +14,13 @@ class EventController extends Controller
 {
     public function addEvent(EventRequest $request)
     {
+        $adminstration = Auth()->user()->adminstration->id;
         $event = new AdEvent();
         $event->name = $request->name;
         $event->description = $request->description;
         $event->date = $request->date;
         $event->time = $request->time;
+        $event->adminstration_id = $adminstration;
         $event->save();
         $schools = $request->input('schools');
         $event->Schools()->attach($schools);
@@ -26,7 +28,8 @@ class EventController extends Controller
     }
 
     public function showEvent(Request $request){
-        $event = AdEvent::all();
+        $adminstration = Auth()->user()->adminstration->id;
+        $event = AdEvent::where('adminstration_id',$adminstration)->get();
         return ApiResponse::sendResponse(200,'Events Retrived Successfully',ShowEventResource::collection($event));
 
     }

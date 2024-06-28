@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->belongsToMany(AdEvent::class);
     }
 
+    public function chatpot()
+    {
+        return $this->hasMany(Chatpot::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -17,6 +17,13 @@ return new class extends Migration
             $table->text('description');
             $table->date('date');
             $table->time('time');
+            // Add foreign key for administration
+            $table->unsignedBigInteger('adminstration_id')->nullable();
+            $table->foreign('adminstration_id')->references('id')->on('adminstrations')->onDelete('cascade');
+
+            // Add foreign key for school
+            $table->unsignedBigInteger('school_id')->nullable();
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
             $table->timestamps();
         });
     }

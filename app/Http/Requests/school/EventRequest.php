@@ -43,7 +43,6 @@ class EventRequest extends FormRequest
             'description' => ['required', 'string'],
             'date' => ['required', 'date',new DateBetweenRule],
             'time' => ['required','date_format:H:i' ,new timeBetweenRule],
-            'stages' => ['required'],
 
         ];
     }
