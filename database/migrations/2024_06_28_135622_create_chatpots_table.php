@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('chatpots', function (Blueprint $table) {
             $table->id();
             $table->string('question');
-            $table->string('answer');
+            $table->string('answer')->nullable();
             $table->text('description');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();

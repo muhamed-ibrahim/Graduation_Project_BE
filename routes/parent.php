@@ -6,6 +6,7 @@ use App\Models\TransferRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\parent\ChildController;
 use App\Http\Controllers\Api\parent\ParentController;
+use App\Http\Controllers\Api\parent\SchoolController;
 use App\Http\Controllers\Api\parent\auth\AuthController;
 use App\Http\Controllers\Api\parent\auth\PasswordController;
 use App\Http\Controllers\Api\parent\chatpot\ChatpotController;
@@ -41,6 +42,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/transferRequest/{id}', [TransferRequestController::class, 'transferRequest']);
     Route::get('/ShowTransferReqWithNationalID/{nationalId}', [TransferRequestController::class, 'ShowTransferReqWithNationalID']);
     Route::post('/addQuestion', [ChatpotController::class, 'addQuestion']);
+
+    Route::get('/getChildSchools', [SchoolController::class, 'getChildSchools']);
+
 
 
 });

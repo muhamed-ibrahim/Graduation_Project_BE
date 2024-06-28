@@ -9,13 +9,14 @@ use App\Http\Controllers\Api\school\StudentController;
 use App\Http\Controllers\Api\school\auth\AuthController;
 use App\Http\Controllers\Api\school\Events\EventController;
 use App\Http\Controllers\Api\school\auth\PasswordController;
+use App\Http\Controllers\Api\school\report\ReportController;
+use App\Http\Controllers\Api\school\chatpot\ChatpotController;
 use App\Http\Controllers\Api\school\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\school\eductionalLevels\LevelController;
 use App\Http\Controllers\Api\school\requests\EnrollRequestController;
 use App\Http\Controllers\Api\school\requests\TransferRequestController;
 use App\Http\Controllers\Api\school\Events\AdminstrationEventController;
 use App\Http\Controllers\Api\school\eductionalLevels\StudentScoreController;
-use App\Http\Controllers\Api\school\report\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +87,11 @@ Route::group(['middleware' => ['auth:sanctum', 'multiguard']], function () {
     Route::get('/showEvent', [EventController::class, 'showEvent']);
     Route::post('/updateEvent/{eventId}', [EventController::class, 'updateEvent']);
     Route::get('/deleteEvent/{eventId}', [EventController::class, 'deleteEvent']);
+    Route::get('/showChatpot', [ChatpotController::class, 'showChatpot']);
+    Route::post('/addAnswer/{questionId}', [ChatpotController::class, 'addAnswer']);
+
+
+
 
 
 

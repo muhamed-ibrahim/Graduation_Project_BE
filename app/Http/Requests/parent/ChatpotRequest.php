@@ -35,7 +35,6 @@ class ChatpotRequest extends FormRequest
     {
         return [
             'question' => 'required|string',
-            'answer' => 'required|string',
             'description' => 'required',
             'school_id' => 'required'
 

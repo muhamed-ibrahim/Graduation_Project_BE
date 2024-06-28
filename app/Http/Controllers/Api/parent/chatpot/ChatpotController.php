@@ -21,4 +21,5 @@ class ChatpotController extends Controller
             return ApiResponse::sendResponse(201, 'Question Added Successfully', []);
         }
     }
+
 }
