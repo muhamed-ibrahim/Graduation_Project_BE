@@ -24,6 +24,24 @@ class StaffController extends Controller
             return ApiResponse::sendResponse(201, 'Staff Added Successfully', []);
         }
     }
+
+    public function showStaff()
+    {
+        $school = Auth()->user()->school;
+        $staff = $school->staff;
+        return ApiResponse::sendResponse(200, 'Staff Retrived Successfully', $staff);
+    }
+
+    public function deleteStaff(Request $request, $id)
+    {
+        $staff = SchoolStaff::findorfail($id);
+        if ($staff) {
+            $staff->delete();
+            return ApiResponse::sendResponse(200, 'Staff deleted Successfully', []);
+        } else {
+            return ApiResponse::sendResponse(200, 'Staff Not Found', []);
+        }
+    }
     public function showProfile()
     {
         $user = Auth::user();

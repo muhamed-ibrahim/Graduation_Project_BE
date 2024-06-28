@@ -20,6 +20,11 @@ class Adminstration extends Model
         return $this->hasMany(School::class);
     }
 
+    public function Report()
+    {
+        return $this->hasMany(Report::class);
+    }
+
 
 
 

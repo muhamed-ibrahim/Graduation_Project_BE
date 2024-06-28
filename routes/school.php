@@ -7,12 +7,15 @@ use App\Http\Controllers\Api\school\StaffController;
 use App\Http\Controllers\Api\school\ManagerController;
 use App\Http\Controllers\Api\school\StudentController;
 use App\Http\Controllers\Api\school\auth\AuthController;
+use App\Http\Controllers\Api\school\Events\EventController;
 use App\Http\Controllers\Api\school\auth\PasswordController;
 use App\Http\Controllers\Api\school\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\school\eductionalLevels\LevelController;
 use App\Http\Controllers\Api\school\requests\EnrollRequestController;
 use App\Http\Controllers\Api\school\requests\TransferRequestController;
+use App\Http\Controllers\Api\school\Events\AdminstrationEventController;
 use App\Http\Controllers\Api\school\eductionalLevels\StudentScoreController;
+use App\Http\Controllers\Api\school\report\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +33,7 @@ use App\Http\Controllers\Api\school\eductionalLevels\StudentScoreController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
-    Route::post('logout', 'logout')->middleware('auth:sanctum','multiguard');
+    Route::post('logout', 'logout')->middleware('auth:sanctum', 'multiguard');
 });
 
 
@@ -40,19 +43,21 @@ Route::post('reset-password', [ForgotPasswordController::class, 'reset']);
 
 
 
-Route::group(['middleware' => ['auth:sanctum','school_manager']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'school_manager']], function () {
     Route::get('manager/showProfile', [ManagerController::class, 'showProfile']);
     Route::post('manager/updateProfile', [ManagerController::class, 'updateProfile']);
     Route::post('/addStaff', [StaffController::class, 'addStaff']);
+    Route::get('/showStaff', [StaffController::class, 'showStaff']);
+    Route::get('/deleteStaff/{staffId}', [StaffController::class, 'deleteStaff']);
 });
 
-Route::group(['middleware' => ['auth:sanctum','school_staff']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'school_staff']], function () {
     Route::get('staff/showProfile', [StaffController::class, 'showProfile']);
     Route::post('staff/updateProfile', [StaffController::class, 'updateProfile']);
 });
 
 
-Route::group(['middleware' => ['auth:sanctum','multiguard']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'multiguard']], function () {
     Route::post('/updatePassword', [PasswordController::class, 'updatePassword']);
     Route::get('/showStudents', [StudentController::class, 'showStudents']);
     Route::get('/showStudentInf/{id}', [StudentController::class, 'showStudentInf']);
@@ -74,12 +79,8 @@ Route::group(['middleware' => ['auth:sanctum','multiguard']], function () {
     Route::get('/getStudentsGrade/{termSubject}', [StudentController::class, 'getStudentsGrade']);
     Route::post('/addStudentScore/{studentId}/{termSubject}', [StudentScoreController::class, 'addStudentScore']);
     Route::get('/getScoresByStudentGradeAndTerm/{studentId}/{levelId}/{termId}', [LevelController::class, 'getScoresByStudentGradeAndTerm']);
+    Route::get('/showReport', [ReportController::class, 'showReport']);
 
-
-
-
-
+    Route::get('/ShowAdEvent', [AdminstrationEventController::class, 'ShowAdEvent']);
+    Route::get('/addEvent', [EventController::class, 'addEvent']);
 });
-
-
-

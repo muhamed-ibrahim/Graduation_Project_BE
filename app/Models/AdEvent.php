@@ -16,5 +16,8 @@ class AdEvent extends Model
         return $this->belongsToMany(School::class);
     }
 
-
+    public function parents()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

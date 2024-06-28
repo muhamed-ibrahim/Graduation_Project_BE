@@ -45,6 +45,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Student::class);
     }
+    public function Events()
+    {
+        return $this->belongsToMany(AdEvent::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

@@ -15,4 +15,9 @@ class Report extends Model
         return $this->belongsToMany(School::class);
     }
 
+    public function adminstration()
+    {
+        return $this->belongsTo(Adminstration::class);
+    }
+
 }

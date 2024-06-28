@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\adminstration\EventController;
-use App\Http\Controllers\Api\adminstration\ReportController;
+use App\Http\Controllers\Api\adminstration\Report\ReportController;
 use App\Http\Controllers\Api\adminstration\SchoolController;
 use App\Http\Controllers\Api\adminstration\StudentController;
 use App\Http\Controllers\Api\adminstration\auth\AuthController;
