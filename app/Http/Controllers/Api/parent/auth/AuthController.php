@@ -72,7 +72,7 @@ class AuthController extends Controller
     public function logout(Request $request){
         Auth::user()->currentAccessToken()->delete();
         $user = Auth::user();
-        $user->last_login = now();
+        $user->last_login = now()->toRfc850String();
         $user->save();
         return ApiResponse::sendResponse(200, 'parent Account Logged Out Successfully', []);
 
