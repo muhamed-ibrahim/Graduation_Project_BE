@@ -45,7 +45,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/getChildSchools', [SchoolController::class, 'getChildSchools']);
     // get recommended schools
-    Route::get('/recommended-schools', [SchoolController::class, 'getRecommendedSchools']);
+    Route::get('/recommended-schools/{adminstrationId}', [SchoolController::class, 'getRecommendedSchools']);
 });
 
 

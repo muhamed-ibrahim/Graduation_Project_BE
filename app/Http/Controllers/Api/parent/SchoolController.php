@@ -21,11 +21,12 @@ class SchoolController extends Controller
         // $parents = array_unique($parents);
     }
 
-    public function getRecommendedSchools(Request $request)
+    public function getRecommendedSchools(Request $request,$adminstrationId)
     {
         $user = Auth::user();
         // get schools sorted by compatibility in schoolparentrank table
-        $schools = $user->recommendedSchools()->orderBy('compatibility','desc')->get();
-        return  ApiResponse::sendResponse(200,'gggggg',ShowSchoolResource::collection($schools));
+        $schools = $user->recommendedSchools()->where('adminstration_id', $adminstrationId)->orderBy('compatibility','desc')->get();
+
+        return  ApiResponse::sendResponse(200,'gggggg',$schools);
     }
 }
