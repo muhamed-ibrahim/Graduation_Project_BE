@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\parent\children\ChildrenController;
+use App\Http\Controllers\Api\parent\schools\SchoolsController;
 use App\Models\School;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\parent\auth\AuthController;
@@ -26,7 +27,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/add-child', [ChildrenController::class, 'addChild'])->middleware('auth:sanctum');
 
 // get recommended schools
-Route::get('/recommended-schools', [ChildrenController::class, 'getRecommendedSchools'])->middleware('auth:sanctum');
+Route::get('/recommended-schools', [SchoolsController::class, 'getRecommendedSchools'])->middleware('auth:sanctum');
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
