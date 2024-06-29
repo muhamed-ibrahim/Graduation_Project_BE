@@ -25,7 +25,8 @@ class updateSchoolParentRanks extends Command
 
     public function getCompatibility($parent_lat, $parent_long, $school_lat, $school_long, $school_rank)
     {
-        $response = \Http::get('http://127.0.0.1:5000/predict', [
+        $recommendation_model_url = env('RECOMMENDATION_MODEL_URL');
+        $response = \Http::get($recommendation_model_url, [
             'parent_lat' => $parent_lat,
             'parent_long' => $parent_long,
             'school_lat' => $school_lat,
