@@ -25,7 +25,7 @@ class SchoolController extends Controller
     {
         $user = Auth::user();
         // get schools sorted by compatibility in schoolparentrank table
-        $schools = $user->recommendedSchools()->where('adminstration_id', $adminstrationId)->orderBy('compatibility','desc')->get();
+        $schools = $user->recommendedSchools()->where('adminstration_id', $adminstrationId)->orderBy('compatibility','desc')->take(2)->get();
 
         return  ApiResponse::sendResponse(200,'gggggg',$schools);
     }

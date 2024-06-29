@@ -25,6 +25,7 @@ class ParentResource extends JsonResource
             'gender' => $this->gender,
             'religion' => $this->religion,
             'birthdate' => $this->birthdate,
+            'last_login' => $this->last_login
 
         ];
     }

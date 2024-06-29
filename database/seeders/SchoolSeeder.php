@@ -38,6 +38,8 @@ class SchoolSeeder extends Seeder
             'rank' => '4',
 
         ]);
+
+        
         Schema::enableForeignKeyConstraints();
 
     }
