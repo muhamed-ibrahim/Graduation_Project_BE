@@ -20,6 +20,7 @@ class SchoolController extends Controller
     {
 
         $school = $request->validated();
+        $school['rank'] = 0;
         $school['adminstration_id'] = Auth::user()->adminstration_id;
         if ($request->hasFile('image')) {
             // if(file_exists(public_path().'/storage/school_logo/'.$request->user()->image)){

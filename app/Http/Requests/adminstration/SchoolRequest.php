@@ -40,6 +40,8 @@ class SchoolRequest extends FormRequest
             'phone' => ['required', 'min:11', 'numeric'],
             'address' => ['required', 'string'],
             'stages' => ['required'],
+            'lat' => ['required'],
+            'lng' => ['required'],
         ];
     }
 }
