@@ -45,6 +45,8 @@ class AuthController extends Controller
         $user->nationality = $request->nationality;
         $user->job = $request->job;
         $user->religion = $request->religion;
+        $user->lat = $request->lat;
+        $user->lng = $request->lng;
         if ($request->hasFile('national_id_image')) {
             $file = $request->file('national_id_image');
             $extension = $file->getClientOriginalExtension();

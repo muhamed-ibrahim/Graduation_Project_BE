@@ -55,6 +55,12 @@ class User extends Authenticatable
         return $this->hasMany(Chatpot::class);
     }
 
+    // schools
+    public function recommendedSchools()
+    {
+        return $this->belongsToMany(School::class, 'school_user_ranks', 'user_id', 'school_id')->withPivot('compatibility');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

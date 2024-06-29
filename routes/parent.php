@@ -44,9 +44,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/addQuestion', [ChatpotController::class, 'addQuestion']);
 
     Route::get('/getChildSchools', [SchoolController::class, 'getChildSchools']);
-
-
-
+    // get recommended schools
+    Route::get('/recommended-schools', [SchoolController::class, 'getRecommendedSchools']);
 });
 
 

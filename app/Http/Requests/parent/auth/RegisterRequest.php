@@ -44,6 +44,8 @@ class RegisterRequest extends FormRequest
             'religion' => 'required|string',
             'birthdate' => 'required|date',
             'password' => 'required|string|min:8',
+            'lat' => 'required',
+            'lng' => 'required',
         ];
     }
 }
