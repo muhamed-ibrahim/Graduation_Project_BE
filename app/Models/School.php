@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class School extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
 
 
@@ -30,5 +31,6 @@ class School extends Model
     {
         return $this->hasMany(Child::class);
     }
+
 
 }

@@ -27,6 +27,8 @@ class ShowSchoolResource extends JsonResource
             'manager_email' => $this->Manager()->first()->email,
             'manager_phone' => $this->Manager()->first()->manager_phone,
             'manager_address' => $this->Manager()->first()->manager_address,
+            'lat' => $this->lat,
+            'lng' => $this->lng,
 
         ];
     }

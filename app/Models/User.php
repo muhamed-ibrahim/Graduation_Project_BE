@@ -26,12 +26,19 @@ class User extends Authenticatable
         'address',
         'national_id_image',
         'birthdate',
-        'gender'
+        'gender',
+        'lat',
+        'lng',
     ];
 
     // children
     public function children(){
         return $this->hasMany(Child::class);
+    }
+
+    // schools
+    public function recommendedSchools(){
+        return $this->belongsToMany(School::class, 'school_parent_ranks', 'parent_id', 'school_id')->withPivot('compatibility');
     }
 
     /**

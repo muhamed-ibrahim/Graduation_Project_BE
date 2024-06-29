@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('image')->nullable();
             $table->string('address');
-            $table->string('educational_stages')->nullable();
+                $table->string('educational_stages')->nullable();
             $table->string('educational_certificate')->nullable();
             // $table->bigInteger('adminstration_id')->unsigned()->index();
             $table->foreignId('adminstration_id')->constrained('adminstrations')->cascadeOnDelete();

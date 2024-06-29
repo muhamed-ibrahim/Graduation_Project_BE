@@ -23,6 +23,8 @@ class ParentResource extends JsonResource
             'national_id_image' => $this->national_id_image,
             'gender' => $this->gender,
             'birthdate' => $this->birthdate,
+            'lat' => $this->lat,
+            'lng' => $this->lng,
         ];
     }
 }

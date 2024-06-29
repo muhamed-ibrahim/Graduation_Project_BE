@@ -22,6 +22,7 @@ class ManagerProfileResource extends JsonResource
             'address' => $this->manager_address,
             'school_name' => $this->School()->first()->name,
             'adminstartion' => $this->School()->first()->adminstration()->first()->name,
+
         ];
     }
 }

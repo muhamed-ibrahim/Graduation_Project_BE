@@ -25,6 +25,9 @@ Route::post('/register', [AuthController::class, 'register']);
 // add child
 Route::post('/add-child', [ChildrenController::class, 'addChild'])->middleware('auth:sanctum');
 
+// get recommended schools
+Route::get('/recommended-schools', [ChildrenController::class, 'getRecommendedSchools'])->middleware('auth:sanctum');
+
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
