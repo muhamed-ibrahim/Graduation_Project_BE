@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('childbirth_certificate')->nullable();
             $table->string('level');
-            $table->foreignId('parent_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
             $table->timestamps();
         });

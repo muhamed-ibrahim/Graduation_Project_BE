@@ -10,23 +10,23 @@ use App\Http\Resources\parent\ShowSchoolResource;
 
 class SchoolController extends Controller
 {
-    public function getChildSchools(){
-        $user = Auth()->user()->students;
-        return ApiResponse::sendResponse(201, 'Event added Successfully', $user);
+    public function getChildSchools()
+    {
+        $user = Auth::user();
+        $students = $user->students;
+        $schools = $students->map(function ($student) {
+            return $student->school;
+        })->unique('id')->values();
+        return ApiResponse::sendResponse(200, 'Schools Retrivied Successfully', $schools);
 
-        // $students = $school->students;
-        // foreach ($students as $student) {
-        //     $parents[] = $student->parent->id;
-        // }
-        // $parents = array_unique($parents);
     }
 
-    public function getRecommendedSchools(Request $request,$adminstrationId)
+    public function getRecommendedSchools(Request $request, $adminstrationId)
     {
         $user = Auth::user();
         // get schools sorted by compatibility in schoolparentrank table
-        $schools = $user->recommendedSchools()->where('adminstration_id', $adminstrationId)->orderBy('compatibility','desc')->take(2)->get();
+        $schools = $user->recommendedSchools()->where('adminstration_id', $adminstrationId)->orderBy('compatibility', 'desc')->take(2)->get();
 
-        return  ApiResponse::sendResponse(200,'gggggg',$schools);
+        return  ApiResponse::sendResponse(200, 'gggggg', $schools);
     }
 }

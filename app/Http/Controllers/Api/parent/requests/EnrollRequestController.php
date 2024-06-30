@@ -56,7 +56,7 @@ class EnrollRequestController extends Controller
         $enroll->nationality=$request->nationality;
         $enroll->state=$request->state;
         $enroll->country=$request->country;
-        $enroll->parent_id= $user->id;
+        $enroll->user_id= $user->id;
         $enroll->save();
         $enroll->Schools()->attach($schools);
 
@@ -73,7 +73,7 @@ class EnrollRequestController extends Controller
 
     public function ShowEnrollRequests(){
         $user = Auth::user();
-        $req = EnrollRequest::where('parent_id','=',$user->id)->get();
+        $req = EnrollRequest::where('user_id','=',$user->id)->get();
         return ApiResponse::sendResponse('200','Request Retrivied Successfully',EnrollRequestResources::collection($req));
     }
 

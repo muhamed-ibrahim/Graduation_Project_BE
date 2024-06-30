@@ -31,7 +31,7 @@ class StudentSeeder extends Seeder
             'childbirth_certificate' => '1714668179.png',
             'stage_id' => 1,
             'grade_id' => 1,
-            'parent_id' =>  1,
+            'user_id' =>  1,
             'school_id' =>  1,
 
         ]);
@@ -49,7 +49,7 @@ class StudentSeeder extends Seeder
             'childbirth_certificate' => '1714668179.png',
             'stage_id' => 1,
             'grade_id' => 2,
-            'parent_id' =>  1,
+            'user_id' =>  1,
             'school_id' =>  1,
 
         ]);
@@ -68,7 +68,7 @@ class StudentSeeder extends Seeder
             'childbirth_certificate' => '1714668179.png',
             'stage_id' => 1,
             'grade_id' => 2,
-            'parent_id' =>  2,
+            'user_id' =>  2,
             'school_id' =>  1,
 
         ]);
@@ -87,7 +87,7 @@ class StudentSeeder extends Seeder
             'childbirth_certificate' => '1714668179.png',
             'stage_id' => 1,
             'grade_id' => 1,
-            'parent_id' =>  2,
+            'user_id' =>  2,
             'school_id' =>  1,
 
         ]);
@@ -106,7 +106,7 @@ class StudentSeeder extends Seeder
             'childbirth_certificate' => '1714668179.png',
             'stage_id' => 1,
             'grade_id' => 1,
-            'parent_id' =>  3,
+            'user_id' =>  3,
             'school_id' =>  2,
 
         ]);
@@ -125,7 +125,7 @@ class StudentSeeder extends Seeder
             'childbirth_certificate' => '1714668179.png',
             'stage_id' => 1,
             'grade_id' => 1,
-            'parent_id' =>  4,
+            'user_id' =>  4,
             'school_id' =>  2,
 
         ]);
@@ -144,7 +144,7 @@ class StudentSeeder extends Seeder
             'childbirth_certificate' => '1714668179.png',
             'stage_id' => 2,
             'grade_id' => 9,
-            'parent_id' =>  2,
+            'user_id' =>  2,
             'school_id' =>  2,
 
         ]);
@@ -163,7 +163,7 @@ class StudentSeeder extends Seeder
             'childbirth_certificate' => '1714668179.png',
             'stage_id' => 1,
             'grade_id' => 5,
-            'parent_id' =>  5,
+            'user_id' =>  5,
             'school_id' =>  2,
 
         ]);

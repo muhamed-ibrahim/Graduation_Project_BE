@@ -36,6 +36,53 @@ class SchoolManagerSeeder extends Seeder
             'school_id' => 2,
 
         ]);
+        SchoolManager::create([
+            'manager_name' => 'karim',
+            'email' => 'karim@gamil.com',
+            'manager_phone' => '01151445556',
+            'manager_address' => 'السيدة زينب',
+            'password' => Hash::make('12345678'),
+            'school_id' => 3,
+
+        ]);
+
+        SchoolManager::create([
+            'manager_name' => 'osama',
+            'email' => 'osama@gamil.com',
+            'manager_phone' => '01551475556',
+            'manager_address' => 'مدينة نصر',
+            'password' => Hash::make('12345678'),
+            'school_id' => 4,
+
+        ]);
+        SchoolManager::create([
+            'manager_name' => 'khaled',
+            'email' => 'khaled@gamil.com',
+            'manager_phone' => '01151445556',
+            'manager_address' => 'القصر العيني',
+            'password' => Hash::make('12345678'),
+            'school_id' => 5,
+
+        ]);
+
+        SchoolManager::create([
+            'manager_name' => 'hamada',
+            'email' => 'hamada@gamil.com',
+            'manager_phone' => '010514451235',
+            'manager_address' => 'القصر العيني',
+            'password' => Hash::make('12345678'),
+            'school_id' => 6,
+        ]);
+
+        SchoolManager::create([
+            'manager_name' => 'mohamed khaled',
+            'email' => 'mohamed123@gamil.com',
+            'manager_phone' => '010514451235',
+            'manager_address' => 'المرج',
+            'password' => Hash::make('12345678'),
+            'school_id' => 7,
+        ]);
+
         Schema::enableForeignKeyConstraints();
     }
 }
