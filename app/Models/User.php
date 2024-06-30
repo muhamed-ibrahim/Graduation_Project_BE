@@ -58,7 +58,7 @@ class User extends Authenticatable
     // schools
     public function recommendedSchools()
     {
-        return $this->belongsToMany(School::class, 'school_user_ranks', 'user_id', 'school_id')->withPivot('compatibility');
+        return $this->belongsToMany(School::class, 'school_user_ranks', 'parent_id', 'school_id')->withPivot('compatibility');
     }
 
     /**

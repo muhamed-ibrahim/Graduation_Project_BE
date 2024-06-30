@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('school_user_ranks', function (Blueprint $table) {
             $table->id();
             // parent_ID
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('parent_id');
+            $table->foreign('parent_id')->references('id')->on('users')->onDelete('cascade');
 
             // school_ID
             $table->unsignedBigInteger('school_id');
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('school_parent_ranks');
+        Schema::dropIfExists('school_user_ranks');
     }
 };

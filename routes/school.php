@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth:sanctum', 'school_manager']], function () {
     Route::post('manager/updateProfile', [ManagerController::class, 'updateProfile']);
     Route::post('/addStaff', [StaffController::class, 'addStaff']);
     Route::get('/showStaff', [StaffController::class, 'showStaff']);
+    Route::post('/updateStaff/{StaffId}', [StaffController::class, 'updateStaff']);
     Route::get('/deleteStaff/{staffId}', [StaffController::class, 'deleteStaff']);
 });
 
@@ -89,7 +90,6 @@ Route::group(['middleware' => ['auth:sanctum', 'multiguard']], function () {
     Route::get('/deleteEvent/{eventId}', [EventController::class, 'deleteEvent']);
     Route::get('/showChatpot', [ChatpotController::class, 'showChatpot']);
     Route::post('/addAnswer/{questionId}', [ChatpotController::class, 'addAnswer']);
-
 
 
 

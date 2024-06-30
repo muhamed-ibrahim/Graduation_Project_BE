@@ -56,13 +56,13 @@ class updateSchoolParentRanks extends Command
                 // make api call to get compatibility
                 $compatibility = $this->getCompatibility($parent_lat, $parent_long, $school_lat, $school_long, $school_rank);
                 // create or update the rank
-                $rank = SchoolUserRank::where('school_id', $school->id)->where('user_id', $parent->id)->first();
+                $rank = SchoolUserRank::where('school_id', $school->id)->where('parent_id', $parent->id)->first();
                 if ($rank) {
                     $rank->update(['compatibility' => $compatibility]);
                 } else {
                     SchoolUserRank::create([
                         'school_id' => $school->id,
-                        'user_id' => $parent->id,
+                        'parent_id' => $parent->id,
                         'compatibility' => $compatibility,
                     ]);
                 }

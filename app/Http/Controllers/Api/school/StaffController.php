@@ -25,6 +25,14 @@ class StaffController extends Controller
         }
     }
 
+    public function updateStaff(Request $request,$id)
+    {
+        $staff = SchoolStaff::find($id)->update($request->all());
+        if ($staff) {
+            return ApiResponse::sendResponse(200, 'Staff Updated Successfully', []);
+        }
+    }
+
     public function showStaff()
     {
         $school = Auth()->user()->school;
