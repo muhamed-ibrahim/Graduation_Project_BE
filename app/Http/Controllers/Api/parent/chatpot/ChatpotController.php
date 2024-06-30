@@ -15,7 +15,7 @@ class ChatpotController extends Controller
 
         $chatpot = $request->validated();
         $user =Auth::user()->id;
-        $chatpot['user_id'] = $user;
+        $chatpot['parent_id'] = $user;
         $Storechatpot = Chatpot::create($chatpot);
         if ($Storechatpot) {
             return ApiResponse::sendResponse(201, 'Question Added Successfully', []);

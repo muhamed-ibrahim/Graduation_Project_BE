@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\parent;
 
+use App\Models\Student;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,12 +14,11 @@ class SchoolController extends Controller
     public function getChildSchools()
     {
         $user = Auth::user();
-        $students = $user->students;
+        $students = Student::where('parent_id',$user->id)->get();
         $schools = $students->map(function ($student) {
             return $student->school;
         })->unique('id')->values();
         return ApiResponse::sendResponse(200, 'Schools Retrivied Successfully', $schools);
-
     }
 
     public function getRecommendedSchools(Request $request, $adminstrationId)
