@@ -30,6 +30,13 @@ class AdminstrationSeeder extends Seeder
             'state' => 'الجيزة',
         ]);
 
+        Adminstration::create([
+            'name' => 'إدارة السيدة زينب ',
+            'address' => 'ش خيرت السيدة زينب',
+            'phone' => '0227952697',
+            'state' => 'القاهرة',
+        ]);
+
         Schema::enableForeignKeyConstraints();
     }
 }

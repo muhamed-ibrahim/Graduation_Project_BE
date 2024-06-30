@@ -14,49 +14,116 @@ class StudentScoreController extends Controller
 {
     public function addStudentScore($studentId, $termSubject, Request $request)
     {
-        $validate = $request->validate([
+        // Validate the request input
+        $validatedData = $request->validate([
             'score' => 'required|integer',
         ]);
-        $school = Auth::user()->school->id;
+
+        $scoreValue = $validatedData['score'];
+
+        // Retrieve the authenticated user's school ID
+        $schoolId = Auth::user()->school->id;
+
+        // Find the student and check if they belong to the authenticated user's school
         $student = Student::with('grade')->findOrFail($studentId);
-        if ($school == $student->school_id) {
-            // Check if the term_subject has term_id 2
-            $termSubjectInstance = TermSubject::findOrFail($termSubject);
-            if ($termSubjectInstance->term_id == 2) {
-                $Subjectsgrade = TermSubject::where('grade_id', $student->grade_id)->get();
-                // Get all subjects for term_id 1
-                $term1Subjects = $Subjectsgrade->where('term_id', 1)->pluck('id');
-                // Get student's scores for term_id 1 subjects
-                $term1Scores = Score::where('student_id', $studentId)->whereIn('term_subject_id', $term1Subjects)->get();
-                // Check if the student has scores for all subjects in term_id 1
-                $term1SubjectIds = $term1Subjects->toArray();
-                foreach ($term1SubjectIds as $subjectId) {
-                    if (!$term1Scores->contains('term_subject_id', $subjectId)) {
-                        return ApiResponse::sendResponse('400', 'Student does not have a score for all subjects in Term 1', []);
-                    }
-                }
-                // Check if the student has passed all subjects in term_id 1
-                foreach ($term1Scores as $score) {
-                    if ($score->score < 50) {
-                        return ApiResponse::sendResponse('400', 'Student has not passed all subjects in Term 1', []);
-                    }
-                }
-            }
-            $existingScore = Score::where('student_id', $studentId)->where('term_subject_id', $termSubject)->first();
-            if ($existingScore) {
-                $existingScore->score = $validate['score'];
-                $existingScore->save();
-                return ApiResponse::sendResponse('200', 'Student Score Updated Successfully', $existingScore);
-            } else {
-                $ADDScore = new Score();
-                $ADDScore->student_id = $studentId;
-                $ADDScore->term_subject_id = $termSubject;
-                $ADDScore->score = $validate['score'];
-                $ADDScore->save();
-                return ApiResponse::sendResponse('201', 'Student Score Added Successfully', $ADDScore);
-            }
-        } else {
-            return ApiResponse::sendResponse('200', 'This student not found in this school', []);
+        if ($schoolId != $student->school_id) {
+            return ApiResponse::sendResponse('400', 'This student is not found in this school', []);
         }
+
+        // Find the term subject instance
+        $termSubjectInstance = TermSubject::findOrFail($termSubject);
+
+        // If term subject belongs to term 2, check for term 1 subjects and scores
+        if ($termSubjectInstance->term_id == 2) {
+            if (!$this->hasPassedTermSubjects($studentId, $student->grade_id, 1)) {
+                return ApiResponse::sendResponse('400', 'Student has not passed all subjects in Term 1', []);
+            }
+        }
+
+        // Process score update or addition for the term subject
+        $existingScore = Score::where('student_id', $studentId)->where('term_subject_id', $termSubject)->first();
+        if ($existingScore) {
+            $existingScore->score = $scoreValue;
+            $existingScore->save();
+        } else {
+            $newScore = new Score();
+            $newScore->student_id = $studentId;
+            $newScore->term_subject_id = $termSubject;
+            $newScore->score = $scoreValue;
+            $newScore->save();
+        }
+
+        // Check if the student has passed all subjects in term 2 after adding/updating the score
+        if (!$this->hasCompletedAndPassedTermSubjects($studentId, $student->grade_id, 2)) {
+            return ApiResponse::sendResponse('200', 'Student Score Added/Updated Successfully, but has not passed all subjects in Term 2', []);
+        }
+
+        // If all subjects in term 2 are passed, update the student's grade
+        $this->promoteStudent($student);
+
+        // Save the updated student and return the response
+        if ($student->save()) {
+            // Reload the student's grade relationship
+            $student->load('grade');
+            return ApiResponse::sendResponse('200', 'Student Score Added/Updated Successfully and progressed to the next Grade', $student);
+        }
+    }
+
+    /**
+     * Check if the student has passed all subjects for a given term.
+     *
+     * @param int $studentId
+     * @param int $gradeId
+     * @param int $termId
+     * @return bool
+     */
+    private function hasPassedTermSubjects($studentId, $gradeId, $termId)
+    {
+        $termSubjects = TermSubject::where('grade_id', $gradeId)->where('term_id', $termId)->pluck('id');
+        $termScores = Score::where('student_id', $studentId)->whereIn('term_subject_id', $termSubjects)->get();
+
+        foreach ($termSubjects as $subjectId) {
+            if (!$termScores->contains('term_subject_id', $subjectId) || $termScores->where('term_subject_id', $subjectId)->first()->score < 50) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the student has completed and passed all subjects for a given term.
+     *
+     * @param int $studentId
+     * @param int $gradeId
+     * @param int $termId
+     * @return bool
+     */
+    private function hasCompletedAndPassedTermSubjects($studentId, $gradeId, $termId)
+    {
+        $termSubjects = TermSubject::where('grade_id', $gradeId)->where('term_id', $termId)->pluck('id');
+        $termScores = Score::where('student_id', $studentId)->whereIn('term_subject_id', $termSubjects)->get();
+
+        foreach ($termSubjects as $subjectId) {
+            if (!$termScores->contains('term_subject_id', $subjectId) || $termScores->where('term_subject_id', $subjectId)->first()->score < 50) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Promote the student to the next grade and stage if applicable.
+     *
+     * @param Student $student
+     * @return void
+     */
+    private function promoteStudent($student)
+    {
+        if ($student->grade_id == 6 || $student->grade_id == 9) {
+            $student->stage_id += 1;
+        }
+        $student->grade_id += 1;
     }
 }

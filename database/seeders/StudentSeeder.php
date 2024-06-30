@@ -18,14 +18,32 @@ class StudentSeeder extends Seeder
 
         Student::truncate();
         Student::create([
+            'name' => 'ibrahim mohamed',
+            'nationality' => 'مصري',
+            'national_id' => 147896325489888,
+            'gender' => 'Male',
+            'religion' => 'Muslim',
+            'date_of_birth' => '2002/1/1',
+            'address' =>  'شارع الطوابق',
+            'state' => 'الجيزة',
+            'country' => 'Eygpt',
+            'image' => '1714668179.jpg',
+            'childbirth_certificate' => '1714668179.png',
+            'stage_id' => 1,
+            'grade_id' => 1,
+            'parent_id' =>  1,
+            'school_id' =>  1,
+
+        ]);
+        Student::create([
             'name' => 'Ahmed Yasser',
             'nationality' => 'مصري',
             'national_id' => 15545985566555,
             'gender' => 'Male',
             'religion' => 'Muslim',
             'date_of_birth' => '2002/6/16',
-            'address' => 'شارع حسن محمد ',
-            'state' => 'الجيزة',
+            'address' => 'السيدة زينب',
+            'state' => 'القاهرة',
             'country' => 'Eygpt',
             'image' => '1714668179.jpg',
             'childbirth_certificate' => '1714668179.png',
@@ -43,37 +61,17 @@ class StudentSeeder extends Seeder
             'gender' => 'Male',
             'religion' => 'Muslim',
             'date_of_birth' => '2002/7/19',
-            'address' =>  'شارع الطوابق',
+            'address' =>  '',
             'state' => 'الجيزة',
             'country' => 'Eygpt',
             'image' => '1714668179.jpg',
             'childbirth_certificate' => '1714668179.png',
-            'stage_id' => 2,
-            'grade_id' => 7,
-            'parent_id' =>  1,
+            'stage_id' => 1,
+            'grade_id' => 2,
+            'parent_id' =>  2,
             'school_id' =>  1,
 
         ]);
-
-        Student::create([
-            'name' => 'ibrahim mohamed',
-            'nationality' => 'مصري',
-            'national_id' => 147896325489888,
-            'gender' => 'Male',
-            'religion' => 'Muslim',
-            'date_of_birth' => '2002/1/1',
-            'address' =>  'شارع الطوابق',
-            'state' => 'الجيزة',
-            'country' => 'Eygpt',
-            'image' => '1714668179.jpg',
-            'childbirth_certificate' => '1714668179.png',
-            'stage_id' => 3,
-            'grade_id' => 10,
-            'parent_id' =>  1,
-            'school_id' =>  1,
-
-        ]);
-
 
         Student::create([
             'name' => 'samy mohsen',
@@ -89,7 +87,7 @@ class StudentSeeder extends Seeder
             'childbirth_certificate' => '1714668179.png',
             'stage_id' => 1,
             'grade_id' => 1,
-            'parent_id' =>  1,
+            'parent_id' =>  2,
             'school_id' =>  1,
 
         ]);
@@ -108,7 +106,7 @@ class StudentSeeder extends Seeder
             'childbirth_certificate' => '1714668179.png',
             'stage_id' => 1,
             'grade_id' => 1,
-            'parent_id' =>  2,
+            'parent_id' =>  3,
             'school_id' =>  2,
 
         ]);
@@ -125,9 +123,9 @@ class StudentSeeder extends Seeder
             'country' => 'Eygpt',
             'image' => '1714668179.jpg',
             'childbirth_certificate' => '1714668179.png',
-            'stage_id' => 2,
-            'grade_id' => 8,
-            'parent_id' =>  2,
+            'stage_id' => 1,
+            'grade_id' => 1,
+            'parent_id' =>  4,
             'school_id' =>  2,
 
         ]);
@@ -165,7 +163,7 @@ class StudentSeeder extends Seeder
             'childbirth_certificate' => '1714668179.png',
             'stage_id' => 1,
             'grade_id' => 5,
-            'parent_id' =>  2,
+            'parent_id' =>  5,
             'school_id' =>  2,
 
         ]);

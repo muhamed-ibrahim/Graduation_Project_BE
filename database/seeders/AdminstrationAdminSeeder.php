@@ -35,6 +35,15 @@ class AdminstrationAdminSeeder extends Seeder
             'adminstration_id' => 2,
 
         ]);
+
+        AdAdmin::create([
+            'name' => 'hamdy mohamed',
+            'email' => 'hamdy@gmail.com',
+            'image' => '1714968179.png',
+            'phone' => '01056281000',
+            'password' => Hash::make('12345678'),
+            'adminstration_id' => 3,
+        ]);
         Schema::enableForeignKeyConstraints();
     }
 
