@@ -14,7 +14,7 @@ class ChatbotController extends Controller
 {
     public function showChatpot(){
         $school = Auth::user()->school;
-        $chatpot = $school->chatpot;
+        $chatpot = $school->support;
         return ApiResponse::sendResponse(200, 'Question Retrivied Successfully', $chatpot);
 
     }
