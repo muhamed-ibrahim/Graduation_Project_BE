@@ -50,9 +50,9 @@ class User extends Authenticatable
         return $this->belongsToMany(AdEvent::class);
     }
 
-    public function chatpot()
+    public function support()
     {
-        return $this->hasMany(Chatpot::class);
+        return $this->hasMany(Support::class);
     }
 
     // schools
