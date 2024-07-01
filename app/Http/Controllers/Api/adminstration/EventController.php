@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\adminstration\EventRequest;
 use App\Http\Resources\adminstration\ShowEventResource;
 use App\Models\AdEvent;
+use Carbon\Carbon;
+
 
 
 class EventController extends Controller
@@ -20,6 +22,9 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->date = $request->date;
         $event->time = $request->time;
+        $event->address = $request->address;
+
+
         $event->adminstration_id = $adminstration;
         $event->save();
         $schools = $request->input('schools');
@@ -29,8 +34,15 @@ class EventController extends Controller
 
     public function showEvent(Request $request){
         $adminstration = Auth()->user()->adminstration->id;
-        $event = AdEvent::where('adminstration_id',$adminstration)->get();
-        return ApiResponse::sendResponse(200,'Events Retrived Successfully',ShowEventResource::collection($event));
+        $events = AdEvent::where('adminstration_id',$adminstration)->get();
+        foreach ($events as $event) {
+            $eventDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $event->date . ' ' . $event->time);
+            if (Carbon::now()->greaterThan($eventDateTime)) {
+                $event->status = 1;
+                $event->save();
+            }
+        }
+        return ApiResponse::sendResponse(200,'Events Retrived Successfully',ShowEventResource::collection($events));
 
     }
 
@@ -41,6 +53,7 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->date = $request->date;
         $event->time = $request->time;
+        $event->address = $request->address;
         $event->save();
         $schools = $request->input('schools');
         $event->Schools()->sync($schools);

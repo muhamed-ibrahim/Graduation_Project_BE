@@ -18,8 +18,10 @@ class ShowEventResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'address' => $this->address,
             'date' => $this->date,
             'time' => $this->time,
+            'status' => $this->status,
             'schools'=>$this->Schools()->select('school_id', 'name')->get()->toArray(),
 
         ];

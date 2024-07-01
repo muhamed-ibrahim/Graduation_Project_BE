@@ -41,6 +41,7 @@ class EventRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
+            'address' => ['required','string'],
             'date' => ['required', 'date',new DateBetweenRule],
             'time' => ['required','date_format:H:i' ,new timeBetweenRule],
 

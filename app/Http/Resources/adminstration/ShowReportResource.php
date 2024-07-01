@@ -18,6 +18,7 @@ class ShowReportResource extends JsonResource
             'id' => $this->id,
             'subject' => $this->subject,
             'description' => $this->description,
+            'created_at' => $this->created_at,
             'schools'=>$this->Schools()->select('school_id', 'name')->get()->toArray(),
 
         ];

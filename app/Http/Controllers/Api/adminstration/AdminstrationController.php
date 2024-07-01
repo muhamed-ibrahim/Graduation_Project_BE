@@ -35,6 +35,7 @@ class AdminstrationController extends Controller
         $request->user()->name = $request->name;
         $request->user()->email = $request->email;
         $request->user()->phone = $request->phone;
+        $request->user()->address = $request->address;
         $request->user()->save();
         return ApiResponse::sendResponse(200,'Adminstration Profile Updated Successfully',[]);
     }

@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('ad_events', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('address');
             $table->text('description');
             $table->date('date');
             $table->time('time');
+            $table->boolean('status')->default(false);
             // Add foreign key for administration
             $table->unsignedBigInteger('adminstration_id')->nullable();
             $table->foreign('adminstration_id')->references('id')->on('adminstrations')->onDelete('cascade');

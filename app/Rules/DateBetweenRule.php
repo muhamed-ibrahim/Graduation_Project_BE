@@ -16,7 +16,7 @@ class DateBetweenRule implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $res_date = Carbon::parse($value);
-        $today = now()->addDay();
+        $today = now()->addDay()->startOfDay();
         $oneYearFromNow = now()->addYear()->startOfDay();
         if ($res_date->lt($today) || $res_date->gte($oneYearFromNow)) {
             $fail("Please choose a date starting from tomorrow and within the next year.");

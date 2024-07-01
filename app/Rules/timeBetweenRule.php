@@ -17,10 +17,10 @@ class timeBetweenRule implements ValidationRule
     {
         $res_date = Carbon::parse($value);
         $pickTime = Carbon::createFromTime($res_date->hour,$res_date->minute,$res_date->second);
-        $startTime = Carbon::createFromTimeString('17:00:00');
+        $startTime = Carbon::createFromTimeString('07:00:00');
         $endTime = Carbon::createFromTimeString('23:00:00');
         if(!($pickTime->between($startTime,$endTime))){
-            $fail("please choose time between 17:00 and 23:00");
+            $fail("Please choose a time between 07:00 AM and 11:00 PM.");
         }
 
     }

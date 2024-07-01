@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\school\Events;
 
+use Carbon\Carbon;
 use App\Models\AdEvent;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
@@ -23,7 +24,9 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->date = $request->date;
         $event->time = $request->time;
+        $event->address = $request->address;
         $event->school_id = $school->id;
+
         $event->save();
         $event->parents()->attach($parents);
         return ApiResponse::sendResponse(201, 'Event added Successfully', []);
@@ -31,8 +34,15 @@ class EventController extends Controller
 
     public function showEvent(Request $request){
         $school = Auth()->user()->school->id;
-        $event = AdEvent::where('school_id',$school)->get();
-        return ApiResponse::sendResponse(200,'Events Retrived Successfully',$event);
+        $events = AdEvent::where('school_id',$school)->get();
+        foreach ($events as $event) {
+            $eventDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $event->date . ' ' . $event->time);
+            if (Carbon::now()->greaterThan($eventDateTime)) {
+                $event->status = 1;
+                $event->save();
+            }
+        }
+        return ApiResponse::sendResponse(200,'Events Retrived Successfully',$events);
 
     }
 
@@ -43,6 +53,8 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->date = $request->date;
         $event->time = $request->time;
+        $event->address = $request->address;
+
         $event->save();
         return ApiResponse::sendResponse(200,'Event Updated Successfully',[]);
 

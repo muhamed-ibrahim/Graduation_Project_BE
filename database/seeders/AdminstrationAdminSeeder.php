@@ -22,6 +22,7 @@ class AdminstrationAdminSeeder extends Seeder
             'name' => 'Mohamed Ibrahim',
             'email' => 'mohamed@gmail.com',
             'image' => '1714968179.png',
+            'address' => 'شارع المرج الجديد',
             'phone' => '01056288945',
             'password' => Hash::make('12345678'),
             'adminstration_id' => 1,
@@ -30,6 +31,7 @@ class AdminstrationAdminSeeder extends Seeder
             'name' => 'Youssef Tarek',
             'email' => 'youssef@gmail.com',
             'image' => '1714968179.png',
+            'address' => 'شارع حلون',
             'phone' => '01156288945',
             'password' => Hash::make('12345678'),
             'adminstration_id' => 2,
@@ -41,6 +43,7 @@ class AdminstrationAdminSeeder extends Seeder
             'email' => 'hamdy@gmail.com',
             'image' => '1714968179.png',
             'phone' => '01056281000',
+            'address' => 'شارع مجلس الشعب',
             'password' => Hash::make('12345678'),
             'adminstration_id' => 3,
         ]);

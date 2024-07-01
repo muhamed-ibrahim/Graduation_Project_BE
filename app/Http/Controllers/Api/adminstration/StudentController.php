@@ -19,6 +19,9 @@ class StudentController extends Controller
         $sc = School::find($school);
         if($sc->adminstration_id==$adminstration){
             $student = Student::where('school_id',$school)->where('stage_id',$stage)->where('grade_id',$grade)->get();
+            foreach ($student as $stu) {
+                $stu->school = $stu->school->adminstration;
+            }
             if (is_null($request->national_id)) {
                 if(!$student){
                     return ApiResponse::sendResponse('404','Student Not Found',[]);
