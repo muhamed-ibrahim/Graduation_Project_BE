@@ -12,10 +12,12 @@ class ShowSubjectResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
+            'type' => $this->subject()->first()->type,
             'subject' => $this->subject()->first()->subject_name,
 
         ];

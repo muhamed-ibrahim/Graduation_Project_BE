@@ -16,6 +16,7 @@ class ShowSubjectResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'type' => $this->subject()->first()->type,
             'subject' => $this->subject()->first()->subject_name,
 
         ];

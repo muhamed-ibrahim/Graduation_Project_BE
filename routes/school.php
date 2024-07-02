@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\school\ManagerController;
 use App\Http\Controllers\Api\school\StudentController;
 use App\Http\Controllers\Api\school\auth\AuthController;
 use App\Http\Controllers\Api\school\Events\EventController;
+use App\Http\Controllers\Api\school\WithDrawFileController;
 use App\Http\Controllers\Api\school\auth\PasswordController;
 use App\Http\Controllers\Api\school\report\ReportController;
 use App\Http\Controllers\Api\school\chatbot\ChatbotController;
@@ -90,6 +91,8 @@ Route::group(['middleware' => ['auth:sanctum', 'multiguard']], function () {
     Route::get('/deleteEvent/{eventId}', [EventController::class, 'deleteEvent']);
     Route::get('/showChatpot', [ChatbotController::class, 'showChatpot']);
     Route::post('/addAnswer/{questionId}', [ChatbotController::class, 'addAnswer']);
+    Route::post('/withDrawFile/{studentId}', [WithDrawFileController::class, 'withDrawFile']);
+
 
 
 

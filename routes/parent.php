@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\parent\chatbot\ChatbotController;
 use App\Http\Controllers\Api\parent\children\ChildrenController;
 use App\Http\Controllers\Api\parent\requests\EnrollRequestController;
 use App\Http\Controllers\Api\parent\requests\TransferRequestController;
+use App\Http\Controllers\Api\parent\WithDrawFileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/ShowTransferReqWithNationalID/{nationalId}', [TransferRequestController::class, 'ShowTransferReqWithNationalID']);
     Route::post('/addQuestion', [ChatbotController::class, 'addQuestion']);
     Route::get('/getChatbotData', [ChatbotController::class, 'getChatbotData']);
+    Route::post('/withDrawFile/{studentId}', [WithDrawFileController::class, 'withDrawFile']);
+
+
 
 
 

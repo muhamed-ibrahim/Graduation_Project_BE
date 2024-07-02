@@ -5,12 +5,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\adminstration\EventController;
-use App\Http\Controllers\Api\adminstration\Report\ReportController;
 use App\Http\Controllers\Api\adminstration\SchoolController;
 use App\Http\Controllers\Api\adminstration\StudentController;
 use App\Http\Controllers\Api\adminstration\auth\AuthController;
 use App\Http\Controllers\Api\adminstration\AdminstrationController;
 use App\Http\Controllers\Api\adminstration\auth\PasswordController;
+use App\Http\Controllers\Api\adminstration\Report\ReportController;
 use App\Http\Controllers\Api\adminstration\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\adminstration\educationalLevels\LevelController;
 
@@ -66,6 +66,7 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
     Route::post('/addReport', [ReportController::class, 'addReport']);
     Route::get('/showReport', [ReportController::class, 'showReport']);
     Route::get('/deleteReport/{ReportId}', [ReportController::class, 'deleteReport']);
+
 
 
 
