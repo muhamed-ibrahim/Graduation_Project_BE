@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\parent\Event\SchoolEventController;
 use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -92,6 +93,8 @@ Route::group(['middleware' => ['auth:sanctum', 'multiguard']], function () {
     Route::get('/showChatpot', [ChatbotController::class, 'showChatpot']);
     Route::post('/addAnswer/{questionId}', [ChatbotController::class, 'addAnswer']);
     Route::post('/withDrawFile/{studentId}', [WithDrawFileController::class, 'withDrawFile']);
+
+
 
 
 

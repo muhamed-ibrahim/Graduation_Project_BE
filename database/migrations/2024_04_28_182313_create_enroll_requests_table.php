@@ -21,8 +21,8 @@ return new class extends Migration
             $table->date('birthdate');
             $table->string('gender');
             $table->string('religion')->nullable();
-            $table->string('state');
-            $table->string('country');
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
             $table->string('childbirth_certificate')->nullable();
             $table->foreignId('parent_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();

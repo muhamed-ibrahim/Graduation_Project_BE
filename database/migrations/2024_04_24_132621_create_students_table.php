@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('religion')->nullable();
             $table->date('date_of_birth');
             $table->string('address');
-            $table->string('state');
-            $table->string('country');
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
             $table->string('childbirth_certificate')->nullable();
             $table->string('level');
             $table->foreignId('parent_id')->constrained('users')->cascadeOnDelete();

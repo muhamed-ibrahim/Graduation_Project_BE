@@ -24,6 +24,11 @@ class Adminstration extends Model
     {
         return $this->hasMany(Report::class);
     }
+    //create event
+    public function event()
+    {
+        return $this->hasMany(AdEvent::class);
+    }
 
 
 

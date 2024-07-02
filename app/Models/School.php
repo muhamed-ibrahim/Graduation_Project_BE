@@ -21,10 +21,15 @@ class School extends Model
     {
         return $this->hasOne(SchoolManager::class);
     }
-
+    // send event to schools
     public function Events()
     {
         return $this->belongsToMany(AdEvent::class);
+    }
+    // create event
+    public function event()
+    {
+        return $this->hasMany(AdEvent::class);
     }
 
     public function Reports()

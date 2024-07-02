@@ -8,12 +8,13 @@ use App\Http\Controllers\Api\parent\ChildController;
 use App\Http\Controllers\Api\parent\ParentController;
 use App\Http\Controllers\Api\parent\SchoolController;
 use App\Http\Controllers\Api\parent\auth\AuthController;
+use App\Http\Controllers\Api\parent\WithDrawFileController;
 use App\Http\Controllers\Api\parent\auth\PasswordController;
 use App\Http\Controllers\Api\parent\chatbot\ChatbotController;
 use App\Http\Controllers\Api\parent\children\ChildrenController;
+use App\Http\Controllers\Api\parent\Event\SchoolEventController;
 use App\Http\Controllers\Api\parent\requests\EnrollRequestController;
 use App\Http\Controllers\Api\parent\requests\TransferRequestController;
-use App\Http\Controllers\Api\parent\WithDrawFileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/addQuestion', [ChatbotController::class, 'addQuestion']);
     Route::get('/getChatbotData', [ChatbotController::class, 'getChatbotData']);
     Route::post('/withDrawFile/{studentId}', [WithDrawFileController::class, 'withDrawFile']);
+    Route::get('/ShowEvent', [SchoolEventController::class, 'ShowEvent']);
+
 
 
 
