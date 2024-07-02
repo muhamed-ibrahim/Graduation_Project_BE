@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/transferRequest/{id}', [TransferRequestController::class, 'transferRequest']);
     Route::get('/ShowTransferReqWithNationalID/{nationalId}', [TransferRequestController::class, 'ShowTransferReqWithNationalID']);
     Route::post('/addQuestion', [ChatbotController::class, 'addQuestion']);
+    Route::get('/getChatbotData', [ChatbotController::class, 'getChatbotData']);
     Route::post('/withDrawFile/{studentId}', [WithDrawFileController::class, 'withDrawFile']);
 
 
@@ -53,8 +54,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     // get recommended schools
     Route::get('/recommended-schools/{adminstrationId}', [SchoolController::class, 'getRecommendedSchools']);
 });
-Route::get('/getChatbotData', [ChatbotController::class, 'getChatbotData']);
-
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
