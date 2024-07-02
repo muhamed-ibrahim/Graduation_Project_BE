@@ -55,7 +55,8 @@ class EnrollRequestController extends Controller
                 'religion' => $req->religion,
                 'country' => $req->country,
                 'childbirth_certificate' => $req->childbirth_certificate,
-                'level' => 'الصف الأول الأبتدائي',
+                'stage' => 1,
+                'grade' => 1,
                 'parent_id' => $req->parent()->first()->id,
                 'school_id' => $SendSchool->id
             ];
