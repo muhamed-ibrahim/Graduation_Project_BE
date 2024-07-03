@@ -18,40 +18,40 @@ class GradeSeeder extends Seeder
 
         Grade::truncate();
         Grade::create([
-            'grade_name' => 'الصف الأول الابتدائي',
+            'grade_name' => 'الصف الأول الإبتدائي',
             'stage_id' => 1,
         ]);
         Grade::create([
-            'grade_name' => 'الصف الثاني الابتدائي',
+            'grade_name' => 'الصف الثاني الإبتدائي',
             'stage_id' => 1,
         ]);
         Grade::create([
-            'grade_name' => 'الصف الثالث الابتدائي',
+            'grade_name' => 'الصف الثالث الإبتدائي',
             'stage_id' => 1,
         ]);
         Grade::create([
-            'grade_name' => 'الصف الرابع الابتدائي',
+            'grade_name' => 'الصف الرابع الإبتدائي',
             'stage_id' => 1,
         ]);
         Grade::create([
-            'grade_name' => 'الصف الخامس الابتدائي',
+            'grade_name' => 'الصف الخامس الإبتدائي',
             'stage_id' => 1,
         ]);
         Grade::create([
-            'grade_name' => 'الصف السادس الابتدائي',
+            'grade_name' => 'الصف السادس الإبتدائي',
             'stage_id' => 1,
         ]);
 
         Grade::create([
-            'grade_name' => 'الصف الأول الاعدادي',
+            'grade_name' => 'الصف الأول الإعدادي',
             'stage_id' => 2,
         ]);
         Grade::create([
-            'grade_name' => 'الصف الثاني الاعدادي',
+            'grade_name' => 'الصف الثاني الإعدادي',
             'stage_id' => 2,
         ]);
         Grade::create([
-            'grade_name' => 'الصف الثالث الاعدادي',
+            'grade_name' => 'الصف الثالث الإعدادي',
             'stage_id' => 2,
         ]);
 

@@ -20,6 +20,7 @@ class ManagerProfileResource extends JsonResource
             //'image' => asset('/storage/school_manager/' . $this->image),
             'phone' => $this->manager_phone,
             'address' => $this->manager_address,
+            'school_id' => $this->School()->first()->id,
             'school_name' => $this->School()->first()->name,
             'school_image' => asset('/storage/school_logo/' . $this->School()->first()->image),
             'school_address' => $this->School()->first()->address,
