@@ -34,9 +34,9 @@ class ChatpotRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'Student_nationalId' => 'required',
             'question' => 'required|string',
             'description' => 'required',
-            'school_id' => 'required'
 
         ];
     }
