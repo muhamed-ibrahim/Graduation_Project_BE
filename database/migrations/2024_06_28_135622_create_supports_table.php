@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('description');
             $table->foreignId('parent_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
+            $table->boolean('status')->default(false);
+
             $table->timestamps();
         });
     }

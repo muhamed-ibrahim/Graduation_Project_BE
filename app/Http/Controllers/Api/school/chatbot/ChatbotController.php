@@ -22,6 +22,7 @@ class ChatbotController extends Controller
     public function addAnswer(Request $request,$id){
         $support = Support::findorfail($id);
         $support->answer = $request->answer;
+        $support->status = 1;
         if($support->save()){
             $chatbot = new Chatbot();
             $chatbot->question = $support->question;

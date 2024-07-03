@@ -49,6 +49,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/withDrawFile/{studentId}', [WithDrawFileController::class, 'withDrawFile']);
     Route::get('/ShowEvent', [SchoolEventController::class, 'ShowEvent']);
     Route::get('/childinfo/{childId}', [ChildController::class, 'childinfo']);
+    Route::get('/showSupport', [ChatbotController::class, 'showSupport']);
+
+
 
 
 

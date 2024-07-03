@@ -34,6 +34,13 @@ class ChatbotController extends Controller
         }
     }
 
+    public function showSupport(){
+        $user = Auth()->user();
+        $support = Support::where('parent_id',$user->id)->with('school')->get();
+        return ApiResponse::sendResponse(200, 'This Student Not Found', $support);
+
+    }
+
     public function getChatbotData()
     {
         $chatbot = Chatbot::all();
