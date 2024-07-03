@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\parent\children\ChildrenController;
 use App\Http\Controllers\Api\parent\Event\SchoolEventController;
 use App\Http\Controllers\Api\parent\requests\EnrollRequestController;
 use App\Http\Controllers\Api\parent\requests\TransferRequestController;
+use App\Http\Resources\parent\ChildResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/getChatbotData', [ChatbotController::class, 'getChatbotData']);
     Route::post('/withDrawFile/{studentId}', [WithDrawFileController::class, 'withDrawFile']);
     Route::get('/ShowEvent', [SchoolEventController::class, 'ShowEvent']);
+    Route::get('/childinfo/{childId}', [ChildController::class, 'childinfo']);
+
+
 
 
 
