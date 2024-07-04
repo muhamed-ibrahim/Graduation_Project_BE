@@ -33,7 +33,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::post('forgot-password', [ForgotPasswordController::class, 'forgot']);
 Route::post('reset-password', [ForgotPasswordController::class, 'reset']);
 
-Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function () {
+Route::group(['middleware' =>  ['auth:sanctum', 'adminstration_admin']], function () {
     Route::get('/showProfile', [AdminstrationController::class, 'showProfile']);
     Route::post('/updateProfile', [AdminstrationController::class, 'updateProfile']);
     Route::post('/updatePassword', [PasswordController::class, 'updatePassword']);
@@ -66,13 +66,6 @@ Route::group(['middleware' => 'auth:sanctum','adminstration_admin'], function ()
     Route::post('/addReport', [ReportController::class, 'addReport']);
     Route::get('/showReport', [ReportController::class, 'showReport']);
     Route::get('/deleteReport/{ReportId}', [ReportController::class, 'deleteReport']);
-
-
-
-
-
-
-
 });
 Route::get('/showAdminstrations/{state}', [AdminstrationController::class, 'showAdminstrations']);
 Route::get('/showSchoolsAdminstrations/{id}', [AdminstrationController::class, 'showSchoolsAdminstrations']);

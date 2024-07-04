@@ -7,7 +7,7 @@ use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class School_staff
+class WebUser
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,9 @@ class School_staff
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user()->role === 'staff'){
-            return $next($request);
-        }else{
-            return ApiResponse::sendResponse('401','Unauthenticated for this user',[]);
+        if (!$request->user() || !$request->user() instanceof \App\Models\User) {
+            return ApiResponse::sendResponse(401, 'Unauthorized to make this action. Only the parent can access.', []);
         }
+        return $next($request);
     }
 }

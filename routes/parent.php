@@ -4,18 +4,19 @@ use App\Models\School;
 use Illuminate\Http\Request;
 use App\Models\TransferRequest;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\parent\ChildResource;
 use App\Http\Controllers\Api\parent\ChildController;
 use App\Http\Controllers\Api\parent\ParentController;
 use App\Http\Controllers\Api\parent\SchoolController;
 use App\Http\Controllers\Api\parent\auth\AuthController;
 use App\Http\Controllers\Api\parent\WithDrawFileController;
+use App\Http\Controllers\Api\shared\NotificationController;
 use App\Http\Controllers\Api\parent\auth\PasswordController;
 use App\Http\Controllers\Api\parent\chatbot\ChatbotController;
 use App\Http\Controllers\Api\parent\children\ChildrenController;
 use App\Http\Controllers\Api\parent\Event\SchoolEventController;
 use App\Http\Controllers\Api\parent\requests\EnrollRequestController;
 use App\Http\Controllers\Api\parent\requests\TransferRequestController;
-use App\Http\Resources\parent\ChildResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +32,9 @@ use App\Http\Resources\parent\ChildResource;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum', 'web_user');
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::group(['middleware' => ['auth:sanctum', 'web_user']], function () {
     Route::get('/showProfile', [ParentController::class, 'showProfile']);
     Route::post('/updateProfile', [ParentController::class, 'updateProfile']);
     Route::post('/updatePassword', [PasswordController::class, 'updatePassword']);
@@ -50,6 +51,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/ShowEvent', [SchoolEventController::class, 'ShowEvent']);
     Route::get('/childinfo/{childId}', [ChildController::class, 'childinfo']);
     Route::get('/showSupport', [ChatbotController::class, 'showSupport']);
+    Route::get('/notification', [NotificationController::class, 'notification']);
+    Route::get('/markAsRead/{id}', [NotificationController::class, 'markAsRead']);
 
 
 

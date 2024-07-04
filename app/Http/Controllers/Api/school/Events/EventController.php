@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api\school\Events;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\AdEvent;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\school\EventRequest;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\SchoolNotification\EventNotification;
 
 class EventController extends Controller
 {
@@ -29,6 +32,10 @@ class EventController extends Controller
 
         $event->save();
         $event->parents()->attach($parents);
+        $parentsToNotify = User::whereIn('id', $parents)->get();
+        foreach ($parentsToNotify as $parent) {
+            Notification::send($parent, new EventNotification($event, $school->Manager->first(), "تمت اضافة مناسبة جديد من قبل الادارة", "/school/services/ad-events/event-info/" . $event->id));
+        }
         return ApiResponse::sendResponse(201, 'Event added Successfully', []);
     }
 

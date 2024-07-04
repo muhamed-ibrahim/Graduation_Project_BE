@@ -7,8 +7,10 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
 
-class Adminstration_admin
+
+class AdminstrationAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,9 +19,9 @@ class Adminstration_admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // if(!Auth::guard('adminstration_admin')->check()){
-        //     return ApiResponse::sendResponse(401,'unauthorized to make this action,Only the Adminstration_admin',[]);
-        // }
+        if (!$request->user() || !$request->user() instanceof \App\Models\AdAdmin) {
+            return ApiResponse::sendResponse(401, 'Unauthorized to make this action. Only the Adminstration_admin can access.', []);
+        }
         return $next($request);
     }
 }
