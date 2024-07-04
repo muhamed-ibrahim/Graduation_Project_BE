@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\parent\Event\SchoolEventController;
 use App\Models\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -10,9 +9,11 @@ use App\Http\Controllers\Api\school\StudentController;
 use App\Http\Controllers\Api\school\auth\AuthController;
 use App\Http\Controllers\Api\school\Events\EventController;
 use App\Http\Controllers\Api\school\WithDrawFileController;
+use App\Http\Controllers\Api\shared\NotificationController;
 use App\Http\Controllers\Api\school\auth\PasswordController;
 use App\Http\Controllers\Api\school\report\ReportController;
 use App\Http\Controllers\Api\school\chatbot\ChatbotController;
+use App\Http\Controllers\Api\parent\Event\SchoolEventController;
 use App\Http\Controllers\Api\school\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\school\eductionalLevels\LevelController;
 use App\Http\Controllers\Api\school\requests\EnrollRequestController;
@@ -94,12 +95,6 @@ Route::group(['middleware' => ['auth:sanctum', 'multiguard']], function () {
     Route::post('/addAnswer/{questionId}', [ChatbotController::class, 'addAnswer']);
     Route::post('/withDrawFile/{studentId}', [WithDrawFileController::class, 'withDrawFile']);
 
-
-
-
-
-
-
-
-
+    Route::get('/notification', [NotificationController::class, 'notification']);
+    Route::get('/markAsRead/{id}', [NotificationController::class, 'markAsRead']);
 });
