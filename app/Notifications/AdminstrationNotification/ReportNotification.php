@@ -23,8 +23,8 @@ class ReportNotification extends Notification
     {
         $this->Report = $Report;
         $this->adminstration = $adminstration;
-        $this->message =$message;
         $this->url = $url;
+        $this->message =$message;
     }
 
     /**

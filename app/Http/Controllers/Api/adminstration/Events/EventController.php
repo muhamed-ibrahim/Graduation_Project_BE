@@ -35,8 +35,8 @@ class EventController extends Controller
         }
         $SchoolsToNotify = $event->Schools()->whereIn('school_id', $schools)->get();
         foreach ($SchoolsToNotify as $school) {
-            Notification::send($school->Manager()->first(), new EventNotification($event, $adminstration, "تمت اضافة مناسبة جديد من قبل الادارة", "/Admin/Event/InfoEvent/" . $event->id));
-            Notification::send($school->staff, new EventNotification($event, $adminstration, "تمت اضافة مناسبة جديد من قبل الادارة", "/Admin/Event/InfoEvent/" . $event->id));
+            Notification::send($school->Manager()->first(), new EventNotification($event, $adminstration, "تمت اضافة مناسبة جديد من قبل الادارة", "/school/services/ad-events/event-info/" . $event->id));
+            Notification::send($school->staff, new EventNotification($event, $adminstration, "تمت اضافة مناسبة جديد من قبل الادارة", "/school/services/ad-events/event-info/" . $event->id));
         }
         return ApiResponse::sendResponse(201, 'Event added Successfully', []);
     }
@@ -57,6 +57,7 @@ class EventController extends Controller
 
     public function updateEvent(EventRequest $request, $id)
     {
+        $adminstration = Auth()->user()->adminstration;
         $event = AdEvent::findorfail($id);
         $event->name = $request->name;
         $event->description = $request->description;
@@ -66,12 +67,23 @@ class EventController extends Controller
         $event->save();
         $schools = $request->input('schools');
         $event->Schools()->sync($schools);
+        $SchoolsToNotify = $event->Schools()->whereIn('school_id', $schools)->get();
+        foreach ($SchoolsToNotify as $school) {
+            Notification::send($school->Manager()->first(), new EventNotification($event, $adminstration, "تمت تعديل مناسبة من قبل الادارة", "/school/services/ad-events/event-info/" . $event->id));
+            Notification::send($school->staff, new EventNotification($event, $adminstration, "تمت تعديل مناسبة من قبل الادارة", "/school/services/ad-events/event-info/" . $event->id));
+        }
         return ApiResponse::sendResponse(201, 'Event Updated Successfully', []);
     }
 
     public function deleteEvent($id)
     {
+        $adminstration = Auth()->user()->adminstration;
         $event = AdEvent::findorfail($id);
+        $SchoolsToNotify = $event->Schools()->get();
+        foreach ($SchoolsToNotify as $school) {
+            Notification::send($school->Manager()->first(), new EventNotification($event, $adminstration, "من قبل الادارة " . $event->name . " تم مسح المناسبة", NULL));
+            Notification::send($school->staff, new EventNotification($event, $adminstration, "من قبل الادارة " . $event->name . " تم مسح المناسبة", NULL));
+        }
         $event->Schools()->detach();
         $event->delete();
         return ApiResponse::sendResponse(200, 'Event Deleted Successfully', []);

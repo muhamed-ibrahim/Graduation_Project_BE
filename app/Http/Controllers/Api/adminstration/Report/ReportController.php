@@ -14,7 +14,8 @@ use App\Notifications\AdminstrationNotification\ReportNotification;
 
 class ReportController extends Controller
 {
-    public function addReport(ReportRequest $request){
+    public function addReport(ReportRequest $request)
+    {
         $adminstration = Auth::user()->adminstration;
         $report = new Report();
         $report->subject = $request->subject;
@@ -26,24 +27,31 @@ class ReportController extends Controller
             $report->Schools()->attach($schools);
         }
         $SchoolsToNotify = $report->Schools()->whereIn('school_id', $schools)->get();
-        foreach($SchoolsToNotify as $school){
-            Notification::send($school->Manager()->first(), new ReportNotification($report,$adminstration,"تمت اضافة تقرير جديد من قبل ","/Admin/Reports"));
-            Notification::send($school->staff, new ReportNotification($report,$adminstration,"تمت اضافة تقرير جديد من قبل ","/Admin/Reports"));
-
+        foreach ($SchoolsToNotify as $school) {
+            Notification::send($school->Manager()->first(), new ReportNotification($report, $adminstration, "تمت اضافة تقرير جديد من قبل ", "/Admin/Reports"));
+            Notification::send($school->staff, new ReportNotification($report, $adminstration, "تمت اضافة تقرير جديد من قبل ", "/Admin/Reports"));
         }
-        return ApiResponse::sendResponse(201,'Report added Successfully',[]);
+        return ApiResponse::sendResponse(201, 'Report added Successfully', []);
     }
 
-    public function showReport(Request $request){
+    public function showReport(Request $request)
+    {
         $adminstration = Auth::user()->adminstration->id;
-        $report = Report::where('adminstration_id',$adminstration)->get();
-        return ApiResponse::sendResponse(200,'Report Retrived Successfully',ShowReportResource::collection($report));
+        $report = Report::where('adminstration_id', $adminstration)->get();
+        return ApiResponse::sendResponse(200, 'Report Retrived Successfully', ShowReportResource::collection($report));
     }
 
-    public function deleteReport($id){
+    public function deleteReport($id)
+    {
+        $adminstration = Auth()->user()->adminstration;
         $report = Report::findorfail($id);
+        $SchoolsToNotify = $report->Schools()->get();
+        foreach ($SchoolsToNotify as $school) {
+            Notification::send($school->Manager()->first(), new ReportNotification($report, $adminstration, "من قبل الادارة " . $report->subject . " تم مسح التقرير", NULL));
+            Notification::send($school->staff, new ReportNotification($report, $adminstration, "من قبل الادارة " . $report->subject . " تم مسح التقرير", NULL));
+        }
         $report->Schools()->detach();
         $report->delete();
-        return ApiResponse::sendResponse(200,'Report Deleted Successfully',[]);
+        return ApiResponse::sendResponse(200, 'Report Deleted Successfully', []);
     }
 }
