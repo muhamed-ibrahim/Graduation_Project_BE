@@ -6,6 +6,7 @@ use App\Models\Student;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\school\StudentResource;
 
 class WithDrawFileController extends Controller
 {
@@ -14,7 +15,7 @@ class WithDrawFileController extends Controller
         $user = Auth()->user();
         $Students = $user->school->students()->where('status', 1)->get();
         if ($Students->isNotEmpty()) {
-            return ApiResponse::sendResponse(200, 'Students Retrivied Successfully', $Students);
+            return ApiResponse::sendResponse(200, 'Students Retrivied Successfully', StudentResource::collection($Students));
         } else {
             return ApiResponse::sendResponse(200, 'there are no students to withdraw', []);
         }
