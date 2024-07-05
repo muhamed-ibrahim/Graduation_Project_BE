@@ -38,7 +38,7 @@ class EventController extends Controller
         $event->parents()->attach($parents);
         $parentsToNotify = User::whereIn('id', $parents)->get();
         foreach ($parentsToNotify as $parent) {
-            Notification::send($parent, new EventNotification($event, $SC, " تم اضافة مناسبة جديدة من قبل " . $school->name, "/school/services/ad-events/event-info/" . $event->id));
+            Notification::send($parent, new EventNotification($event, $SC, " تم اضافة مناسبة جديدة من قبل " . $school->name, "/Darb/ShowGrade/Events/" . $event->id));
         }
         return ApiResponse::sendResponse(201, 'Event added Successfully', []);
     }
@@ -76,7 +76,7 @@ class EventController extends Controller
         $event->save();
         $parentsToNotify = User::whereIn('id', $parents)->get();
         foreach ($parentsToNotify as $parent) {
-            Notification::send($parent, new EventNotification($event, $SC, "تم تعديل مناسبة من قبل  " . $school->name, "/school/services/ad-events/event-info/" . $event->id));
+            Notification::send($parent, new EventNotification($event, $SC, "تم تعديل مناسبة من قبل  " . $school->name, "/Darb/ShowGrade/Events/" . $event->id));
         }
         return ApiResponse::sendResponse(200, 'Event Updated Successfully', []);
     }
