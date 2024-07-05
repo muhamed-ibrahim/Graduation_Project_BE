@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\parent;
 
+use App\Models\School;
 use App\Models\Student;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
@@ -28,5 +29,23 @@ class SchoolController extends Controller
         $schools = $user->recommendedSchools()->where('adminstration_id', $adminstrationId)->orderBy('compatibility', 'desc')->take(2)->get();
 
         return  ApiResponse::sendResponse(200, 'gggggg', $schools);
+    }
+
+    public function rateSchool(Request $request)
+    {
+        $request->validate([
+            'school_id' => 'required|exists:schools,id',
+            'rate' => 'required|numeric|min:1|max:5',
+        ]);
+        $parent = Auth::user();
+        $school = School::find($request->school_id);
+
+        // create rating
+        $school->ratings()->updateOrCreate(
+            ['parent_id' => $parent->id],
+            ['rating' => $request->rate]
+        );
+
+        return ApiResponse::sendResponse(200, 'School Rated Successfully');
     }
 }

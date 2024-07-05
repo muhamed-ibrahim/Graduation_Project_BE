@@ -70,4 +70,16 @@ class School extends Model
     {
         return $this->hasMany(Application::class);
     }
+
+    // ratings
+    public function ratings()
+    {
+        return $this->hasMany(SchoolRating::class);
+    }
+
+    // can_be_rated
+    public function getCanBeRatedAttribute()
+    {
+        return date('m') >= 6 && date('m') <= 9 && $this->ratings()->where('parent_id', auth()->id())->count() == 0;
+    }
 }

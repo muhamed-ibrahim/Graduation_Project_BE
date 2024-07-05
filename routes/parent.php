@@ -66,6 +66,9 @@ Route::group(['middleware' => ['auth:sanctum', 'web_user']], function () {
     Route::get('/showStudentStage/{studentId}', [LevelController::class, 'showStudentStage']);
     Route::get('/showStudentLevel/{studentId}/{stageId}', [LevelController::class, 'showStudentLevel']);
     Route::get('/getScoresByStudentGradeAndTerm/{studentId}/{levelId}/{termId}', [LevelController::class, 'getScoresByStudentGradeAndTerm']);
+
+    // rate the school
+    Route::post('/rate-school/{schoolId}', [SchoolController::class, 'rateSchool']);
 });
 
 
