@@ -4,6 +4,7 @@ namespace App\Http\Resources\parent;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\parent\SchoolRatingResource;
 
 class ShowSchoolResource extends JsonResource
 {
@@ -28,6 +29,8 @@ class ShowSchoolResource extends JsonResource
             'manager_phone' => $this->Manager()->first()->manager_phone,
             'manager_address' => $this->Manager()->first()->manager_address,
             'stages'=>$this->stages()->select('stage_name')->get()->toArray(),
+            'can_be_rated'=>$this->can_be_rated,
+            'ratings'=> SchoolRatingResource::collection($this->ratings),
         ];
     }
 }
