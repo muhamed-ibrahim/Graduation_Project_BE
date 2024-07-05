@@ -93,6 +93,8 @@ Route::group(['middleware' => ['auth:sanctum', 'multiguard']], function () {
     Route::get('/deleteEvent/{eventId}', [EventController::class, 'deleteEvent']);
     Route::get('/showChatpot', [ChatbotController::class, 'showChatpot']);
     Route::post('/addAnswer/{questionId}', [ChatbotController::class, 'addAnswer']);
+
+    Route::get('/studentToWithDrawFile', [WithDrawFileController::class, 'studentToWithDrawFile']);
     Route::post('/withDrawFile/{studentId}', [WithDrawFileController::class, 'withDrawFile']);
 
     Route::get('/notification', [NotificationController::class, 'notification']);

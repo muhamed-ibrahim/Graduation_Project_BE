@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\SendSchoolToParentNotification;
 use App\Http\Requests\parent\requests\EnrolRequest;
+use App\Notifications\SendSchoolToParentNotification;
+use App\Notifications\SchoolNotification\EnrollNotification;
 use App\Http\Resources\school\requests\EnrollRequestResources;
 
 class EnrollRequestController extends Controller
@@ -39,6 +40,7 @@ class EnrollRequestController extends Controller
         $SendSchool = $req->Schools()->wherePivot('school_id', $school)->first();
         if ($request->status == 0) {
             $send = $SendSchool->pivot->update(['status' => 0]);
+            Notification::send($req->parent()->first(), new EnrollNotification([], $user->School,  ' تم رفض الطالب ' . $req->name . ' من قِبل ' . $user->School->name, '/Darb/Dashboard/Child/' . $req->id));
             return ApiResponse::sendResponse('200', 'Status Updated and Student rejected Successfully', []);
         } else {
             $send = $SendSchool->pivot->update(['status' => 1]);
@@ -64,7 +66,7 @@ class EnrollRequestController extends Controller
             File::copy('storage/requests/EnrollReqChildcertificate/' . $studentData['childbirth_certificate'], 'storage/student_data/st-certficate/' . $studentData['childbirth_certificate']);
             $addStudent = Student::create($studentData);
             if ($addStudent) {
-                Notification::send($req->parent()->first(), new SendSchoolToParentNotification($addStudent,$user,"/Darb/Dashboard/Children"));
+                Notification::send($req->parent()->first(), new EnrollNotification($addStudent, $user->School, ' تم قبول الطالب ' . $addStudent->name . ' من قِبل ' . $user->School->name, '/Darb/Dashboard/Child/' . $addStudent->id));
             }
             return ApiResponse::sendResponse('201', 'Status Updated and Student Added Successfully', []);
         }

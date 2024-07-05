@@ -9,10 +9,21 @@ use App\Http\Controllers\Controller;
 
 class WithDrawFileController extends Controller
 {
-    public function withDrawFile($StudentId){
+    public function studentToWithDrawFile()
+    {
+        $user = Auth()->user();
+        $Students = $user->school->students()->where('status', 1)->get();
+        if ($Students->isNotEmpty()) {
+            return ApiResponse::sendResponse(200, 'Students Retrivied Successfully', $Students);
+        } else {
+            return ApiResponse::sendResponse(200, 'there are no students to withdraw', []);
+        }
+    }
+    public function withDrawFile($StudentId)
+    {
         $student = Student::find($StudentId);
         $student->status = 2;
-        if($student->save()){
+        if ($student->save()) {
             return ApiResponse::sendResponse(200, 'School Send TO parent', []);
         }
     }
