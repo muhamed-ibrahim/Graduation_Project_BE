@@ -43,7 +43,8 @@ class SchoolController extends Controller
         // create rating
         $school->ratings()->updateOrCreate(
             ['parent_id' => $parent->id],
-            ['rating' => $request->rate]
+            ['rating' => $request->rate],
+            ['year' => date('Y')]
         );
 
         return ApiResponse::sendResponse(200, 'School Rated Successfully');
