@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Notifications\SchoolNotification;
+namespace App\Notifications\ParentNotification;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class EventNotification extends Notification
+class EnrollNotification extends Notification
 {
     use Queueable;
-    private $Event;
-    private $school;
+    private $Enroll;
+    private $parent;
     private $url;
     private $message;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($Event, $school, $message, $url)
+    public function __construct($Enroll, $parent, $message, $url)
     {
-        $this->Event = $Event;
-        $this->school = $school;
+        $this->Enroll = $Enroll;
+        $this->parent = $parent;
         $this->url = $url;
         $this->message = $message;
     }
@@ -44,8 +44,8 @@ class EventNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'Event' => $this->Event,
-            'school' => $this->school,
+            'Enroll' => $this->Enroll,
+            'parent' => $this->parent,
             'message' => $this->message,
             'url' => $this->url,
         ];

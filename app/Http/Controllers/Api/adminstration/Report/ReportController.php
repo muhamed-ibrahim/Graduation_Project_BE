@@ -28,8 +28,8 @@ class ReportController extends Controller
         }
         $SchoolsToNotify = $report->Schools()->whereIn('school_id', $schools)->get();
         foreach ($SchoolsToNotify as $school) {
-            Notification::send($school->Manager()->first(), new ReportNotification($report, $adminstration, "تمت اضافة تقرير جديد من قبل ", "/Admin/Reports"));
-            Notification::send($school->staff, new ReportNotification($report, $adminstration, "تمت اضافة تقرير جديد من قبل ", "/Admin/Reports"));
+            Notification::send($school->Manager()->first(), new ReportNotification($report, $adminstration, "تم اضافة تقرير جديد من قبل " . $adminstration->name, "/Admin/Reports"));
+            Notification::send($school->staff, new ReportNotification($report, $adminstration, "تم اضافة تقرير جديد من قبل " . $adminstration->name, "/Admin/Reports"));
         }
         return ApiResponse::sendResponse(201, 'Report added Successfully', []);
     }
@@ -47,8 +47,8 @@ class ReportController extends Controller
         $report = Report::findorfail($id);
         $SchoolsToNotify = $report->Schools()->get();
         foreach ($SchoolsToNotify as $school) {
-            Notification::send($school->Manager()->first(), new ReportNotification($report, $adminstration, "من قبل الادارة " . $report->subject . " تم مسح التقرير", NULL));
-            Notification::send($school->staff, new ReportNotification($report, $adminstration, "من قبل الادارة " . $report->subject . " تم مسح التقرير", NULL));
+            Notification::send($school->Manager()->first(), new ReportNotification($report, $adminstration, "من قبل  " . $adminstration->name . $report->subject . " تم مسح التقرير", NULL));
+            Notification::send($school->staff, new ReportNotification($report, $adminstration, "من قبل  " . $adminstration->name . $report->subject . " تم مسح التقرير", NULL));
         }
         $report->Schools()->detach();
         $report->delete();

@@ -34,6 +34,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum', 'web_user');
 
+
 Route::group(['middleware' => ['auth:sanctum', 'web_user']], function () {
     Route::get('/showProfile', [ParentController::class, 'showProfile']);
     Route::post('/updateProfile', [ParentController::class, 'updateProfile']);
@@ -53,16 +54,6 @@ Route::group(['middleware' => ['auth:sanctum', 'web_user']], function () {
     Route::get('/showSupport', [ChatbotController::class, 'showSupport']);
     Route::get('/notification', [NotificationController::class, 'notification']);
     Route::get('/markAsRead/{id}', [NotificationController::class, 'markAsRead']);
-
-
-
-
-
-
-
-
-
-
     Route::get('/getChildSchools', [SchoolController::class, 'getChildSchools']);
     // get recommended schools
     Route::get('/recommended-schools/{adminstrationId}', [SchoolController::class, 'getRecommendedSchools']);

@@ -35,8 +35,8 @@ class EventController extends Controller
         }
         $SchoolsToNotify = $event->Schools()->whereIn('school_id', $schools)->get();
         foreach ($SchoolsToNotify as $school) {
-            Notification::send($school->Manager()->first(), new EventNotification($event, $adminstration, "تمت اضافة مناسبة جديد من قبل الادارة", "/school/services/ad-events/event-info/" . $event->id));
-            Notification::send($school->staff, new EventNotification($event, $adminstration, "تمت اضافة مناسبة جديد من قبل الادارة", "/school/services/ad-events/event-info/" . $event->id));
+            Notification::send($school->Manager()->first(), new EventNotification($event, $adminstration, "تمت اضافة مناسبة جديد من قبل الادارة". $adminstration->name, "/school/services/ad-events/event-info/" . $event->id));
+            Notification::send($school->staff, new EventNotification($event, $adminstration, "تمت اضافة مناسبة جديد من قبل الادارة". $adminstration->name, "/school/services/ad-events/event-info/" . $event->id));
         }
         return ApiResponse::sendResponse(201, 'Event added Successfully', []);
     }
@@ -69,8 +69,8 @@ class EventController extends Controller
         $event->Schools()->sync($schools);
         $SchoolsToNotify = $event->Schools()->whereIn('school_id', $schools)->get();
         foreach ($SchoolsToNotify as $school) {
-            Notification::send($school->Manager()->first(), new EventNotification($event, $adminstration, "تمت تعديل مناسبة من قبل الادارة", "/school/services/ad-events/event-info/" . $event->id));
-            Notification::send($school->staff, new EventNotification($event, $adminstration, "تمت تعديل مناسبة من قبل الادارة", "/school/services/ad-events/event-info/" . $event->id));
+            Notification::send($school->Manager()->first(), new EventNotification($event, $adminstration, " تمت تعديل مناسبة من قبل الادارة" . $adminstration->name, "/school/services/ad-events/event-info/" . $event->id));
+            Notification::send($school->staff, new EventNotification($event, $adminstration, "تمت تعديل مناسبة من قبل الادارة" . $adminstration->name, "/school/services/ad-events/event-info/" . $event->id));
         }
         return ApiResponse::sendResponse(201, 'Event Updated Successfully', []);
     }
@@ -81,8 +81,8 @@ class EventController extends Controller
         $event = AdEvent::findorfail($id);
         $SchoolsToNotify = $event->Schools()->get();
         foreach ($SchoolsToNotify as $school) {
-            Notification::send($school->Manager()->first(), new EventNotification($event, $adminstration, "من قبل الادارة " . $event->name . " تم مسح المناسبة", NULL));
-            Notification::send($school->staff, new EventNotification($event, $adminstration, "من قبل الادارة " . $event->name . " تم مسح المناسبة", NULL));
+            Notification::send($school->Manager()->first(), new EventNotification($event, $adminstration, "  من قبل " . $adminstration->name . $event->name . " تم مسح المناسبة ", NULL));
+            Notification::send($school->staff, new EventNotification($event, $adminstration, "  من قبل " . $adminstration . $event->name . " تم مسح المناسبة ", NULL));
         }
         $event->Schools()->detach();
         $event->delete();
