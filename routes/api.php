@@ -74,13 +74,6 @@ Route::get('/notification', [NotificationController::class, 'notification'])->mi
 Route::get('/markAsRead/{id}', [NotificationController::class, 'markAsRead'])->middleware('auth:sanctum');;
 
 
-Route::group(['middleware' =>  ['auth:sanctum', 'web_user']], function () {
-    Route::get('/showStudentStage/{studentId}', [LevelController::class, 'showStudentStage']);
-    Route::get('/showStudentLevel/{studentId}/{stageId}', [LevelController::class, 'showStudentLevel']);
-    Route::get('/showterms', [LevelController::class, 'showterms']);
-    Route::get('/getScoresByStudentGradeAndTerm/{studentId}/{levelId}/{termId}', [LevelController::class, 'getScoresByStudentGradeAndTerm']);
-});
-
 
 
 

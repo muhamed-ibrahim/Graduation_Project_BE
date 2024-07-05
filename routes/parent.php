@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\parent\children\ChildrenController;
 use App\Http\Controllers\Api\parent\Event\SchoolEventController;
 use App\Http\Controllers\Api\parent\requests\EnrollRequestController;
 use App\Http\Controllers\Api\parent\requests\TransferRequestController;
+use App\Http\Controllers\Api\adminstration\educationalLevels\LevelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,10 @@ Route::group(['middleware' => ['auth:sanctum', 'web_user']], function () {
     Route::get('/notification', [NotificationController::class, 'notification']);
     Route::get('/markAsRead/{id}', [NotificationController::class, 'markAsRead']);
     Route::get('/getChildSchools', [SchoolController::class, 'getChildSchools']);
+    Route::get('/showStudentStage/{studentId}', [LevelController::class, 'showStudentStage']);
+    Route::get('/showStudentLevel/{studentId}/{stageId}', [LevelController::class, 'showStudentLevel']);
+    Route::get('/showterms', [LevelController::class, 'showterms']);
+    Route::get('/getScoresByStudentGradeAndTerm/{studentId}/{levelId}/{termId}', [LevelController::class, 'getScoresByStudentGradeAndTerm']);
     // get recommended schools
     Route::get('/recommended-schools/{adminstrationId}', [SchoolController::class, 'getRecommendedSchools']);
 });
