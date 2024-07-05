@@ -28,6 +28,8 @@ class ShowSchoolResource extends JsonResource
             'manager_phone' => $this->Manager()->first()->manager_phone,
             'manager_address' => $this->Manager()->first()->manager_address,
             'stages'=>$this->stages()->select('stage_name')->get()->toArray(),
+            'can_be_rated'=>$this->can_be_rated,
+            'ratings'=> SchoolRatingResource::collection($this->ratings),
         ];
     }
 }
