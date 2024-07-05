@@ -52,11 +52,16 @@ Route::group(['middleware' =>  ['auth:sanctum', 'adminstration_admin']], functio
     Route::get('/showStages', [LevelController::class, 'showStages']);
     Route::get('/showStudentStage/{studentId}', [LevelController::class, 'showStudentStage']);
     Route::get('/showLevels/{stageId}', [LevelController::class, 'showLevels']);
+    Route::get('/showStudentLevel/{studentId}/{stageId}', [LevelController::class, 'showStudentLevel']);
 
+    Route::get('/showterms', [LevelController::class, 'showterms']);
     Route::get('/showSubjects/{levelId}/{termId}', [LevelController::class, 'showSubjects']);
 
     Route::get('/getStudentsSchools', [StudentController::class, 'getStudentsSchools']);
     Route::post('/getStudent/{school}/{stage}/{grade}', [StudentController::class, 'getStudent']);
+    Route::get('/studentinfo/{studentId}', [StudentController::class, 'studentinfo']);
+    Route::get('/getScoresByStudentGradeAndTerm/{studentId}/{levelId}/{termId}', [LevelController::class, 'getScoresByStudentGradeAndTerm']);
+    Route::get('/showStudentStage/{studentId}', [LevelController::class, 'showStudentStage']);
 
     Route::post('/addReport', [ReportController::class, 'addReport']);
     Route::get('/showReport', [ReportController::class, 'showReport']);
@@ -69,13 +74,7 @@ Route::get('/notification', [NotificationController::class, 'notification'])->mi
 Route::get('/markAsRead/{id}', [NotificationController::class, 'markAsRead'])->middleware('auth:sanctum');;
 
 
-Route::group(['middleware' =>  ['auth:sanctum', 'adminstration_admin', 'web_user']], function () {
-    Route::get('/studentinfo/{studentId}', [StudentController::class, 'studentinfo']);
-    Route::get('/showStudentStage/{studentId}', [LevelController::class, 'showStudentStage']);
-    Route::get('/showStudentLevel/{studentId}/{stageId}', [LevelController::class, 'showStudentLevel']);
-    Route::get('/showterms', [LevelController::class, 'showterms']);
-    Route::get('/getScoresByStudentGradeAndTerm/{studentId}/{levelId}/{termId}', [LevelController::class, 'getScoresByStudentGradeAndTerm']);
-});
+
 
 
 

@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\parent\auth\AuthController;
 use App\Http\Controllers\Api\parent\WithDrawFileController;
 use App\Http\Controllers\Api\shared\NotificationController;
 use App\Http\Controllers\Api\parent\auth\PasswordController;
+use App\Http\Controllers\Api\adminstration\StudentController;
 use App\Http\Controllers\Api\parent\chatbot\ChatbotController;
 use App\Http\Controllers\Api\parent\children\ChildrenController;
 use App\Http\Controllers\Api\parent\Event\SchoolEventController;
@@ -58,6 +59,13 @@ Route::group(['middleware' => ['auth:sanctum', 'web_user']], function () {
     Route::get('/getChildSchools', [SchoolController::class, 'getChildSchools']);
     // get recommended schools
     Route::get('/recommended-schools/{adminstrationId}', [SchoolController::class, 'getRecommendedSchools']);
+
+    //
+    Route::get('/studentinfo/{studentId}', [StudentController::class, 'studentinfo']);
+    Route::get('/showterms', [LevelController::class, 'showterms']);
+    Route::get('/showStudentStage/{studentId}', [LevelController::class, 'showStudentStage']);
+    Route::get('/showStudentLevel/{studentId}/{stageId}', [LevelController::class, 'showStudentLevel']);
+    Route::get('/getScoresByStudentGradeAndTerm/{studentId}/{levelId}/{termId}', [LevelController::class, 'getScoresByStudentGradeAndTerm']);
 });
 
 
