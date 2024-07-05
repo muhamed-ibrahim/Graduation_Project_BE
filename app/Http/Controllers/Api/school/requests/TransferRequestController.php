@@ -52,8 +52,8 @@ class TransferRequestController extends Controller
                 Notification::send($oldSchool->Manager()->first(), new TransferFromNewNotification($TransferRequests, $newSchool, ' تم قبول طلب تحويل الطالب  ' . $TransferRequests->name . ' من قِبل ' . $newSchool->name, '/school/services/transfer-requests/request-info/' . $TransferRequests->id));
                 Notification::send($oldStaff, new TransferFromNewNotification($TransferRequests, $newSchool, ' تم قبول طلب تحويل الطالب  ' . $TransferRequests->name . ' من قِبل ' . $newSchool->name, '/school/services/transfer-requests/request-info/' . $TransferRequests->id));
             } else {
-                Notification::send($oldSchool->Manager()->first(), new TransferFromNewNotification($TransferRequests, $newSchool, ' تم رفض طلب تحويل الطالب  ' . $TransferRequests->name . ' من قِبل ' . $newSchool->name, '/Darb/Dashboard/Transfer/Search'));
-                Notification::send($parent, new TransferFromNewNotification($TransferRequests, $newSchool, ' تم رفض طلبك لتحويل الطالب  ' . $TransferRequests->name . ' من قِبل ' . $newSchool->name, '/Darb/Dashboard/Transfer/' . $TransferRequests->id));
+                Notification::send($oldSchool->Manager()->first(), new TransferFromNewNotification($TransferRequests, $newSchool, ' تم رفض طلب تحويل الطالب  ' . $TransferRequests->name . ' من قِبل ' . $newSchool->name, '/school/services/transfer-requests/request-info/' . $TransferRequests->id));
+                Notification::send($parent, new TransferFromNewNotification($TransferRequests, $newSchool, ' تم رفض طلبك لتحويل الطالب  ' . $TransferRequests->name . ' من قِبل ' . $newSchool->name, '/Darb/Dashboard/Transfer/Search'));
             }
             return ApiResponse::sendResponse(200, 'Transfer status updated to new school Successfully', []);
         }
@@ -74,7 +74,7 @@ class TransferRequestController extends Controller
             $Student = Student::where('national_id', $getTransferRequest['student_national_id'])->first();
             if ($Student) {
                 $Student->update(['school_id' => $getTransferRequest['new_school']]);
-                Notification::send($parent, new TransferFromNewNotification($getTransferRequest, $newSchool, ' تم قبول طلبك لتحويل الطالب  ' . $getTransferRequest->name . ' من قِبل ' . $newSchool->name, '/Darb/Dashboard/Transfer/' . $getTransferRequest->id));
+                Notification::send($parent, new TransferFromNewNotification($getTransferRequest, $newSchool, ' تم قبول طلبك لتحويل الطالب  ' . $getTransferRequest->name . ' من قِبل ' . $newSchool->name, '/Darb/Dashboard/Transfer/Search'));
 
                 return ApiResponse::sendResponse(200, 'Student Deleted From This School And Added To New School', []);
             } else {
