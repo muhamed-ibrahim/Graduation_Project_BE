@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\parent\Event\SchoolEventController;
 use App\Http\Controllers\Api\school\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\school\eductionalLevels\LevelController;
 use App\Http\Controllers\Api\school\requests\EnrollRequestController;
+use App\Http\Controllers\Api\school\application\ApplicationController;
 use App\Http\Controllers\Api\school\requests\TransferRequestController;
 use App\Http\Controllers\Api\school\Events\AdminstrationEventController;
 use App\Http\Controllers\Api\school\eductionalLevels\StudentScoreController;
@@ -96,6 +97,10 @@ Route::group(['middleware' => ['auth:sanctum', 'multiguard']], function () {
 
     Route::get('/studentToWithDrawFile', [WithDrawFileController::class, 'studentToWithDrawFile']);
     Route::post('/withDrawFile/{studentId}', [WithDrawFileController::class, 'withDrawFile']);
+
+    Route::get('/getApplication', [ApplicationController::class, 'getApplication']);
+
+
 
     Route::get('/notification', [NotificationController::class, 'notification']);
     Route::get('/markAsRead/{id}', [NotificationController::class, 'markAsRead']);

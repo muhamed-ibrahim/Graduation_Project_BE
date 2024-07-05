@@ -65,4 +65,9 @@ class School extends Model
     {
         return $this->hasMany(Support::class);
     }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

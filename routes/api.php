@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\adminstration\auth\PasswordController;
 use App\Http\Controllers\Api\adminstration\Report\ReportController;
 use App\Http\Controllers\Api\adminstration\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\adminstration\educationalLevels\LevelController;
+use App\Http\Controllers\Api\application\ApplicationController;
+use App\Models\Application;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,8 +72,11 @@ Route::group(['middleware' =>  ['auth:sanctum', 'adminstration_admin']], functio
 Route::get('/showAdminstrations/{state}', [AdminstrationController::class, 'showAdminstrations']);
 Route::get('/showSchoolsAdminstrations/{id}', [AdminstrationController::class, 'showSchoolsAdminstrations']);
 Route::post('/showSchoolsExceptSchool/{id}', [AdminstrationController::class, 'showSchoolsExceptSchool']);
-Route::get('/notification', [NotificationController::class, 'notification'])->middleware('auth:sanctum');;
-Route::get('/markAsRead/{id}', [NotificationController::class, 'markAsRead'])->middleware('auth:sanctum');;
+Route::get('/notification', [NotificationController::class, 'notification'])->middleware('auth:sanctum');
+Route::get('/markAsRead/{id}', [NotificationController::class, 'markAsRead'])->middleware('auth:sanctum');
+
+Route::post('/EnrollInApplication', [ApplicationController::class, 'EnrollInApplication']);
+
 
 
 
