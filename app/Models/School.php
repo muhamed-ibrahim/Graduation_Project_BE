@@ -84,4 +84,6 @@ class School extends Model
             ['parent_id', auth()->id()], ['year', date('Y')]
         ])->count() == 0;
     }
+
+
 }

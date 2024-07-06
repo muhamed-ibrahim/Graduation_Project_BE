@@ -49,9 +49,9 @@ class SchoolController extends Controller
         return ApiResponse::sendResponse(200, 'School Rated Successfully');
     }
 
-    public function Get(){
-        $school = School::all();
-        return ApiResponse::sendResponse(200, 'School Rated Successfully',ShowSchoolResource::collection($school));
+    public function dataToRate(){
+        $user = Auth()->user();
+        return ApiResponse::sendResponse(200, 'Rated Retrivied  Successfully',$user->dataToRated());
 
     }
 }
