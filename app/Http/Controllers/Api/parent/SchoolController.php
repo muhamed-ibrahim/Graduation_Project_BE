@@ -19,7 +19,7 @@ class SchoolController extends Controller
         $schools = $students->map(function ($student) {
             return $student->school;
         })->unique('id')->values();
-        return ApiResponse::sendResponse(200, 'Schools Retrivied Successfully', $schools);
+        return ApiResponse::sendResponse(200, 'Schools Retrivied Successfully', ShowSchoolResource::collection($schools));
     }
 
     public function getRecommendedSchools(Request $request, $adminstrationId)

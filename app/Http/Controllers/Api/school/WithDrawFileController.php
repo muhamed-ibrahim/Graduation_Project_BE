@@ -15,7 +15,7 @@ class WithDrawFileController extends Controller
         $user = Auth()->user();
         $Students = $user->school->students()->where('status', 1)->get();
         if ($Students->isNotEmpty()) {
-            return ApiResponse::sendResponse(200, 'Students Retrivied Successfully', StudentResource::collection($Students));
+            return ApiResponse::sendResponse(200, 'Students Retrivied Successfully', $Students);
         } else {
             return ApiResponse::sendResponse(200, 'there are no students to withdraw', []);
         }
