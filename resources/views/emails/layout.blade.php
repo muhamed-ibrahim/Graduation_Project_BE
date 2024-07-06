@@ -1,6 +1,6 @@
 
     <!DOCTYPE html>
-<html lang="{{ $locale ?? 'en' }}">
+<html lang="{{ $locale ?? 'ar' }}" dir="rtl" style="direction: rtl">
 
 <head>
     <meta charset="UTF-8">
@@ -15,6 +15,7 @@
             display: block;
             padding: 0px;
             margin: 0px;
+            direction: rtl;
         }
 
         .proton-wrapper {

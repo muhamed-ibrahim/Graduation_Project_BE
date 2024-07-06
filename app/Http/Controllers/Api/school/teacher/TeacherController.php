@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\school\teacher;
 
+use App\Mail\ApplicationAccepted;
+use App\Mail\ApplicationRejected;
 use App\Models\Application;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
@@ -29,8 +31,12 @@ class TeacherController extends Controller
         if ($application) {
             if ($request->status == 1) {
                 $application->status = 1;
+                // send email to teacher
+                Mail::to($application->email)->send(new ApplicationAccepted($application));
             } elseif ($request->status == 2) {
                 $application->status = 2;
+                // send email to teacher
+                Mail::to($application->email)->send(new ApplicationRejected($application));
             }
 
             $application->save();
