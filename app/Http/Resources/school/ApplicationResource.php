@@ -21,6 +21,7 @@ class ApplicationResource extends JsonResource
             'phone' => $this->phone,
             'address' => $this->address,
             'subject' => $this->subject,
+            'birthdate' => $this->birthdate,
             'status' => $this->status,
             "cv"=> asset('/storage/applications/' . $this->cv),
             "school_id"=> $this->school_id,

@@ -8,6 +8,8 @@ use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Mail\TeacherApplication;
 use App\Mail\ApplicationAccepted;
+use Illuminate\Validation\Rule;
+
 
 use App\Mail\ApplicationRejected;
 use App\Http\Controllers\Controller;
@@ -72,5 +74,35 @@ class TeacherController extends Controller
             return ApiResponse::sendResponse(201, 'Teacher Added Successfully', []);
         }
         return ApiResponse::sendResponse(500, 'An error occurred while adding the teacher', []);
+    }
+
+    public function updateTeacher(Request $request, $teacherId) {
+        $validatedData = $request->validate([
+            'phone'      => ['required', 'string'],
+            'email'      => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(Teacher::class)->ignore($teacherId)],
+            'address'    => ['required', 'string'],
+            'subject_id' => ['required'],
+        ]);
+
+        $teacher = Teacher::find($teacherId);
+
+        if ($teacher) {
+            $teacher->update($validatedData);
+            return ApiResponse::sendResponse(200, 'Teacher Updated Successfully', $teacher);
+        } else {
+            return ApiResponse::sendResponse(404, 'Teacher Not Found');
+        }
+    }
+
+    public function deleteTeacher($teacherId){
+        $teacher = Teacher::find($teacherId);
+        if ($teacher) {
+            $teacher->delete();
+            return ApiResponse::sendResponse(200, 'Teacher Deleted Successfully');
+        } else {
+            return ApiResponse::sendResponse(404, 'Teacher Not Found');
+        }
+
+
     }
 }
