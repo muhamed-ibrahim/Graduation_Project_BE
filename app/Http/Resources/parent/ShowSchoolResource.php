@@ -4,6 +4,7 @@ namespace App\Http\Resources\parent;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\parent\SchoolRatingResource;
 
 class ShowSchoolResource extends JsonResource
 {

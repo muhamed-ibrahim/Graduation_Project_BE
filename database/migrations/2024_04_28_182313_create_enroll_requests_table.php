@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('type');
             $table->string('name');
-            $table->bigInteger('student_national_id')->nullable();
+            $table->bigInteger('student_national_id')->unique();
             $table->string('nationality');
             $table->string('image')->nullable();
             $table->date('birthdate');

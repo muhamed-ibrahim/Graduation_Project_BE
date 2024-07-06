@@ -61,6 +61,10 @@ class User extends Authenticatable
         return $this->belongsToMany(School::class, 'school_user_ranks', 'parent_id', 'school_id')->withPivot('compatibility');
     }
 
+    public function dataToRated(){
+        return date('m') >= 8 && date('m') <= 9;
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

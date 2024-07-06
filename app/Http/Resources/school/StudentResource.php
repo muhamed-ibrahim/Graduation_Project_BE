@@ -19,6 +19,7 @@ class StudentResource extends JsonResource
             'name' => $this->name,
             'nationality' => $this->nationality,
             'national_id' => $this->national_id,
+            "image" => asset('/storage/student_data/st-image/' . $this->image),
             'gender' => $this->gender,
             'date_of_birth' => $this->date_of_birth,
             'grade_id' => $this->grade->id,
@@ -28,6 +29,7 @@ class StudentResource extends JsonResource
             'address' => $this->address,
             'state' => $this->state,
             'country' => $this->country,
+            "childbirth_certificate" => asset('/storage/student_data/st-certficate/' . $this->childbirth_certificate),
             'parent_name' => $this->parent()->first()->name,
             'parent_job' => $this->parent()->first()->job,
 

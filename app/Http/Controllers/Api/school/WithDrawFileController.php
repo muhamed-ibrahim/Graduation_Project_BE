@@ -6,6 +6,7 @@ use App\Models\Student;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\school\StudentResource;
 
 class WithDrawFileController extends Controller
 {

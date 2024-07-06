@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests\parent\requests;
 
+use App\Models\EnrollRequest;
+
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateEnrolRequest extends FormRequest
@@ -23,7 +26,7 @@ class UpdateEnrolRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'student_national_id' => 'required|integer',
+            'student_national_id' => ['required', 'integer', Rule::unique(EnrollRequest::class)->ignore($this->id)],
             'birthdate' => 'date_format:Y-m-d|before:today',
             'gender' => 'required|in:male,female',
             'religion' => 'required',

@@ -7,6 +7,7 @@ use App\Models\Grade;
 use App\Models\Score;
 use App\Models\Stage;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Models\TermSubject;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
@@ -60,6 +61,12 @@ class LevelController extends Controller
     {
         $subjects = TermSubject::where('Grade_id', $levelId)->where('term_id', $termId)->get();
         return ApiResponse::sendResponse('200', 'subjects Retrived Successfully', ShowSubjectResource::collection($subjects));
+    }
+
+    public function Subjects(Request $request)
+    {
+        $subjects = Subject::all();
+        return ApiResponse::sendResponse('200', 'subjects Retrived Successfully', $subjects);
     }
 
     public function getScoresByStudentGradeAndTerm($studentId, $gradeId, $termId)

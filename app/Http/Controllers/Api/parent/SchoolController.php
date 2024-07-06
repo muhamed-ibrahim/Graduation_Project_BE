@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\parent;
 
 use App\Models\School;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,7 +20,7 @@ class SchoolController extends Controller
         $schools = $students->map(function ($student) {
             return $student->school;
         })->unique('id')->values();
-        return ApiResponse::sendResponse(200, 'Schools Retrivied Successfully', $schools);
+        return ApiResponse::sendResponse(200, 'Schools Retrivied Successfully', ShowSchoolResource::collection($schools));
     }
 
     public function getRecommendedSchools(Request $request, $adminstrationId)
@@ -47,5 +48,12 @@ class SchoolController extends Controller
         );
 
         return ApiResponse::sendResponse(200, 'School Rated Successfully');
+    }
+
+
+    public function dataToRate(){
+        $user = Auth()->user();
+        return ApiResponse::sendResponse(200, 'Rated Retrivied  Successfully',$user->dataToRated());
+
     }
 }

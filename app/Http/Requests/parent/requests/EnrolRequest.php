@@ -34,7 +34,7 @@ class EnrolRequest extends FormRequest
         return [
             'name' => 'required|string',
             'nationality' => 'required|string',
-            'student_national_id' => 'required|integer',
+            'student_national_id' => 'required|integer|unique:enroll_requests,student_national_id',
             'image' => 'required|image',
             'birthdate' => 'date_format:Y-m-d|before:today',
             'gender' => 'required|in:male,female',

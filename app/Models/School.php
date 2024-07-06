@@ -80,8 +80,10 @@ class School extends Model
     // can_be_rated
     public function getCanBeRatedAttribute()
     {
-        return date('m') >= 6 && date('m') <= 9 && $this->ratings()->where([
+        return date('m') >= 8 && date('m') <= 9 && $this->ratings()->where([
             ['parent_id', auth()->id()], ['year', date('Y')]
         ])->count() == 0;
     }
+
+
 }

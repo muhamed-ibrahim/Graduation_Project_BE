@@ -13,11 +13,10 @@ use App\Http\Controllers\Api\shared\NotificationController;
 use App\Http\Controllers\Api\school\auth\PasswordController;
 use App\Http\Controllers\Api\school\report\ReportController;
 use App\Http\Controllers\Api\school\chatbot\ChatbotController;
-use App\Http\Controllers\Api\parent\Event\SchoolEventController;
+use App\Http\Controllers\Api\school\teacher\TeacherController;
 use App\Http\Controllers\Api\school\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\school\eductionalLevels\LevelController;
 use App\Http\Controllers\Api\school\requests\EnrollRequestController;
-use App\Http\Controllers\Api\school\application\ApplicationController;
 use App\Http\Controllers\Api\school\requests\TransferRequestController;
 use App\Http\Controllers\Api\school\Events\AdminstrationEventController;
 use App\Http\Controllers\Api\school\eductionalLevels\StudentScoreController;
@@ -98,7 +97,8 @@ Route::group(['middleware' => ['auth:sanctum', 'multiguard']], function () {
     Route::get('/studentToWithDrawFile', [WithDrawFileController::class, 'studentToWithDrawFile']);
     Route::post('/withDrawFile/{studentId}', [WithDrawFileController::class, 'withDrawFile']);
 
-    Route::get('/getApplication', [ApplicationController::class, 'getApplication']);
+    Route::get('/getApplication', [TeacherController::class, 'getApplication']);
+    Route::post('/sendAcceptOrReject/{teacherId}', [TeacherController::class, 'sendAcceptOrReject']);
 
 
 

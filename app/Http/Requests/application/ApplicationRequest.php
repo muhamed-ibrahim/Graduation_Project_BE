@@ -24,6 +24,10 @@ class ApplicationRequest extends FormRequest
         return [
             'name' => 'required|string',
             'email' => 'required|email|unique:applications',
+            'phone' => 'required|min:11|numeric',
+            'address' => 'required|string',
+            'subject' => 'required|string',
+            'birthdate' => 'required|date',
             'cv' => 'required|mimes:pdf|max:10000',
             'school_id' => 'required',
         ];
