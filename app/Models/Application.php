@@ -10,7 +10,7 @@ class Application extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function author()
+    public function school()
     {
         return $this->belongsTo(School::class);
     }
