@@ -20,19 +20,22 @@ class TeacherController extends Controller
         return ApiResponse::sendResponse(200, 'Applications Retrivied Successfully', ApplicationResource::collection($application));
     }
 
-    public function sendAcceptOrReject(Request $request,$teacherId){
+    public function sendAcceptOrReject(Request $request, $teacherId)
+    {
         $valid = $request->validate([
             'status' => 'required',
         ]);
         $application = Application::find($teacherId);
-        if($valid['status'] == 1){
-            $application->status = 1;
-        }else if($valid['status'] == 2){
-            $application->status = 2;
+        if ($application) {
+            if ($request->status == 1) {
+                $application->status = 1;
+            } elseif ($request->status == 2) {
+                $application->status = 2;
+            }
 
+            $application->save();
+
+            return ApiResponse::sendResponse(200, 'Application retrieved and updated successfully', $application);
         }
-        $application->save();
-        return ApiResponse::sendResponse(200, 'Applications Retrivied Successfully', ApplicationResource::collection($application));
-
     }
 }
