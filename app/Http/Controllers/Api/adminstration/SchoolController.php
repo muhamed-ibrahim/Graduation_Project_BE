@@ -12,6 +12,7 @@ use App\Http\Requests\adminstration\SchoolRequest;
 use App\Http\Requests\adminstration\ManagerRequest;
 use App\Http\Resources\adminstration\ShowSchoolResource;
 use App\Models\SchoolManager;
+use App\Models\Subject;
 use Illuminate\Database\Capsule\Manager;
 
 class SchoolController extends Controller
@@ -94,4 +95,5 @@ class SchoolController extends Controller
             return ApiResponse::sendResponse(200, 'School Not Found', []);
         }
     }
+
 }

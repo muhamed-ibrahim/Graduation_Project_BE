@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\parent;
 
 use App\Models\School;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

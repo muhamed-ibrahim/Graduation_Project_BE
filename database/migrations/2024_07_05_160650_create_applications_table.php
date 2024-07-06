@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-
+            $table->string('phone');
+            $table->string('address');
+            $table->date('birthdate');
+            $table->string('subject');
             $table->string('cv')->nullable();
             $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

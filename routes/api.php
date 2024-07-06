@@ -72,6 +72,8 @@ Route::group(['middleware' =>  ['auth:sanctum', 'adminstration_admin']], functio
 Route::get('/showAdminstrations/{state}', [AdminstrationController::class, 'showAdminstrations']);
 Route::get('/showSchoolsAdminstrations/{id}', [AdminstrationController::class, 'showSchoolsAdminstrations']);
 Route::post('/showSchoolsExceptSchool/{id}', [AdminstrationController::class, 'showSchoolsExceptSchool']);
+Route::get('/Subjects', [LevelController::class, 'Subjects']);
+
 Route::get('/notification', [NotificationController::class, 'notification'])->middleware('auth:sanctum');
 Route::get('/markAsRead/{id}', [NotificationController::class, 'markAsRead'])->middleware('auth:sanctum');
 

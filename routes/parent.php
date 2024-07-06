@@ -71,11 +71,8 @@ Route::group(['middleware' => ['auth:sanctum', 'web_user']], function () {
     Route::post('/rate-school', [SchoolController::class, 'rateSchool']);
     Route::get('/dataToRate', [SchoolController::class, 'dataToRate']);
 
-
-
-    Route::get('/Get', [SchoolController::class, 'Get']);
-
 });
+
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
