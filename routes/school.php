@@ -99,6 +99,10 @@ Route::group(['middleware' => ['auth:sanctum', 'multiguard']], function () {
 
     Route::get('/getApplication', [TeacherController::class, 'getApplication']);
     Route::post('/sendAcceptOrReject/{teacherId}', [TeacherController::class, 'sendAcceptOrReject']);
+    Route::post('/addTeacher', [TeacherController::class, 'addTeacher']);
+    Route::get('/getTeacher', [TeacherController::class, 'getTeacher']);
+
+
 
 
 

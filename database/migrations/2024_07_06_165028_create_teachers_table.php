@@ -15,8 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-
-
+            $table->string('phone');
+            $table->string('address');
+            $table->date('birthdate');
+            $table->foreignId('subject_id')->constrained('subjects')->cascadeOnDelete();
+            $table->foreignId('school_id')->constrained('schools')->cascadeOnDelete();
             $table->timestamps();
         });
     }

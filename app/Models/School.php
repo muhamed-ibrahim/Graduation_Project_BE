@@ -71,6 +71,11 @@ class School extends Model
         return $this->hasMany(Application::class);
     }
 
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class);
+    }
+
     // ratings
     public function ratings()
     {

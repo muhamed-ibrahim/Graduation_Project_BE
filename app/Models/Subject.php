@@ -15,4 +15,8 @@ class Subject extends Model
     {
         return $this->hasMany(TermSubject::class);
     }
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
 }
