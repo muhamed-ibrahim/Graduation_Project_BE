@@ -64,7 +64,6 @@ class TeacherController extends Controller
             'email'      => ['required', 'string', 'email', 'max:255'],
             'phone'      => ['required', 'string'],
             'address'    => ['required', 'string'],
-            'birthdate'  => ['required', 'date'],
             'subject_id' => ['required'],
         ]);
         $user = Auth::user();
