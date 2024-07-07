@@ -21,7 +21,7 @@ class ForgotPasswordController extends Controller
             'email' => 'required|email',
         ]);
 
-        $status = Password::broker('adminstration_admins')->sendResetLink($valid);
+        $status = Password::broker('users')->sendResetLink($valid);
         if ($status == Password::RESET_LINK_SENT) {
             return ApiResponse::sendResponse(200,__($status),[]);
         }
@@ -32,7 +32,7 @@ class ForgotPasswordController extends Controller
 
     public function reset(ResetPasswordRequest $request){
         $request->validated();
-        $status = Password::broker('adminstration_admins')->reset(
+        $status = Password::broker('users')->reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {
                 $user->forceFill([

@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\adminstration\StudentController;
 use App\Http\Controllers\Api\parent\chatbot\ChatbotController;
 use App\Http\Controllers\Api\parent\children\ChildrenController;
 use App\Http\Controllers\Api\parent\Event\SchoolEventController;
+use App\Http\Controllers\Api\parent\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\parent\requests\EnrollRequestController;
 use App\Http\Controllers\Api\parent\requests\TransferRequestController;
 use App\Http\Controllers\Api\adminstration\educationalLevels\LevelController;
@@ -35,6 +36,9 @@ use App\Http\Controllers\Api\adminstration\educationalLevels\LevelController;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum', 'web_user');
+
+Route::post('forgot-password', [ForgotPasswordController::class, 'forgot']);
+Route::post('reset-password', [ForgotPasswordController::class, 'reset']);
 
 
 Route::group(['middleware' => ['auth:sanctum', 'web_user']], function () {
