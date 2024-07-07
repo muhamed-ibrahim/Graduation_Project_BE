@@ -22,7 +22,7 @@ class SchoolManager extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $url = 'http://localhost:5173/School/resetPassword/' . $token;
+        $url = 'http://localhost:5173/school/reset-password/' . $token;
         $this->notify(new ResetPasswordNotification($url));
     }
 

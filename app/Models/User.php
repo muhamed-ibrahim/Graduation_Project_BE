@@ -17,7 +17,7 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $url = 'http://localhost:5173/resetPassword/' . $token;
+        $url = 'http://localhost:5173/Darb/ResetPassword/' . $token;
         $this->notify(new ResetPasswordNotification($url));
     }
 
