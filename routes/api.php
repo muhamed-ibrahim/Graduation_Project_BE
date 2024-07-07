@@ -1,20 +1,21 @@
 <?php
 
 use App\Models\School;
+use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\shared\NotificationController;
-use App\Http\Controllers\Api\adminstration\Events\EventController;
 use App\Http\Controllers\Api\adminstration\SchoolController;
 use App\Http\Controllers\Api\adminstration\StudentController;
 use App\Http\Controllers\Api\adminstration\auth\AuthController;
+use App\Http\Controllers\Api\application\ApplicationController;
+use App\Http\Controllers\Api\adminstration\Events\EventController;
 use App\Http\Controllers\Api\adminstration\AdminstrationController;
 use App\Http\Controllers\Api\adminstration\auth\PasswordController;
 use App\Http\Controllers\Api\adminstration\Report\ReportController;
+use App\Http\Controllers\Api\adminstration\teacher\TeacherController;
 use App\Http\Controllers\Api\adminstration\auth\ForgotPasswordController;
 use App\Http\Controllers\Api\adminstration\educationalLevels\LevelController;
-use App\Http\Controllers\Api\application\ApplicationController;
-use App\Models\Application;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,9 @@ Route::group(['middleware' =>  ['auth:sanctum', 'adminstration_admin']], functio
     Route::post('/addReport', [ReportController::class, 'addReport']);
     Route::get('/showReport', [ReportController::class, 'showReport']);
     Route::get('/deleteReport/{ReportId}', [ReportController::class, 'deleteReport']);
+    Route::get('/getTeacher/{schoolId}', [TeacherController::class, 'getTeacher']);
+
+
 });
 Route::get('/showAdminstrations/{state}', [AdminstrationController::class, 'showAdminstrations']);
 Route::get('/showSchoolsAdminstrations/{id}', [AdminstrationController::class, 'showSchoolsAdminstrations']);
