@@ -28,6 +28,16 @@ class SchoolSeeder extends Seeder
             'rank' => '4',
         ]);
         School::create([
+            'name' => 'مدرسة اسباتس بنين',
+            'address' => 'شارع الطوابق',
+            'phone' => '0225998897',
+            'image' => '1711868111.png',
+            'adminstration_id' => 2,
+            'lat' => '-10.4966636',
+            'lng' => '121.9729053',
+            'rank' => '4',
+        ]);
+        School::create([
             'name' => 'مدرسة مصطفي كامل',
             'address' => 'شارع حسن محمد',
             'phone' => '0225568897',
@@ -36,7 +46,16 @@ class SchoolSeeder extends Seeder
             'lat' => '46.344514',
             'lng' => '129.543632',
             'rank' => '4',
-
+        ]);
+        School::create([
+            'name' => 'مدرسة ابن حزم ',
+            'address' => 'شارع حسن محمد',
+            'phone' => '0225568897',
+            'image' => '1711868111.png',
+            'adminstration_id' => 1,
+            'lat' => '46.344514',
+            'lng' => '129.543632',
+            'rank' => '4',
         ]);
 
         School::create([

@@ -13,7 +13,7 @@ class SchoolRatingObserver
     {
         // update school rate in school table
         $school = $schoolRating->school;
-        $school->rate = $school->ratings()->avg('rating');
+        $school->rank = $school->ratings()->avg('rating');
         $school->save();
     }
 
@@ -24,7 +24,7 @@ class SchoolRatingObserver
     {
         // update school rate in school table
         $school = $schoolRating->school;
-        $school->rate = $school->ratings()->avg('rating');
+        $school->rank = $school->ratings()->avg('rating');
         $school->save();
     }
 

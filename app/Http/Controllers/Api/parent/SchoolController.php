@@ -6,6 +6,7 @@ use App\Models\School;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Helpers\ApiResponse;
+use App\Models\SchoolRating;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +47,9 @@ class SchoolController extends Controller
             ['parent_id' => $parent->id, 'year' => date('Y')],
             ['rating' => $request->rate],
         );
+        $school->rank = $school->ratings()->avg('rating');
+        $school->save();
+
 
         return ApiResponse::sendResponse(200, 'School Rated Successfully');
     }

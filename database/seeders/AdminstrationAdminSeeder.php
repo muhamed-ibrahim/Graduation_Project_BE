@@ -19,8 +19,8 @@ class AdminstrationAdminSeeder extends Seeder
 
         AdAdmin::truncate();
         AdAdmin::create([
-            'name' => 'Mohamed Ibrahim',
-            'email' => 'mohamed@gmail.com',
+            'name' => 'محمد ابراهيم',
+            'email' => 'mohamed@admin.com',
             'image' => '1714968179.png',
             'address' => 'شارع المرج الجديد',
             'phone' => '01056288945',
@@ -28,8 +28,8 @@ class AdminstrationAdminSeeder extends Seeder
             'adminstration_id' => 1,
         ]);
         AdAdmin::create([
-            'name' => 'Youssef Tarek',
-            'email' => 'youssef@gmail.com',
+            'name' => 'يوسف طارق',
+            'email' => 'youssef@admin.com',
             'image' => '1714968179.png',
             'address' => 'شارع حلون',
             'phone' => '01156288945',
@@ -39,8 +39,8 @@ class AdminstrationAdminSeeder extends Seeder
         ]);
 
         AdAdmin::create([
-            'name' => 'hamdy mohamed',
-            'email' => 'hamdy@gmail.com',
+            'name' => 'حمدي فتحي',
+            'email' => 'hamdy@admin.com',
             'image' => '1714968179.png',
             'phone' => '01056281000',
             'address' => 'شارع مجلس الشعب',

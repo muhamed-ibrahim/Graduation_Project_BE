@@ -19,8 +19,8 @@ class SchoolStaffSeeder extends Seeder
 
         SchoolStaff::truncate();
         SchoolStaff::create([
-            'staff_name' => 'Mohamed',
-            'email' => 'mm@gmail.com',
+            'staff_name' => 'محمد احمد',
+            'email' => 'mohamed@school.com',
             'staff_phone' => '01555455555',
             'staff_address' => 'مدينة نصر',
             'birthdate' => '2000-02-03',
@@ -30,8 +30,8 @@ class SchoolStaffSeeder extends Seeder
         ]);
 
         SchoolStaff::create([
-            'staff_name' => 'Amir',
-            'email' => 'am@gmail.com',
+            'staff_name' => 'امير',
+            'email' => 'amer@school.com',
             'staff_phone' => '01555455555',
             'staff_address' => 'مدينة بدر',
             'birthdate' => '1999-06-18',

@@ -18,7 +18,7 @@ class StudentSeeder extends Seeder
 
         Student::truncate();
         Student::create([
-            'name' => 'ibrahim mohamed',
+            'name' => 'ابراهيم',
             'nationality' => 'مصري',
             'national_id' => 147896325489888,
             'gender' => 'Male',
@@ -36,7 +36,7 @@ class StudentSeeder extends Seeder
 
         ]);
         Student::create([
-            'name' => 'Ahmed Yasser',
+            'name' => 'احمد',
             'nationality' => 'مصري',
             'national_id' => 15545985566555,
             'gender' => 'Male',
@@ -55,7 +55,7 @@ class StudentSeeder extends Seeder
         ]);
 
         Student::create([
-            'name' => 'khaled mahmoud',
+            'name' => 'خالد',
             'nationality' => 'مصري',
             'national_id' => 168452684556655,
             'gender' => 'Male',
@@ -74,7 +74,7 @@ class StudentSeeder extends Seeder
         ]);
 
         Student::create([
-            'name' => 'samy mohsen',
+            'name' => 'سامي',
             'nationality' => 'مصري',
             'national_id' => 14785214785214,
             'gender' => 'Male',
@@ -93,7 +93,7 @@ class StudentSeeder extends Seeder
         ]);
 
         Student::create([
-            'name' => 'Khaled Mohamed',
+            'name' => 'خالد',
             'nationality' => 'مصري',
             'national_id' => 1669556653355,
             'gender' => 'Male',
@@ -112,7 +112,7 @@ class StudentSeeder extends Seeder
         ]);
 
         Student::create([
-            'name' => 'mohy Mohamed',
+            'name' => 'محي',
             'nationality' => 'مصري',
             'national_id' => 1597456321845,
             'gender' => 'Male',
@@ -131,7 +131,7 @@ class StudentSeeder extends Seeder
         ]);
 
         Student::create([
-            'name' => 'wael Magdy',
+            'name' => 'وائل',
             'nationality' => 'مصري',
             'national_id' => 4896512354789,
             'gender' => 'Male',
@@ -150,7 +150,7 @@ class StudentSeeder extends Seeder
         ]);
 
         Student::create([
-            'name' => 'yahia mahmoud',
+            'name' => 'يحيي',
             'nationality' => 'مصري',
             'national_id' => 47565898547789,
             'gender' => 'Male',

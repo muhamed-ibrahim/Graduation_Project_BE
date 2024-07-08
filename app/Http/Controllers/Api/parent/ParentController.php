@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\parent\UpdateProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\parent\ParentResource;
+use App\Models\School;
+use App\Models\SchoolRating;
 
 class ParentController extends Controller
 {
@@ -18,7 +20,7 @@ class ParentController extends Controller
     }
 
     public function updateProfile(UpdateProfileRequest $request){
-        
+
 
         $request->user()->address = $request->address;
         $request->user()->phone = $request->phone;
@@ -26,6 +28,8 @@ class ParentController extends Controller
         $request->user()->save();
         return ApiResponse::sendResponse(200,'Parent Profile Updated Successfully',[]);
     }
+
+
 
 
 

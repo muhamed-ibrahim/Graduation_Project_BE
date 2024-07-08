@@ -73,6 +73,11 @@ class User extends Authenticatable
         return date('m') >= 8 && date('m') <= 9;
     }
 
+    public function ratings()
+    {
+        return $this->hasMany(SchoolRating::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
